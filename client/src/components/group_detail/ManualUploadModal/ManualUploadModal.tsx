@@ -37,13 +37,4 @@ const ManualUploadModal = () => {
     )
 }
 
-//
-// <input
-//     type="text"
-//     name="username"
-//     value={사용자가 }
-//     onChange={handleChange}
-// />
-
-
 export default ManualUploadModal;
