@@ -7,15 +7,14 @@ const QrScan = () => {
         text: string;
     } | null;
 
-    const [scanned, setScanned] = useState(false);
+    const [scanned, setQrScanned] = useState(false);
 
     const handleScan = (data: scanData) => {
         if (data && !scanned) {
-            setScanned(true); // 한 번만 스캔 가능
-            console.log(data.text);
+            setQrScanned(true); 
 
             setTimeout(() => {
-                setScanned(false); // Allow scanning again after 5 seconds
+                setQrScanned(false);
             }, 1000);
         }
     };
