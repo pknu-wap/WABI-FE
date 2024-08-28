@@ -26,7 +26,6 @@ const ManualUploadModal = () => {
             ...prevStudent,
             [name]: value,
         }));
-        console.log(student);
     };
 
     return (
