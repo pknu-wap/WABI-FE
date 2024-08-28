@@ -2,7 +2,7 @@ import React from 'react';
 import {stepProps} from '../../../../types/stepTypes';
 import {manualUpload} from "../../../../api/manualUpload";
 
-const Step2 = ({prevStep, student, handleChange}: stepProps) => {
+const OptionalStep = ({prevStep, student, handleChange}: stepProps) => {
         return (
             <div>
                 <h1>선택 항목 입력</h1>
@@ -52,4 +52,4 @@ const Step2 = ({prevStep, student, handleChange}: stepProps) => {
         )
 }
 
-export default Step2;
+export default OptionalStep;

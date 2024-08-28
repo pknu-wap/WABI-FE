@@ -1,7 +1,7 @@
 import React from "react";
 import {stepProps} from "../../../../types/stepTypes";
 
-const Step1 = ({nextStep, student, handleChange}: stepProps) => {
+const RequiredStep = ({nextStep, student, handleChange}: stepProps) => {
 
     return (
         <div>
@@ -26,4 +26,4 @@ const Step1 = ({nextStep, student, handleChange}: stepProps) => {
     )
 }
 
-export default Step1;
+export default RequiredStep;
