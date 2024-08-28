@@ -1,7 +1,7 @@
 import React from "react";
 import {student} from "./studentTypes";
 
-export type stepProps = {
+export interface stepProps {
     step?: number;
     nextStep ?: () => void;
     prevStep ?: () => void;
