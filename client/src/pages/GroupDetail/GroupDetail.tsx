@@ -1,10 +1,16 @@
 import React from 'react';
-import FileUploadModal from '../../components/group_detail/FileUploadModal/FileUploadModal';
+import {useRecoilState} from 'recoil';
+import {
+  fileUploadModalState,
+  manualUploadModalState,
+} from '../../recoil/modalState';
+
 import MemberUpdateButton from 'components/group_detail/MemberUpdateButton/MemberUpdateButton';
 import Header from 'components/common/Header/Header';
+import FileUploadModal from '../../components/group_detail/FileUploadModal/FileUploadModal';
+import ManualUploadModal from '../../components/group_detail/ManualUploadModal/ManualUploadModal';
+
 // 파일 업로드 기능 컴포넌트
-
-
 
 //Todo
 //1. ModalFrame 만들기
@@ -14,24 +20,39 @@ import Header from 'components/common/Header/Header';
 //5. GroupMemberList 부분 컴포넌트 만들기
 //6. 3~5 하나로 묶기.
 
-
 const GroupDetailPage = () => {
-    return (
-        <div>
-            <Header />
-            {/*<Title />*/}
+  const [fileUploadModalStateValue, setFileUploadModalStateValue] =
+    useRecoilState(fileUploadModalState);
+  const [manualUploadModalStateValue, setManualUploadModalStateValue] =
+    useRecoilState(manualUploadModalState);
+  const openFileUploadModal = () => {
+    setFileUploadModalStateValue(true);
+  };
 
-            <div>
-                {/*<SerchBox/>*/}
-                <div>
-                    <MemberUpdateButton />
-                    {/*<ManualUpdateButton />*/}
-                </div>
-                {/*<GroupMemberList />*/}
-            </div>
-            {/*<FileUploadModal/>*/}
+  const openManualUploadModal = () => {
+    setManualUploadModalStateValue(true);
+  };
+
+  return (
+    <div>
+      <FileUploadModal modalStateValue={fileUploadModalStateValue} />
+      <ManualUploadModal modalStateValue={manualUploadModalStateValue} />
+      <Header />
+      {/*<Title />*/}
+
+      <div>
+        {/*<SerchBox/>*/}
+        <div>
+          {/*Todo 자동추가 / 수동추가 버튼을 Button 컴포넌트 활용해서 나누기*/}
+          <MemberUpdateButton onClick={openFileUploadModal} />
+          <MemberUpdateButton onClick={openManualUploadModal} />
+          {/*<ManualUpdateButton />*/}
         </div>
-    );
-}
+        {/*<GroupMemberList />*/}
+      </div>
+      {/*<FileUploadModal/>*/}
+    </div>
+  );
+};
 
 export default GroupDetailPage;
