@@ -1,5 +1,4 @@
 import axios from "axios";
-import {studentCheckedIn} from "../types/QrType/StudentQr";
 
 export const LoadCheckInStudent = () => {
     return axios
