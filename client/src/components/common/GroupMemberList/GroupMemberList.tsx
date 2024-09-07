@@ -10,10 +10,6 @@ const GroupMemberList = () => {
         loadGroupMemberList(setGroupMembers)
     },[])
 
-    useEffect(() => {
-
-    },[groupMembers])
-
     return (
         <div>
             <Styled.Table>
