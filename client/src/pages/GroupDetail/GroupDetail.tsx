@@ -9,6 +9,7 @@ import MemberUpdateButton from 'components/group_detail/MemberUpdateButton/Membe
 import Header from 'components/common/Header/Header';
 import FileUploadModal from '../../components/group_detail/FileUploadModal/FileUploadModal';
 import ManualUploadModal from '../../components/group_detail/ManualUploadModal/ManualUploadModal';
+import GroupMemberList from "../../components/common/GroupMemberList/GroupMemberList";
 
 // 파일 업로드 기능 컴포넌트
 
@@ -48,7 +49,7 @@ const GroupDetailPage = () => {
           <MemberUpdateButton onClick={openManualUploadModal} />
           {/*<ManualUpdateButton />*/}
         </div>
-        {/*<GroupMemberList />*/}
+        <GroupMemberList />
       </div>
       {/*<FileUploadModal/>*/}
     </div>
