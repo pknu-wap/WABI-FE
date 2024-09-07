@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import GroupDetail from "./pages/GroupDetail/GroupDetail";
+import GroupDetail from './pages/GroupDetail/GroupDetail';
 
 function App() {
 
