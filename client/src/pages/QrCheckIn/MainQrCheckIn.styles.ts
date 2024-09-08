@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     background-color: #F0F4F7;
 `;
 
-const Event = styled.div`
+export const Event = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,17 +21,15 @@ const Event = styled.div`
     padding: 20px;
 `
 
-const Date = styled.div`
+export const Date = styled.div`
     width: 100%;
     height: 30%;
     border: 1px solid black;
 `
 
-const QrStyle = styled.div`
+export const QrStyle = styled.div`
     border-radius: 25px;
     background-color: #a18ee8;
     border: 15px solid #a18ee8;
     padding:10px;
 `
-
-export {Wrapper, Event, Date, QrStyle};
