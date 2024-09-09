@@ -17,6 +17,7 @@ const handleError = (err: Error) => {
 
 const QrScan = () => {
   const [scanned, setQrScanned] = useState(false);
+  const [nextScanned, setNextScanned] = useState(0);
 
   const handleScan = (data: scanData) => {
     if (data && !scanned) {
@@ -36,14 +37,17 @@ const QrScan = () => {
 
       setTimeout(() => {
         setQrScanned(false);
+        setNextScanned(prevKey => prevKey + 1);
       }, 1000);
+
     }
   };
+
 
   return (
     <div>
       <Styled.QrCameraReveral>
-        <QrScanner onError={handleError} onScan={handleScan} delay={300} />
+        <QrScanner key={nextScanned} onScan={handleScan} onError={handleError} />
       </Styled.QrCameraReveral>
     </div>
   );
