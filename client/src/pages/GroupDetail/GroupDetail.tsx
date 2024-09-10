@@ -5,10 +5,10 @@ import {
   manualUploadModalState,
 } from '../../recoil/modalState';
 
-import MemberUpdateButton from 'components/group_detail/MemberUpdateButton/MemberUpdateButton';
+import MemberUpdateButton from 'components/GroupDetail/MemberUpdateButton/MemberUpdateButton';
 import Header from 'components/common/Header/Header';
-import FileUploadModal from '../../components/group_detail/FileUploadModal/FileUploadModal';
-import ManualUploadModal from '../../components/group_detail/ManualUploadModal/ManualUploadModal';
+import FileUploadModal from '../../components/GroupDetail/FileUploadModal/FileUploadModal';
+import ManualUploadModal from '../../components/GroupDetail/ManualUploadModal/ManualUploadModal';
 import GroupMemberList from "../../components/common/GroupMemberList/GroupMemberList";
 
 // 파일 업로드 기능 컴포넌트
