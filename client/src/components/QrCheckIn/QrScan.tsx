@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import QrScanner from 'react-qr-scanner';
-import {SendToServer} from '../../api/SendToServer';
+import {SendToServer} from '../../api/sendToServer';
 import {studentQr} from '../../types/QrType/StudentQr';
 import {scanData} from '../../types/QrType/ScanData';
 import * as Styled from '../QrCheckIn/qrCode.styles';
