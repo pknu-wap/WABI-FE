@@ -1,21 +1,18 @@
 import React, {ReactElement, ReactNode} from 'react';
-import {ButtonStyle, ButtonStyled} from 'components/common/Button/Button.styles';
-interface LogoProps {
-    src: string;
-    text: string;
-}
+import {
+  ButtonStyle,
+  ButtonStyled,
+} from 'components/common/Button/Button.styles';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonStyle {
-        children:ReactNode;
-        onClick?: () => void;
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonStyle {
+  children: ReactNode;
+  onClick?: () => void;
 }
 
 const Button = ({children, ...buttonProps}: ButtonProps): ReactElement => {
-    return (
-        <ButtonStyled {...buttonProps}>
-            {children}
-        </ButtonStyled>
-    )
-}
+  return <ButtonStyled {...buttonProps}>{children}</ButtonStyled>;
+};
 
 export default Button;
