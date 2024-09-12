@@ -7,6 +7,7 @@ export const HeaderStyles = styled.header`
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
+  background-color: #ffffff;
 `;
 
 export const LogoGroup = styled.div`
