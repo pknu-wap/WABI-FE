@@ -1,3 +1,5 @@
+import Header from '../../components/common/Header/Header';
+
 import React, {useState} from "react";
 import * as Styled from './MainQrCheckIn.styles';
 import QrScan from '../../components/QrCheckIn/QrScan';
@@ -16,6 +18,8 @@ const MainQrCheckIn = () => {
     };
 
     return (
+          <>
+          <Header />
             <Styled.Wrapper>
                 <Styled.Event>
                     <Styled.EventName>
@@ -43,6 +47,7 @@ const MainQrCheckIn = () => {
                     </Styled.QrMessage>
                 </div>
             </Styled.Wrapper>
+          </>
     )
 }
 
