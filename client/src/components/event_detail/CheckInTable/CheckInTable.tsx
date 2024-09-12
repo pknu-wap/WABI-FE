@@ -1,9 +1,14 @@
-import React from "react";
-import * as Styled from "./CheckInTable.styles";
-import useCheckInStudent from "../../../hooks/useCheckInStudent";
+import React from 'react';
+import * as Styled from './CheckInTable.styles';
+import useCheckInStudent from '../../../hooks/useCheckInStudent';
 
 const CheckInTable = () => {
-    const { students } = useCheckInStudent("8");
+  const {students} = useCheckInStudent('8');
+
+  const eventStudentStatusImage = (rowEventStudentStatus: string) => {
+    if (rowEventStudentStatus === 'CHECK_IN') {
+      return <img src="images/checkInDot.png" alt="Check In" width={'16px'} />;
+    }
     return (
         <div>
             <Styled.Table>
