@@ -15,7 +15,7 @@ const handleError = (err: Error) => {
 };
 
 interface QrScanProps {
-  onScanResult: (message: string, messageColor:string, qrColor:string) => void; // Callback prop for scan result message
+  onScanResult: (message: string, messageColor:string, qrColor:string) => void;
 }
 
 const QrScan = ({ onScanResult }: QrScanProps) => {
