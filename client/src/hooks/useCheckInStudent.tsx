@@ -14,7 +14,7 @@ const useCheckInStudent = (eventId: string) => {
 
   const LoadCheckInStudent = () => {
     axios
-      .get(`http://34.47.97.81:8080/api/events/check-in/${eventId}?filter=ALL`)
+      .get(`/api/api/events/check-in/${eventId}?filter=ALL`)
       .then(res => {
         const CleanedData = res.data.data;
 
