@@ -4,6 +4,7 @@ import {SendToServer} from '../../api/SendToServer';
 import {studentQr} from '../../types/QrType/StudentQr';
 import {scanData} from '../../types/QrType/ScanData';
 import {LoadCheckInStudent} from '../../api/LoadCheckInStudent';
+import * as Styled from './qrCode.styles';
 
 const Student: studentQr = {
   studentId: '',
@@ -16,6 +17,7 @@ const handleError = (err: Error) => {
 
 const QrScan = () => {
   const [scanned, setQrScanned] = useState(false);
+  const [nextScanned, setNextScanned] = useState(0);
 
   const handleScan = (data: scanData) => {
     if (data && !scanned) {
@@ -35,13 +37,18 @@ const QrScan = () => {
 
       setTimeout(() => {
         setQrScanned(false);
+        setNextScanned(prevKey => prevKey + 1);
       }, 1000);
+
     }
   };
 
+
   return (
     <div>
-      <QrScanner onError={handleError} onScan={handleScan} delay={300} />
+      <Styled.QrCameraReveral>
+        <QrScanner key={nextScanned} onScan={handleScan} onError={handleError} />
+      </Styled.QrCameraReveral>
     </div>
   );
 };
