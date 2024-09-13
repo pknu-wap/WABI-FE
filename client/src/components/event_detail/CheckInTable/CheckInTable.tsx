@@ -2,8 +2,12 @@ import React from 'react';
 import * as Styled from './CheckInTable.styles';
 import useCheckInStudent from '../../../hooks/useCheckInStudent';
 
-const CheckInTable = () => {
-  const {students} = useCheckInStudent('8');
+interface CheckInTableProps {
+  eventId: string;
+}
+
+const CheckInTable: React.FC<CheckInTableProps> = ({eventId}) => {
+  const {students} = useCheckInStudent(eventId);
 
   const eventStudentStatusImage = (rowEventStudentStatus: string) => {
     if (rowEventStudentStatus === 'CHECK_IN') {
@@ -13,6 +17,7 @@ const CheckInTable = () => {
       <img src="images/notCheckInDot.png" alt="Not Check In" width={'16px'} />
     );
   };
+
   return (
     <>
       <Styled.Table>
