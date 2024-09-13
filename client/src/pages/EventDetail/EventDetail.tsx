@@ -11,7 +11,7 @@ const EventDetail = () => {
   const eventId: string = location.state?.eventId || 'No Event ID'; // 전달된 eventId 받기
 
   const navigateToQrScanner = () => {
-    navigate('/qrScan');
+    navigate('/qrScan', {state: {eventId}});
   };
 
   return (
