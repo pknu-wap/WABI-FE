@@ -14,7 +14,6 @@ const MainQrCheckIn = () => {
   const [messageColor, setMessageColor] = useState('black');
   const [qrColor, setQrColor] = useState<string>('lightgray');
 
-  const navigate = useNavigate();
   const location = useLocation();
   const eventId: string = location.state?.eventId || 'No Event ID';
 
