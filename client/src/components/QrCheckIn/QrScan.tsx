@@ -15,10 +15,14 @@ const handleError = (err: Error) => {
 };
 
 interface QrScanProps {
-  onScanResult: (message: string, messageColor:string, qrColor:string) => void;
+  onScanResult: (
+    message: string,
+    messageColor: string,
+    qrColor: string,
+  ) => void;
 }
 
-const QrScan = ({ onScanResult }: QrScanProps) => {
+const QrScan = ({onScanResult}: QrScanProps) => {
   const [scanned, setQrScanned] = useState(false);
   const [nextScanned, setNextScanned] = useState(0);
 
@@ -33,32 +37,42 @@ const QrScan = ({ onScanResult }: QrScanProps) => {
       );
       Student.studentId = ExtractedStudentId;
 
-        sendToServer(Student)
-          .then((res) => {
-            if (!res.data.message || res.data.message == "이미 체크인 했습니다.") {
-              onScanResult("정상적으로 참석되었습니다.",'#4E54F5','#4E54F5');
-            } else {
-              onScanResult("이벤트 해당그룹이 아닙니다.",'red','red');
-            }
-            setQrScanned(true);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      sendToServer(Student)
+        .then(res => {
+          if (
+            !res.data.message ||
+            res.data.message === '이미 체크인 했습니다.'
+          ) {
+            onScanResult('정상적으로 참석되었습니다.', '#4E54F5', '#4E54F5');
+          } else {
+            onScanResult('이벤트 해당그룹이 아닙니다.', 'red', 'red');
+          }
+          setQrScanned(true);
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
       setTimeout(() => {
         setQrScanned(false);
-        onScanResult("QR CODE를 화면의 사각형 안에 맞춰주세요.",'black','lightgray');
+        onScanResult(
+          'QR CODE를 화면의 사각형 안에 맞춰주세요.',
+          'black',
+          'lightgray',
+        );
         setNextScanned(prevKey => prevKey + 1);
       }, 1000);
-
     }
   };
 
   return (
     <div>
       <Styled.QrCameraReveral>
-        <QrScanner key={nextScanned} onScan={handleScan} onError={handleError} />
+        <QrScanner
+          key={nextScanned}
+          onScan={handleScan}
+          onError={handleError}
+        />
       </Styled.QrCameraReveral>
     </div>
   );

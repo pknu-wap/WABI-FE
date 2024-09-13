@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Styled from './EventDetail.styles';
 import {useNavigate} from 'react-router-dom';
-import Button from '../../components/common/Button/Button';
 import CheckInTable from '../../components/event_detail/CheckInTable/CheckInTable';
 import Header from '../../components/common/Header/Header';
 import SearchAndButtonFrame from '../../components/common/SearchAndButtonFrame/SearchAndButtonFrame';
