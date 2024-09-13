@@ -5,7 +5,7 @@ import * as Styled from './MainQrCheckIn.styles';
 import QrScan from '../../components/QrCheckIn/QrScan';
 import icon from '../../icon.png';
 import Logo from '../../components/common/Logo/Logo';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 const MainQrCheckIn = () => {
   const [message, setMessage] = useState(
