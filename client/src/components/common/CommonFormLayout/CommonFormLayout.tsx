@@ -9,12 +9,12 @@ interface CreateFormLayoutProps {
   onDelete?: () => void;
 }
 
-const CommonFormLayout: React.FC<CreateFormLayoutProps> = ({
+const CommonFormLayout = ({
   title,
   children,
   onSubmit,
   onDelete,
-}) => {
+}: CreateFormLayoutProps) => {
   return (
     <Styled.FormContainer>
       <Styled.FormTitle>{title}</Styled.FormTitle>
