@@ -10,14 +10,14 @@ interface InputFieldProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputField: React.FC<InputFieldProps> = ({
+const InputField = ({
   label,
   placeholder,
   required,
   type = 'text',
   value,
   onChange,
-}) => {
+}: InputFieldProps) => {
   return (
     <Styled.InputContainer>
       <Styled.Label>
