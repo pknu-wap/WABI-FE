@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateEventForm from 'components/EventGroupSwitcher/CreateEventForm/CreateEventForm';
-import Header from '../../components/common/Header/Header';
+import Header from 'components/common/Header/Header';
 
 const EventGroupSwitcher = () => {
   // Todo

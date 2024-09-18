@@ -1,6 +1,6 @@
 import React from 'react';
 import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayout';
-import InputField from '../../common/InputField/InputField';
+import InputField from 'components/common/InputField/InputField';
 const CreateGroupForm = () => {
   //Todo
   //차후 수정하기기능을 위해 데이터를 받아와서 띄우도록 추가 예정

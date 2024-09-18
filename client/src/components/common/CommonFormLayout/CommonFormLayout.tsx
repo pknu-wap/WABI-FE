@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Styled from 'components/common/CommonFormLayout/CommonFormLayout.styles';
-import Button from '../Button/Button';
+import Button from 'components/common/Button/Button';
 
 interface CreateFormLayoutProps {
   title: string;
