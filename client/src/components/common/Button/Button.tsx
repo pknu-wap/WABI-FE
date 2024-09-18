@@ -9,10 +9,19 @@ interface ButtonProps
     ButtonStyle {
   children: ReactNode;
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const Button = ({children, ...buttonProps}: ButtonProps): ReactElement => {
-  return <ButtonStyled {...buttonProps}>{children}</ButtonStyled>;
+const Button = ({
+  children,
+  type = 'button',
+  ...buttonProps
+}: ButtonProps): ReactElement => {
+  return (
+    <ButtonStyled type={type} {...buttonProps}>
+      {children}
+    </ButtonStyled>
+  );
 };
 
 export default Button;
