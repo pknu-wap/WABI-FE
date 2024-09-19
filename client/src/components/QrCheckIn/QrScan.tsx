@@ -66,19 +66,15 @@ const QrScan = ({onScanResult}: QrScanProps) => {
   };
 
   return (
-      <div>
-        <Styled.QrCameraReveral>
-          <Styled.QrScannerContainer>
-            <Styled.StyledQrScanner>
-              <QrScanner
-                  key={nextScanned}
-                  onScan={handleScan}
-                  onError={handleError}
-              />
-            </Styled.StyledQrScanner>
-          </Styled.QrScannerContainer>
-        </Styled.QrCameraReveral>
-      </div>
+    <div>
+      <Styled.QrCameraReveral>
+        <QrScanner
+          key={nextScanned}
+          onScan={handleScan}
+          onError={handleError}
+        />
+      </Styled.QrCameraReveral>
+    </div>
   );
 };
 

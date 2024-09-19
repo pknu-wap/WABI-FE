@@ -1,12 +1,8 @@
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 export const LogoImage = styled.img`
-    ${({
-           width = 'auto',
-           height = 'auto',
-       }) => css`
-        width: ${width};
-        height: ${height};
-    `}
+    width: 40px;
+    height: 40px;
+    background-color: #AEB5BC;
 `
 
 export const LogoText = styled.span`

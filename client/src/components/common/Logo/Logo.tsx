@@ -10,15 +10,13 @@ interface LogoProps {
   src: string;
   alt: string;
   text: string;
-  width: string;
-  height: string;
 }
 
-const Logo = ({className, src, alt, text,width,height}: LogoProps) => {
+const Logo = ({className, src, alt, text}: LogoProps) => {
   return (
     <div className={className}>
       <LogoContainer>
-        <LogoImage src={src} alt={alt} width={width} height={height} />
+        <LogoImage src={src} alt={alt} />
         <LogoText>{text}</LogoText>
       </LogoContainer>
     </div>
