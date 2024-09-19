@@ -1,9 +1,7 @@
 import Header from '../../components/common/Header/Header';
-
 import React, {useState} from "react";
 import * as Styled from './MainQrCheckIn.styles';
 import QrScan from '../../components/QrCheckIn/QrScan';
-import icon from "../../icon.png";
 import Logo from "../../components/common/Logo/Logo";
 
 const MainQrCheckIn = () => {
@@ -23,8 +21,8 @@ const MainQrCheckIn = () => {
             <Styled.Wrapper>
                 <Styled.Event>
                     <Styled.EventName>
-                        <Logo src={icon} alt={'logo1'} text={''} />
-                        <h2>WAP 2024 2학기 개강총회</h2>
+                        <Logo src={'images/eventIcon.png'} alt={'logo3'} text={''} width={'45px'} height={'45px'}/>
+                        <h2>WAP 2024 2학기 시작발표</h2>
                     </Styled.EventName>
                     <Styled.Line></Styled.Line>
                     <Styled.EventTime>
@@ -38,14 +36,14 @@ const MainQrCheckIn = () => {
                         <p>WAP 2024</p>
                     </Styled.GroupBox>
                 </Styled.Event>
-                <div className="Qr">
+                <Styled.Qr>
                     <Styled.QrBox qrColor={qrColor}>
                         <QrScan onScanResult={handleScanResult}/>
                     </Styled.QrBox>
                     <Styled.QrMessage messageColor={messageColor}>
                         <div>{message}</div>
                     </Styled.QrMessage>
-                </div>
+                </Styled.Qr>
             </Styled.Wrapper>
           </>
     )
