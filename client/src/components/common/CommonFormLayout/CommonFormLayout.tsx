@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as Styled from 'components/common/CommonFormLayout/CommonFormLayout.styles';
-import Button from 'components/common/Button/Button';
+import FormSaveButton from 'components/EventGroupSwitcher/FormSaveButton/FormSaveButton';
 
 interface CreateFormLayoutProps {
   title: string;
@@ -15,9 +15,29 @@ const CommonFormLayout = ({
   onSubmit,
   onDelete,
 }: CreateFormLayoutProps) => {
+  const [isError, setIsError] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.target as HTMLFormElement;
+
+    if (!form.checkValidity()) {
+      setIsError(true);
+      const firstInvalidInput = form.querySelector(
+        'input:invalid',
+      ) as HTMLInputElement | null;
+      if (firstInvalidInput) {
+        firstInvalidInput.focus();
+      }
+    } else {
+      setIsError(false);
+      onSubmit();
+    }
+  };
+
   return (
     <Styled.FormContainer>
-      <Styled.FormTitle>{title}</Styled.FormTitle>
       {onDelete && (
         <Styled.DeleteButton onClick={onDelete}>
           <Styled.DeleteIcon
@@ -26,20 +46,18 @@ const CommonFormLayout = ({
           />
         </Styled.DeleteButton>
       )}
-      <Styled.Form onSubmit={onSubmit}>
+      <Styled.FormTitle>{title}</Styled.FormTitle>
+      <Styled.Form onSubmit={handleSubmit} noValidate>
         {children}
-        <Button
-          type="submit"
-          width="106px"
-          height="40px"
-          buttonColor="#4E54F5"
-          borderColor="#C1C7CD"
-          borderRadius="10px"
-          fontColor="#FFFFFF"
-          fontSize="16px"
-        >
-          저장하기
-        </Button>
+        <Styled.FormFooter>
+          <Styled.RequiredNote>* 필수항목</Styled.RequiredNote>
+          <FormSaveButton />
+        </Styled.FormFooter>
+        {isError && (
+          <Styled.ErrorMessage>
+            필수항목을 모두 입력하지 않았습니다.
+          </Styled.ErrorMessage>
+        )}
       </Styled.Form>
     </Styled.FormContainer>
   );
