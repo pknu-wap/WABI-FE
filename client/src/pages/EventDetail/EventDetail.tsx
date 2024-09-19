@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Styled from './EventDetail.styles';
 import {useNavigate, useLocation} from 'react-router-dom';
-import CheckInTable from '../../components/event_detail/CheckInTable/CheckInTable';
-import Header from '../../components/common/Header/Header';
-import SearchAndButtonFrame from '../../components/common/SearchAndButtonFrame/SearchAndButtonFrame';
+import CheckInTable from 'components/event_detail/CheckInTable/CheckInTable';
+import Header from 'components/common/Header/Header';
+import SearchAndButtonFrame from 'components/common/SearchAndButtonFrame/SearchAndButtonFrame';
 
 const EventDetail = () => {
   const navigate = useNavigate();
