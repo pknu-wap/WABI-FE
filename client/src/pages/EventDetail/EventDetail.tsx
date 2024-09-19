@@ -4,6 +4,8 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import CheckInTable from 'components/event_detail/CheckInTable/CheckInTable';
 import Header from 'components/common/Header/Header';
 import SearchAndButtonFrame from 'components/common/SearchAndButtonFrame/SearchAndButtonFrame';
+import Button from 'components/common/Button/Button';
+import SearchBox from 'components/common/SearchBox/SearchBox';
 
 const EventDetail = () => {
   const navigate = useNavigate();
@@ -19,12 +21,8 @@ const EventDetail = () => {
       <Header />
       <Styled.InnerLayout>
         <SearchAndButtonFrame>
-          <div>검색 박스 준비 중... 🙇🏻‍♂️</div>
-          <p>Event ID: {eventId}</p> {/* 전달받은 eventId 표시 */}
-          <img
-            src="images/qrCheckInButton.png"
-            alt={'qrCheckIn'}
-            style={{width: '150px', height: '50px'}}
+          <SearchBox />
+          {/*<p>Event ID: {eventId}</p> /!* 전달받은 eventId 표시 *!/*/}
           <Button
             type="button"
             width={'155px'}
