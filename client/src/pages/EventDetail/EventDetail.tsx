@@ -17,7 +17,7 @@ const EventDetail = () => {
   return (
     <Styled.Wrapper>
       <Header />
-      <div>
+      <Styled.InnerLayout>
         <SearchAndButtonFrame>
           <div>검색 박스 준비 중... 🙇🏻‍♂️</div>
           <p>Event ID: {eventId}</p> {/* 전달받은 eventId 표시 */}
@@ -25,11 +25,23 @@ const EventDetail = () => {
             src="images/qrCheckInButton.png"
             alt={'qrCheckIn'}
             style={{width: '150px', height: '50px'}}
+          <Button
+            type="button"
+            width={'155px'}
+            height={'60px'}
+            borderRadius={'10px'}
+            buttonColor={'#ffffff'}
             onClick={navigateToQrScanner}
-          />
+          >
+            <Styled.Image
+              src={'images/Icon/qrCheckInIcon.png'}
+              alt={'qrCheckInIcon'}
+            />
+            <Styled.Text>QR 체크인</Styled.Text>
+          </Button>
         </SearchAndButtonFrame>
         <CheckInTable eventId={eventId} />
-      </div>
+      </Styled.InnerLayout>
     </Styled.Wrapper>
   );
 };

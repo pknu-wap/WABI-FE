@@ -12,4 +12,15 @@ const Wrapper = styled.div`
   background-color: #f0f4f7;
 `;
 
-export {Wrapper};
+const InnerLayout = styled.div``;
+
+const Image = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+const Text = styled.div`
+  margin-left: 10px;
+  font-size: 20px;
+`;
+export {Wrapper, InnerLayout, Image, Text};
