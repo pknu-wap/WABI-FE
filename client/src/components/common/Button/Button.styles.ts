@@ -12,6 +12,7 @@ export interface ButtonStyle {
     borderRadius?: string;
     fontColor?: string;
     fontSize?: string;
+    padding?:string;
 }
 
 export const ButtonStyled = styled.button<ButtonStyle>`
@@ -27,7 +28,8 @@ export const ButtonStyled = styled.button<ButtonStyle>`
         borderColor = 'white',
         borderRadius = 'auto',
         fontColor = 'auto',
-        fontSize = 'auto',
+        fontSize = 'auto', 
+        padding = '5px',
     }) => css`
         width: ${width};
         height: ${height};
@@ -36,5 +38,6 @@ export const ButtonStyled = styled.button<ButtonStyle>`
         border-radius: ${borderRadius};
         color: ${fontColor};
         font-size: ${fontSize};
+        padding: ${padding};
     `}
 `

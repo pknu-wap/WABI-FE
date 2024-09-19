@@ -29,7 +29,7 @@ const ModalFrame: React.FC<{children: React.ReactNode}> = ({children}) => {
       <ModalView>
         <ModalHeader>
           <ModalExitButton onClick={modalClose}>X</ModalExitButton>
-          <ModalLogo src={icon} alt={'logo1'} text={'WABI'} />
+          <ModalLogo src={icon} alt={'logo1'} text={'WABI'} width={'40px'} height={'40px'}/>
         </ModalHeader>
 
         <ModalContent>{children}</ModalContent>

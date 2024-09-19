@@ -1,75 +1,81 @@
 import styled from "styled-components";
 
-const Text = styled.div`
+export const Text = styled.div`
     font-family: Noto Sans;
     text-align: left;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
+    flex-wrap: wrap;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     padding:0;
     margin:0;
     background-color: #F0F4F7;
-    overflow-x: hidden;
 `;
 
-const Event = styled.div`
+export const Event = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: white;
     height: 417px;
-    margin-top: 40px;
-    padding: 20px 55px 60px 40px;
+    margin: 40px 20px 0 20px;
+    padding:70px 43px 60px 40px;
     border-radius: 10px;
-    gap:5px;
+    line-height: 27.24px;
+    gap:10px;
+
+    @media (min-width: 550px) {
+        min-width: 550px; 
+    }
 `
-const EventName = styled(Text)`
+export const EventName = styled(Text)`
     display: flex;
     flex-direction: row;
     align-items: center;
     max-width: 850px;
     font-size: 40px;
-    line-height: 55px;
+    line-height: 60px;
 `
-const Line = styled("div")`
+export const Line = styled("div")`
     height:1px;
     background-color:#F0F4F7;
     border:0;
 `
 
-const EventTime = styled(Text)`
+export const EventTime = styled(Text)`
     display: flex;
     flex-direction: row;
     font-size: 20px;
-    line-height: 20px;
+    gap: 45px;
 `
 
-const GroupBox = styled(Text)`
+export const GroupBox = styled(Text)`
     font-size: 20px;
     color: #697077;
-    line-height: 27.24px;
 `
 
-const QrBox = styled.div<{ qrColor: string }>`
+export const Qr = styled.div`
+    margin-left:20px;
+`
+
+export const QrBox = styled.div<{ qrColor: string }>`
     margin-top:40px;
+    margin-right:20px;
     background-color: ${({ qrColor }) => qrColor};
     border: 25px solid ${({ qrColor }) => qrColor};
     border-bottom: 20px solid ${({ qrColor }) => qrColor};
     border-radius: 20px;
 `
 
-const QrMessage = styled(Text)<{ messageColor: string }>`
+export const QrMessage = styled(Text)<{ messageColor: string }>`
     color: ${({ messageColor }) => messageColor};
     font-size: 32px;
     font-weight: 400;
     line-height: 43.58px;
-    margin-top: 20px;
-    white-space: normal;
+    margin-top: 25px;
 `
-
-export {Wrapper, Event, GroupBox, EventName, Line, EventTime, QrBox, QrMessage};
