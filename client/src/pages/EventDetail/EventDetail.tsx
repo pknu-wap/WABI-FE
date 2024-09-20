@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import * as Styled from './EventDetail.styles';
 import {useNavigate, useLocation} from 'react-router-dom';
 import CheckInTable from 'components/event_detail/CheckInTable/CheckInTable';
+import CheckInGroup from 'components/event_detail/CheckInGroup/CheckInGroup';
 import Header from 'components/common/Header/Header';
 import SearchAndButtonFrame from 'components/common/SearchAndButtonFrame/SearchAndButtonFrame';
 import Button from 'components/common/Button/Button';
