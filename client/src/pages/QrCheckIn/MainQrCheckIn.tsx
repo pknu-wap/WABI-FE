@@ -20,30 +20,45 @@ const MainQrCheckIn = () => {
           <Header />
             <Styled.Wrapper>
                 <Styled.Event>
-                    <Styled.EventName>
-                        <Logo src={'images/eventIcon.png'} alt={'logo3'} text={''} width={'45px'} height={'45px'}/>
-                        <h2>WAP 2024 2학기 시작발표</h2>
-                    </Styled.EventName>
-                    <Styled.Line></Styled.Line>
-                    <Styled.EventTime>
-                        <h3>2024.09.13 18:30</h3>
-                        <h3> ~ </h3>
-                        <h3>2024.09.13 20:00</h3>
-                    </Styled.EventTime>
-                    <Styled.Line></Styled.Line>
-                    <Styled.GroupBox>
-                        <p>참가 가능한 그룹</p>
-                        <p>WAP 2024</p>
-                    </Styled.GroupBox>
+                    <Styled.EventContent>
+                        <Styled.Line></Styled.Line>
+                        <Styled.EventTime>
+                            <h3>2024.09.13 18:30</h3>
+                            <h3> ~ </h3>
+                            <h3>2024.09.13 20:00</h3>
+                        </Styled.EventTime>
+                        <Styled.Line></Styled.Line>
+                        <Styled.GroupBox>
+                            <p>참가 가능한 그룹</p>
+                            <p>WAP 2024</p>
+                        </Styled.GroupBox>
+                    </Styled.EventContent>
+                    <Styled.Qr>
+                        <Styled.EventName>
+                            <Logo src={'images/eventIcon.png'} alt={'logo3'} text={''} width={'50x'} height={'50px'}/>
+                            <h2>WAP 2024 2학기 시작발표</h2>
+                        </Styled.EventName>
+                        <Styled.QrBox qrColor={qrColor}>
+                            <QrScan onScanResult={handleScanResult}/>
+                        </Styled.QrBox>
+                        <Styled.QrMessage messageColor={messageColor}>
+                            <div>{message}</div>
+                        </Styled.QrMessage>
+                    </Styled.Qr>
+                    <Styled.EventContent>
+                        <Styled.Line></Styled.Line>
+                        <Styled.EventTime>
+                            <h3>2024.09.13 18:30</h3>
+                            <h3> ~ </h3>
+                            <h3>2024.09.13 20:00</h3>
+                        </Styled.EventTime>
+                        <Styled.Line></Styled.Line>
+                        <Styled.GroupBox>
+                            <p>참가 가능한 그룹</p>
+                            <p>WAP 2024</p>
+                        </Styled.GroupBox>
+                    </Styled.EventContent>
                 </Styled.Event>
-                <Styled.Qr>
-                    <Styled.QrBox qrColor={qrColor}>
-                        <QrScan onScanResult={handleScanResult}/>
-                    </Styled.QrBox>
-                    <Styled.QrMessage messageColor={messageColor}>
-                        <div>{message}</div>
-                    </Styled.QrMessage>
-                </Styled.Qr>
             </Styled.Wrapper>
           </>
     )
