@@ -6,7 +6,7 @@ import Header from 'components/common/Header/Header';
 import SearchAndButtonFrame from 'components/common/SearchAndButtonFrame/SearchAndButtonFrame';
 import Button from 'components/common/Button/Button';
 import SearchBox from 'components/common/SearchBox/SearchBox';
-
+import Title from 'components/common/Title/Title';
 const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,6 +22,8 @@ const EventDetail = () => {
     <Styled.Wrapper>
       <Header />
       <Styled.InnerLayout>
+        <Title titleText={'EVENT NAME'} subTitleText={'DEVIL'} />
+        <CheckInGroup eventId={eventId} />
         <SearchAndButtonFrame>
           <SearchBox filterTextChange={setListFilterText} />
           <Button
