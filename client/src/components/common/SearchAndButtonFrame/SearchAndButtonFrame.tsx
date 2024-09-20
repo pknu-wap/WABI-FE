@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 
-import * as Styles from './SearchAndButtonFrame.styles';
+import * as Styled from './SearchAndButtonFrame.styles';
 
 interface FrameProps {
   children: ReactNode;
@@ -8,9 +8,9 @@ interface FrameProps {
 
 const SearchAndButtonFrame = ({children}: FrameProps) => {
   return (
-    <Styles.SearchAndButtonFrameStyles>
+    <Styled.SearchAndButtonFrameStyles>
       {children}
-    </Styles.SearchAndButtonFrameStyles>
+    </Styled.SearchAndButtonFrameStyles>
   );
 };
 

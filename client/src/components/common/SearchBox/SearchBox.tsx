@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as Styles from './SearchBox.styles';
+import * as Styled from './SearchBox.styles';
 
 interface SearchBoxProps {
   filterTextChange: React.Dispatch<React.SetStateAction<string>>;
@@ -14,14 +14,14 @@ const SearchBox = ({filterTextChange}: SearchBoxProps) => {
   };
 
   return (
-    <Styles.SearchBoxFrame>
-      <Styles.SearchIcon src={'images/Icon/searchIcon.png'} />
-      <Styles.InputBox
+    <Styled.SearchBoxFrame>
+      <Styled.SearchIcon src={'images/Icon/searchIcon.png'} />
+      <Styled.InputBox
         type="input"
         placeholder={'SEARCH'}
         onChange={handleSearchTextChange}
       />
-    </Styles.SearchBoxFrame>
+    </Styled.SearchBoxFrame>
   );
 };
 
