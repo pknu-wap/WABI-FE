@@ -3,7 +3,7 @@ import * as Styled from 'components/common/InputField/InputField.styles';
 
 interface InputFieldProps {
   label: string;
-  placeholder: string;
+  placeholder?: string;
   required: boolean;
   type?: string;
   value?: string | number;

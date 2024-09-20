@@ -1,12 +1,9 @@
 import React, {ReactElement, ReactNode} from 'react';
-import {
-  ButtonStyle,
-  ButtonStyled,
-} from 'components/common/Button/Button.styles';
+import * as Styled from 'components/common/Button/Button.styles';
 
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    ButtonStyle {
+    Styled.ButtonStyle {
   children: ReactNode;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
@@ -18,9 +15,9 @@ const Button = ({
   ...buttonProps
 }: ButtonProps): ReactElement => {
   return (
-    <ButtonStyled type={type} {...buttonProps}>
+    <Styled.ButtonStyled type={type} {...buttonProps}>
       {children}
-    </ButtonStyled>
+    </Styled.ButtonStyled>
   );
 };
 

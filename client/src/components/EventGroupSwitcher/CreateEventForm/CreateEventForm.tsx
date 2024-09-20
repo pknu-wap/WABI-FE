@@ -22,21 +22,23 @@ const CreateEventForm = () => {
       onDelete={handleDelete}
     >
       <InputField
-        label={'이벤트 제목'}
-        placeholder={'이벤트 제목'}
+        label="이벤트 제목"
+        placeholder="이벤트 제목 입력"
         required={true}
+      />
+      <InputField label="이벤트 시작" required={true} type="datetime-local" />
+      <InputField label="이벤트 종료" required={true} type="datetime-local" />
+      <InputField
+        label="참여 수 제한 (명)"
+        placeholder="참여 제한 수 입력"
+        required={false}
+        type="number"
       />
       <InputField
-        label={'이벤트 시작'}
-        placeholder={'이벤트 시작'}
-        required={true}
+        label="참여 그룹 선택"
+        placeholder=",을 활용해서 입력 (1, 3, 5)"
+        required={false}
       />
-      <InputField
-        label={'이벤트 종료'}
-        placeholder={'이벤트 종료'}
-        required={true}
-      />
-      {/*Todo 이벤트 개설에 필요한 Input 요소들 추가 예정 및 input type에 맞는 css 적용예정*/}
     </CommonFormLayout>
   );
 };
