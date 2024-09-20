@@ -11,7 +11,7 @@ const SearchBoxFrame = styled.div`
   height: 60px;
   background-color: #ffffff;
   border-radius: 10px;
-  border-width: 0px;
+  border-width: 0;
 `;
 
 const SearchIcon = styled.img`

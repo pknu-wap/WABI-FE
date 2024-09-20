@@ -11,10 +11,12 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId}) => {
 
   const eventStudentStatusImage = (rowEventStudentStatus: string) => {
     if (rowEventStudentStatus === 'CHECK_IN') {
-      return <img src="images/checkInDot.png" alt="Check In" width={'16px'} />;
+      return (
+        <img src={'images/checkInDot.png'} alt="Check In" width={'16px'} />
+      );
     }
     return (
-      <img src="images/notCheckInDot.png" alt="Not Check In" width={'16px'} />
+      <img src={'images/notCheckInDot.png'} alt="Not Check In" width={'16px'} />
     );
   };
 
@@ -32,7 +34,7 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId}) => {
         </thead>
         <tbody>
           {students.length > 0 ? (
-            students.map((row) => (
+            students.map(row => (
               <tr key={row.id}>
                 <Styled.ThData>{row.id}</Styled.ThData>
                 <Styled.ThData>{row.name}</Styled.ThData>
