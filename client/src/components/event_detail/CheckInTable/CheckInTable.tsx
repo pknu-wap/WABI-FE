@@ -13,11 +13,21 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
   const eventStudentStatusImage = (rowEventStudentStatus: string) => {
     if (rowEventStudentStatus === 'CHECK_IN') {
       return (
-        <img src={'images/checkInDot.png'} alt="Check In" width={'16px'} />
+        <img
+          src={'images/checkInDot.png'}
+          alt="Check In"
+          width={'16px'}
+          height={'16px'}
+        />
       );
     }
     return (
-      <img src={'images/notCheckInDot.png'} alt="Not Check In" width={'16px'} />
+      <img
+        src={'images/notCheckInDot.png'}
+        alt="Not Check In"
+        width={'16px'}
+        height={'16px'}
+      />
     );
   };
 
@@ -28,9 +38,8 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
           <tr>
             <Styled.ThData>학번</Styled.ThData>
             <Styled.ThData>이름</Styled.ThData>
-            <Styled.ThBorder>그룹</Styled.ThBorder>
             <Styled.ThBorder>체크인 상태</Styled.ThBorder>
-            <Styled.ThBorder>체크인 시간</Styled.ThBorder>
+            <Styled.ThBorder>그룹</Styled.ThBorder>
           </tr>
         </thead>
         <tbody>
@@ -38,19 +47,23 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
             students
               .filter(
                 row =>
-                  row.id.includes(filterText) ||
-                  row.name.includes(filterText) ||
-                  row.group.includes(filterText),
+                  (row.id && row.id.includes(filterText)) || // row.id가 undefined가 아닌지 확인
+                  (row.name && row.name.includes(filterText)) || // row.name이 undefined가 아닌지 확인
+                  (row.group && row.group.includes(filterText)), // row.group이 undefined가 아닌지 확인
               )
               .map(row => (
                 <tr key={row.id}>
                   <Styled.ThData>{row.id}</Styled.ThData>
                   <Styled.ThData>{row.name}</Styled.ThData>
-                  <Styled.ThBorder>{row.group}</Styled.ThBorder>
                   <Styled.ThBorder>
-                    {eventStudentStatusImage(row.eventStudentStatus)}
+                    <Styled.CheckInData>
+                      <Styled.CheckInImage>
+                        {eventStudentStatusImage(row.eventStudentStatus)}
+                      </Styled.CheckInImage>
+                      <Styled.CheckInTime>{row.checkInTime}</Styled.CheckInTime>
+                    </Styled.CheckInData>
                   </Styled.ThBorder>
-                  <Styled.ThBorder>{row.checkInTime}</Styled.ThBorder>
+                  <Styled.ThBorder>{row.group}</Styled.ThBorder>
                 </tr>
               ))
           ) : (
