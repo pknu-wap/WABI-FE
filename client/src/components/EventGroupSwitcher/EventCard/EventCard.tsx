@@ -30,17 +30,17 @@ const EventCard = () => {
           <Styled.Group>
             {event.bands.length >= 3 ? (
               <>
-                {event.bands.slice(0, 2).map((band: Band) => (
+                {event.bands.slice(0, 3).map((band: Band) => (
                   <h3 key={band.bandId}>{band.bandName}</h3>
                 ))}
-                <h3>외 {event.bands.length - 2}개</h3>
+                <h3>외 {event.bands.length - 3}개</h3>
               </>
             ) : (
               <>
                 {event.bands.map((band: Band) => (
                   <h3 key={band.bandId}>{band.bandName}</h3>
                 ))}
-                {Array(2 - event.bands.length)
+                {Array(3 - event.bands.length)
                   .fill(null)
                   .map((_, idx: number) => (
                     <h3 key={`empty-${idx}`}>&nbsp;</h3>
