@@ -4,9 +4,10 @@ import useCheckInStudent from '../../../hooks/useCheckInStudent';
 
 interface CheckInTableProps {
   eventId: string;
+  filterText: string;
 }
 
-const CheckInTable: React.FC<CheckInTableProps> = ({eventId}) => {
+const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
   const {students} = useCheckInStudent(eventId);
 
   const eventStudentStatusImage = (rowEventStudentStatus: string) => {
@@ -34,17 +35,24 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId}) => {
         </thead>
         <tbody>
           {students.length > 0 ? (
-            students.map(row => (
-              <tr key={row.id}>
-                <Styled.ThData>{row.id}</Styled.ThData>
-                <Styled.ThData>{row.name}</Styled.ThData>
-                <Styled.ThBorder>{row.group}</Styled.ThBorder>
-                <Styled.ThBorder>
-                  {eventStudentStatusImage(row.eventStudentStatus)}
-                </Styled.ThBorder>
-                <Styled.ThBorder>{row.checkInTime}</Styled.ThBorder>
-              </tr>
-            ))
+            students
+              .filter(
+                row =>
+                  row.id.includes(filterText) ||
+                  row.name.includes(filterText) ||
+                  row.group.includes(filterText),
+              )
+              .map(row => (
+                <tr key={row.id}>
+                  <Styled.ThData>{row.id}</Styled.ThData>
+                  <Styled.ThData>{row.name}</Styled.ThData>
+                  <Styled.ThBorder>{row.group}</Styled.ThBorder>
+                  <Styled.ThBorder>
+                    {eventStudentStatusImage(row.eventStudentStatus)}
+                  </Styled.ThBorder>
+                  <Styled.ThBorder>{row.checkInTime}</Styled.ThBorder>
+                </tr>
+              ))
           ) : (
             <tr>
               <td colSpan={5}>데이터가 없습니다.</td>

@@ -2,11 +2,15 @@ import React from 'react';
 
 import * as Styles from './SearchBox.styles';
 
-const SearchBox = () => {
+interface SearchBoxProps {
+  filterTextChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SearchBox = ({filterTextChange}: SearchBoxProps) => {
   const handleSearchTextChange = (
     searchTextChangeEvent: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    console.log(searchTextChangeEvent.target.value);
+    filterTextChange(searchTextChangeEvent.target.value);
   };
 
   return (

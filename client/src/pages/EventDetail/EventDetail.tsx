@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as Styled from './EventDetail.styles';
 import {useNavigate, useLocation} from 'react-router-dom';
 import CheckInTable from 'components/event_detail/CheckInTable/CheckInTable';
@@ -12,6 +12,8 @@ const EventDetail = () => {
   const location = useLocation();
   const eventId: string = location.state?.eventId || 'No Event ID'; // 전달된 eventId 받기
 
+  const [listFilterText, setListFilterText] = useState('');
+
   const navigateToQrScanner = () => {
     navigate('/qrScan', {state: {eventId}});
   };
@@ -21,8 +23,7 @@ const EventDetail = () => {
       <Header />
       <Styled.InnerLayout>
         <SearchAndButtonFrame>
-          <SearchBox />
-          {/*<p>Event ID: {eventId}</p> /!* 전달받은 eventId 표시 *!/*/}
+          <SearchBox filterTextChange={setListFilterText} />
           <Button
             type="button"
             width={'155px'}
@@ -38,7 +39,7 @@ const EventDetail = () => {
             <Styled.Text>QR 체크인</Styled.Text>
           </Button>
         </SearchAndButtonFrame>
-        <CheckInTable eventId={eventId} />
+        <CheckInTable eventId={eventId} filterText={listFilterText} />
       </Styled.InnerLayout>
     </Styled.Wrapper>
   );
