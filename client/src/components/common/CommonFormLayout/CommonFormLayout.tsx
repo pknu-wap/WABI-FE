@@ -20,13 +20,12 @@ const CommonFormLayout = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const form = event.target as HTMLFormElement;
+    const form = event.currentTarget;
 
     if (!form.checkValidity()) {
       setIsError(true);
-      const firstInvalidInput = form.querySelector(
-        'input:invalid',
-      ) as HTMLInputElement | null;
+      const firstInvalidInput =
+        form.querySelector<HTMLInputElement>('input:invalid');
       if (firstInvalidInput) {
         firstInvalidInput.focus();
       }
