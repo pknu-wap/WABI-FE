@@ -17,13 +17,17 @@ const useCheckInStudent = (eventId: string) => {
       .get(`https://zepelown.site/api/events/check-in/${eventId}?filter=ALL`)
       .then(res => {
         const CleanedData = res.data.data;
-
         const CheckInStudent = CleanedData.map((student: any) => ({
           id: student.id,
           name: student.name,
           group: student.band,
           eventStudentStatus: student.eventStudentStatus,
-          checkInTime: student.checkInTime,
+          checkInTime:
+            student.checkInTime !== null
+              ? student.checkInTime.slice(0, 10).replaceAll('-', '.') +
+                ' ' +
+                student.checkInTime.slice(11, 16).replaceAll('-', '.')
+              : '',
         }));
 
         setStudents(CheckInStudent);
