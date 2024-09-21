@@ -19,7 +19,7 @@ const EventCard = () => {
         <Styled.Card key={event.eventId}>
           <Styled.EventTitle>
             <h2>{event.eventName}</h2>
-            <img src="./images/EditEvent.png" alt="EditEvenIcon" />
+            <img src="/images/EditEvent.png" alt="EditEvenIcon" />
           </Styled.EventTitle>
           <Styled.EventTime>
             <h3>
