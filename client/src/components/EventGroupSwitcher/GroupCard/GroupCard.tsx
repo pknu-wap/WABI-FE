@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {LoadGroupList} from 'api/loadGroupList';
 import {Band} from 'types/groupTypes';
-import * as Styled from 'components/EventGroupSwitcher/EventGroup/GroupCard.styles';
+import * as Styled from 'components/EventGroupSwitcher/GroupCard/GroupCard.styles';
 import {useRecoilState} from 'recoil';
 import {selectedBandIdState} from 'recoil/currentBandId';
 
