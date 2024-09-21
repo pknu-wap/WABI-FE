@@ -10,6 +10,7 @@ import SearchBox from 'components/common/SearchBox/SearchBox';
 import Title from 'components/common/Title/Title';
 import {getEventById} from 'api/event';
 import {Band} from '../../types/eventTypes';
+import CheckInStatus from 'components/event_detail/CheckInStatus/CheckInStatus';
 const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,20 +40,23 @@ const EventDetail = () => {
         <CheckInGroup groups={groups} />
         <SearchAndButtonFrame>
           <SearchBox filterTextChange={setListFilterText} />
-          <Button
-            type="button"
-            width={'155px'}
-            height={'60px'}
-            borderRadius={'10px'}
-            buttonColor={'#ffffff'}
-            onClick={navigateToQrScanner}
-          >
-            <Styled.Image
-              src={'images/Icon/qrCheckInIcon.png'}
-              alt={'qrCheckInIcon'}
-            />
-            <Styled.Text>QR 체크인</Styled.Text>
-          </Button>
+          <Styled.StatusAndButtonFrame>
+            <CheckInStatus eventId={eventId} adminId={adminId} />
+            <Button
+              type="button"
+              width={'155px'}
+              height={'60px'}
+              borderRadius={'10px'}
+              buttonColor={'#ffffff'}
+              onClick={navigateToQrScanner}
+            >
+              <Styled.Image
+                src={'images/Icon/qrCheckInIcon.png'}
+                alt={'qrCheckInIcon'}
+              />
+              <Styled.Text>QR 체크인</Styled.Text>
+            </Button>
+          </Styled.StatusAndButtonFrame>
         </SearchAndButtonFrame>
         <CheckInTable eventId={eventId} filterText={listFilterText} />
       </Styled.InnerLayout>
