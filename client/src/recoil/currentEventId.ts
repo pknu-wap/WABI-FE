@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const selectedEventIdState = atom<string | null>({
+export const selectedEventIdState = atom<number | null>({
     key: 'selectedEventIdState',
     default: null,
 });
