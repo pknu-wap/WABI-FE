@@ -22,7 +22,7 @@ const ManualUploadModal: React.FC<FileUploadModalProps> = ({
     college: '',
     major: '',
     tel: '',
-    status: '',
+    academicStatus: '',
   });
 
   const handleChange = (

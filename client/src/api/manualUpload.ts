@@ -1,10 +1,27 @@
 import axios from 'axios';
-import {students} from "../types/studentTypes";
+import { students } from "../types/studentTypes"; // students 타입 import
 
-export const manualUpload = (students : students) => {
-    axios.post('https://13f9350d-c685-4634-9131-e118c99027d6.mock.pstmn.io/api/bands/1/members/enrollments/manual',students)
-        .then((res) => {
-        })
-        .catch((error) => {
-        })
-}
+export const manualUpload = async (students: students) => {
+    try {
+        const requestBody = {
+            bandStudentDtos: students.map((student) => ({
+                studentId: student.studentId,
+                name: student.name,
+                club: student.club,
+                position: student.position,
+                joinDate: student.joinDate,
+                college: student.college,
+                major: student.major,
+                tel: student.tel,
+                academicStatus: student.academicStatus, // 필드 이름이 academicStatus로 매핑됨
+            })),
+        };
+
+        const response = await axios.post('https://zepelown.site/api/bands/1/members/enrollments/manual', requestBody);
+
+        console.log('Response:', response.data);
+        return response.data;
+    } catch (error: unknown) {
+        console.log(error);
+    }
+};

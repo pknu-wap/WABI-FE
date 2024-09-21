@@ -35,7 +35,7 @@ const OptionalStep = ({prevStep, student, handleChange}: stepProps) => {
                 <input
                     type="text"
                     name="status"
-                    value={student?.status}
+                    value={student?.academicStatus}
                     onChange={handleChange}
                 />
                 휴대폰 번호
