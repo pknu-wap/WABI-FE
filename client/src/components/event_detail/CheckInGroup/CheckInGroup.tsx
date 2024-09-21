@@ -1,7 +1,7 @@
 import React from 'react';
 import GroupCard from 'components/event_detail/GroupCard/GroupCard';
 import * as Styled from 'components/event_detail/CheckInGroup/CheckInGroup.styles';
-import {Band} from 'types/eventTypes';
+import {Band} from 'types/groupTypes';
 
 const CheckInGroup = ({groups}: any) => {
   return (
