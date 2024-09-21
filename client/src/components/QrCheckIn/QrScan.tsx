@@ -20,9 +20,10 @@ interface QrScanProps {
     messageColor: string,
     qrColor: string,
   ) => void;
+  eventId: string;
 }
 
-const QrScan = ({onScanResult}: QrScanProps) => {
+const QrScan = ({onScanResult, eventId}: QrScanProps) => {
   const [scanned, setQrScanned] = useState(false);
   const [nextScanned, setNextScanned] = useState(0);
 
@@ -36,6 +37,7 @@ const QrScan = ({onScanResult}: QrScanProps) => {
         studentIdEndPoint,
       );
       Student.studentId = ExtractedStudentId;
+      Student.eventId = parseInt(eventId, 10);
 
       sendToServer(Student)
         .then(res => {

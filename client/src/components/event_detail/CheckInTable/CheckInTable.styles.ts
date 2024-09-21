@@ -33,3 +33,23 @@ export const TdData = styled.td`
 export const TdBorder = styled(TdData)`
   border-left: 1px solid #aeb5bc;
 `;
+
+export const CheckInData = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CheckInImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+`;
+
+export const CheckInTime = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

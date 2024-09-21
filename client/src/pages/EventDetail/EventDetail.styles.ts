@@ -12,4 +12,21 @@ const Wrapper = styled.div`
   background-color: #f0f4f7;
 `;
 
-export {Wrapper};
+const InnerLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+`;
+
+const Image = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+const Text = styled.div`
+  margin-left: 10px;
+  font-size: 20px;
+`;
+export {Wrapper, InnerLayout, Image, Text};

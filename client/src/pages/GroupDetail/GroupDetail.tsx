@@ -9,7 +9,8 @@ import MemberUpdateButton from 'components/GroupDetail/MemberUpdateButton/Member
 import Header from 'components/common/Header/Header';
 import FileUploadModal from '../../components/GroupDetail/FileUploadModal/FileUploadModal';
 import ManualUploadModal from '../../components/GroupDetail/ManualUploadModal/ManualUploadModal';
-import GroupMemberList from "../../components/common/GroupMemberList/GroupMemberList";
+import GroupMemberList from '../../components/common/GroupMemberList/GroupMemberList';
+import {useLocation} from 'react-router-dom';
 
 // 파일 업로드 기능 컴포넌트
 
@@ -27,6 +28,9 @@ const GroupDetailPage = () => {
     setFileUploadModalStateValue(true);
   };
 
+  const location = useLocation();
+  const groupId: string = location.state?.groupId || 'No GROUP ID';
+
   const openManualUploadModal = () => {
     setManualUploadModalStateValue(true);
   };
@@ -37,7 +41,7 @@ const GroupDetailPage = () => {
       <ManualUploadModal modalStateValue={manualUploadModalStateValue} />
       <Header />
       {/*<Title />*/}
-
+      <p>{groupId}</p>
       <div>
         {/*<SerchBox/>*/}
         <div>

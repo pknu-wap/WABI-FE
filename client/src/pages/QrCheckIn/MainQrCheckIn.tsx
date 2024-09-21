@@ -1,19 +1,35 @@
 import Header from '../../components/common/Header/Header';
-import React, {useState} from "react";
+
+
+import React, {useState} from 'react';
 import * as Styled from './MainQrCheckIn.styles';
 import QrScan from '../../components/QrCheckIn/QrScan';
-import Logo from "../../components/common/Logo/Logo";
+import icon from '../../icon.png';
+import Logo from '../../components/common/Logo/Logo';
+import {useLocation} from 'react-router-dom';
+
 
 const MainQrCheckIn = () => {
-    const [message, setMessage] = useState("QR CODE를 화면의 사각형 안에 맞춰주세요.");
-    const [messageColor, setMessageColor] = useState('black');
-    const [qrColor,setQrColor] = useState<string>('lightgray');
+  const [message, setMessage] = useState(
+    'QR CODE를 화면의 사각형 안에 맞춰주세요.',
+  );
+  const [messageColor, setMessageColor] = useState('black');
+  const [qrColor, setQrColor] = useState<string>('lightgray');
 
-    const handleScanResult = (newMessage: string, newMessageColor:string,newQrColor:string) => {
-        setMessage(newMessage);
-        setMessageColor(newMessageColor);
-        setQrColor(newQrColor);
-    };
+  const location = useLocation();
+  const eventId: string = location.state?.eventId || 'No Event ID';
+
+
+  const handleScanResult = (
+    newMessage: string,
+    newMessageColor: string,
+    newQrColor: string,
+  ) => {
+    setMessage(newMessage);
+    setMessageColor(newMessageColor);
+    setQrColor(newQrColor);
+  };
+
 
     return (
           <>
@@ -39,7 +55,7 @@ const MainQrCheckIn = () => {
                             <h2>WAP 2024 2학기 시작발표</h2>
                         </Styled.EventName>
                         <Styled.QrBox qrColor={qrColor}>
-                            <QrScan onScanResult={handleScanResult}/>
+                            <QrScan onScanResult={handleScanResult} eventId={eventId}/>
                         </Styled.QrBox>
                         <Styled.QrMessage messageColor={messageColor}>
                             <div>{message}</div>
@@ -63,5 +79,6 @@ const MainQrCheckIn = () => {
           </>
     )
 }
+
 
 export default MainQrCheckIn;
