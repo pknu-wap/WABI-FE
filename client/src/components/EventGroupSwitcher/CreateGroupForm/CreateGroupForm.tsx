@@ -4,6 +4,10 @@ import InputField from 'components/common/InputField/InputField';
 import {createGroup, updateGroup, getGroupById, deleteGroup} from 'api/group';
 
 const CreateGroupForm = ({bandId}: {bandId?: number}) => {
+  //Todo
+  //1. adminId const 처리
+  //2. 추후 폼 초기화 처리 필요
+  // -> 삭제 이후, 생성 이후, 수정 이후 로직 추가 필요
   const adminId = 1;
 
   const [groupFormData, setGroupFormData] = useState({
