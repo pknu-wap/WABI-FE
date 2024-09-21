@@ -1,75 +1,101 @@
 import styled from "styled-components";
 
-const Text = styled.div`
+export const Text = styled.div`
     font-family: Noto Sans;
     text-align: left;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     padding:0;
     margin:0;
     background-color: #F0F4F7;
-    overflow-x: hidden;
 `;
 
-const Event = styled.div`
+export const Event = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 30px 20px 40px 20px;
+    padding: 30px 43px 60px 40px;
+    border-radius: 10px;
+    line-height: 27.24px;
+    gap:10px;
+`
+
+export const EventContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
-    height: 417px;
-    margin-top: 40px;
-    padding: 20px 55px 60px 40px;
+    align-items: center;
+    width: 200px;
+    height:400px;
+    padding:40px;
     border-radius: 10px;
-    gap:5px;
+    box-shadow: 5px 5px 10px lightgray;
+    background-color: white;
 `
-const EventName = styled(Text)`
+
+export const EventName = styled(Text)`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    max-width: 850px;
-    font-size: 40px;
-    line-height: 55px;
+    font-size: 35px;
+    background-color: white;
+    line-height: 80px;
 `
-const Line = styled("div")`
+
+export const Line = styled("div")`
     height:1px;
     background-color:#F0F4F7;
     border:0;
 `
 
-const EventTime = styled(Text)`
+export const EventTime = styled(Text)`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-size: 20px;
-    line-height: 20px;
 `
 
-const GroupBox = styled(Text)`
+export const GroupBox = styled(Text)`
+    text-align:center;
     font-size: 20px;
     color: #697077;
-    line-height: 27.24px;
 `
 
-const QrBox = styled.div<{ qrColor: string }>`
-    margin-top:40px;
+export const Qr = styled.div`
+    width: 100%;
+    max-width:1050px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left:100px;
+    margin-right:100px;
+    padding:20px;
+    border-radius:10px;
+    background-color: white;
+`
+
+export const QrBox = styled.div<{ qrColor: string }>`
+    margin-top:10px;
+    margin-right:20px;
     background-color: ${({ qrColor }) => qrColor};
     border: 25px solid ${({ qrColor }) => qrColor};
     border-bottom: 20px solid ${({ qrColor }) => qrColor};
     border-radius: 20px;
 `
 
-const QrMessage = styled(Text)<{ messageColor: string }>`
+export const QrMessage = styled(Text)<{ messageColor: string }>`
     color: ${({ messageColor }) => messageColor};
     font-size: 32px;
     font-weight: 400;
     line-height: 43.58px;
-    margin-top: 20px;
-    white-space: normal;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align:center;
 `
-
-export {Wrapper, Event, GroupBox, EventName, Line, EventTime, QrBox, QrMessage};
