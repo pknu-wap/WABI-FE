@@ -1,18 +1,24 @@
 import React, {ReactElement, ReactNode} from 'react';
-import {
-  ButtonStyle,
-  ButtonStyled,
-} from 'components/common/Button/Button.styles';
+import * as Styled from 'components/common/Button/Button.styles';
 
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    ButtonStyle {
+    Styled.ButtonStyle {
   children: ReactNode;
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const Button = ({children, ...buttonProps}: ButtonProps): ReactElement => {
-  return <ButtonStyled {...buttonProps}>{children}</ButtonStyled>;
+const Button = ({
+  children,
+  type = 'button',
+  ...buttonProps
+}: ButtonProps): ReactElement => {
+  return (
+    <Styled.ButtonStyled type={type} {...buttonProps}>
+      {children}
+    </Styled.ButtonStyled>
+  );
 };
 
 export default Button;

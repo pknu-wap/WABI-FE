@@ -1,9 +1,10 @@
-import styled,{css} from "styled-components";
+import styled, {css} from 'styled-components';
 
 //TODO
 // hover 처리도 추가하기
 
 export interface ButtonStyle {
+
     width?: string;
     height?: string;
     buttonColor?: string;
@@ -24,7 +25,7 @@ export const ButtonStyled = styled.button<ButtonStyle>`
         width = 'auto',
         height = 'auto',
         buttonColor = 'auto',
-        hasBorder = false,
+        hasBorder = 'false',
         borderColor = 'white',
         borderRadius = 'auto',
         fontColor = 'auto',
@@ -41,3 +42,4 @@ export const ButtonStyled = styled.button<ButtonStyle>`
         padding: ${padding};
     `}
 `
+

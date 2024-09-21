@@ -32,8 +32,8 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId}) => {
         </thead>
         <tbody>
           {students.length > 0 ? (
-            students.map((row, index) => (
-              <tr key={index}>
+            students.map((row) => (
+              <tr key={row.id}>
                 <Styled.ThData>{row.id}</Styled.ThData>
                 <Styled.ThData>{row.name}</Styled.ThData>
                 <Styled.ThBorder>{row.group}</Styled.ThBorder>
