@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import * as Styled from 'components/EventGroupSwitcher/EventCard/EventCard.styles';
 import ParticipateProgress from 'components/EventGroupSwitcher/EventCard/ParticipateProgress/ParticipateProgress';
-import {eventInfo, Band} from 'types/eventTypes';
+import {EventInfo, Band} from 'types/eventTypes';
 import {LoadEventList} from 'api/loadEventList';
 
 const EventCard = () => {
-  const [events, setEvents] = useState<eventInfo[]>([]); // State to store event data
+  const [events, setEvents] = useState<EventInfo[]>([]); // State to store event data
 
   useEffect(() => {
     LoadEventList().then(filteredEvent => {
@@ -15,7 +15,7 @@ const EventCard = () => {
 
   return (
     <>
-      {events.map((event: eventInfo) => (
+      {events.map((event: EventInfo) => (
         <Styled.Card key={event.eventId}>
           <Styled.EventTitle>
             <h2>{event.eventName}</h2>

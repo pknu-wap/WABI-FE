@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {eventInfo} from 'types/eventTypes';
+import {EventInfo} from 'types/eventTypes';
 
 export const LoadEventList = () => {
   return axios
@@ -7,7 +7,7 @@ export const LoadEventList = () => {
     .then(res => {
       const events = res.data.data;
 
-      const filteredEvent = events.map((event: eventInfo) => ({
+      const filteredEvent = events.map((event: EventInfo) => ({
         eventId: event.eventId,
         eventName: event.eventName,
         eventStudentMaxCount: event.eventStudentMaxCount,
