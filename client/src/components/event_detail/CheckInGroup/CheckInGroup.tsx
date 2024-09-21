@@ -6,7 +6,7 @@ interface CheckInGroupProps {
   eventId: string;
 }
 
-const CheckInGroup: React.FC<CheckInGroupProps> = ({eventId}) => {
+const CheckInGroup = ({eventId}: CheckInGroupProps) => {
   const {groups} = useCheckInGroup(eventId);
 
   return (
