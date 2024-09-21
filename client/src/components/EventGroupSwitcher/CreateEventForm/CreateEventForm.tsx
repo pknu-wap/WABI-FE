@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayout';
 import InputField from 'components/common/InputField/InputField';
-import {Band} from 'types/eventTypes';
+import {Band} from 'types/groupTypes';
 import {getEventById, createEvent, updateEvent, deleteEvent} from 'api/event';
 
-const CreateEventForm = ({eventId}: {eventId?: string}) => {
+const CreateEventForm = ({eventId}: {eventId?: number}) => {
   //Todo
   //1. adminId const 처리
   //2. 그룹 선택 추후 api 연결 이후 selectBox로 구현
@@ -23,7 +23,7 @@ const CreateEventForm = ({eventId}: {eventId?: string}) => {
   // 수정 모드일 경우 기존 데이터 불러오기
   useEffect(() => {
     if (eventId) {
-      getEventById(Number(eventId), adminId).then(response => {
+      getEventById(eventId, adminId).then(response => {
         const {eventName, startAt, endAt, eventStudentMaxCount, bands} =
           response.data;
 
@@ -51,8 +51,6 @@ const CreateEventForm = ({eventId}: {eventId?: string}) => {
   const handleSave = () => {
     const {eventName, startAt, endAt, eventStudentMaxCount, bandIds} =
       eventFormData;
-    console.log(startAt, endAt, eventStudentMaxCount, bandIds);
-
     const requestPayload = {
       eventName,
       startAt,
@@ -65,10 +63,11 @@ const CreateEventForm = ({eventId}: {eventId?: string}) => {
       updateEvent(
         {
           ...requestPayload,
-          eventId: Number(eventId),
+          eventId: eventId,
         },
         adminId,
       );
+      alert('이벤트 정보가 성공적으로 수정되었습니다.');
     } else {
       // 그룹 생성 로직 (POST 요청)
       const bandIdArray = bandIds
@@ -83,11 +82,17 @@ const CreateEventForm = ({eventId}: {eventId?: string}) => {
         },
         adminId,
       );
+      alert('이벤트가 성공적으로 생성되었습니다.');
     }
   };
 
   const handleDelete = () => {
-    deleteEvent(Number(eventId), adminId);
+    if (eventId) {
+      deleteEvent(eventId, adminId);
+      alert('이벤트가 성공적으로 삭제되었습니다.');
+    } else {
+      alert('삭제할 이벤트가 없습니다');
+    }
     //추후 리다이렉트 또는 상태 초기화로 처리해야할 듯
   };
 
