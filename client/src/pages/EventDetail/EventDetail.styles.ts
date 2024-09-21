@@ -29,4 +29,11 @@ const Text = styled.div`
   margin-left: 10px;
   font-size: 20px;
 `;
-export {Wrapper, InnerLayout, Image, Text};
+
+const StatusAndButtonFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+export {Wrapper, InnerLayout, Image, Text, StatusAndButtonFrame};

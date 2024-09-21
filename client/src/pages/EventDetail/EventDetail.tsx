@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as Styled from './EventDetail.styles';
 import {useNavigate, useLocation} from 'react-router-dom';
 import CheckInTable from 'components/event_detail/CheckInTable/CheckInTable';
@@ -8,12 +8,28 @@ import SearchAndButtonFrame from 'components/common/SearchAndButtonFrame/SearchA
 import Button from 'components/common/Button/Button';
 import SearchBox from 'components/common/SearchBox/SearchBox';
 import Title from 'components/common/Title/Title';
+import {getEventById} from 'api/event';
+import {Band} from '../../types/eventTypes';
+import CheckInStatus from 'components/event_detail/CheckInStatus/CheckInStatus';
 const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const eventId: string = location.state?.eventId || 'No Event ID'; // 전달된 eventId 받기
+  const adminId = 1;
 
-  const [listFilterText, setListFilterText] = useState('');
+  const [listFilterText, setListFilterText] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+
+  const [groups, setGroups] = useState<Band[]>([]);
+  useEffect(() => {
+    if (eventId !== 'No Event ID') {
+      const eventIdNumber = parseInt(eventId, 10);
+      getEventById(eventIdNumber, adminId).then(response => {
+        setGroups(response.data.bands);
+        setTitle(response.data.eventName);
+      });
+    }
+  }, []);
 
   const navigateToQrScanner = () => {
     navigate('/qrScan', {state: {eventId}});
@@ -23,24 +39,27 @@ const EventDetail = () => {
     <Styled.Wrapper>
       <Header />
       <Styled.InnerLayout>
-        <Title titleText={'EVENT NAME'} subTitleText={'DEVIL'} />
-        <CheckInGroup eventId={eventId} />
+        <Title titleText={title} />
+        <CheckInGroup groups={groups} />
         <SearchAndButtonFrame>
           <SearchBox filterTextChange={setListFilterText} />
-          <Button
-            type="button"
-            width={'155px'}
-            height={'60px'}
-            borderRadius={'10px'}
-            buttonColor={'#ffffff'}
-            onClick={navigateToQrScanner}
-          >
-            <Styled.Image
-              src={'images/Icon/qrCheckInIcon.png'}
-              alt={'qrCheckInIcon'}
-            />
-            <Styled.Text>QR 체크인</Styled.Text>
-          </Button>
+          <Styled.StatusAndButtonFrame>
+            <CheckInStatus eventId={eventId} adminId={adminId} />
+            <Button
+              type="button"
+              width={'155px'}
+              height={'60px'}
+              borderRadius={'10px'}
+              buttonColor={'#ffffff'}
+              onClick={navigateToQrScanner}
+            >
+              <Styled.Image
+                src={'images/Icon/qrCheckInIcon.png'}
+                alt={'qrCheckInIcon'}
+              />
+              <Styled.Text>QR 체크인</Styled.Text>
+            </Button>
+          </Styled.StatusAndButtonFrame>
         </SearchAndButtonFrame>
         <CheckInTable eventId={eventId} filterText={listFilterText} />
       </Styled.InnerLayout>
