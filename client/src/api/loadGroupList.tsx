@@ -11,7 +11,6 @@ export const LoadGroupList = () => {
         bandName: group.bandName,
       }));
 
-      console.log(filteredEvent);
       return filteredEvent;
     })
     .catch(error => {

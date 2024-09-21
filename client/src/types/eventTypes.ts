@@ -1,15 +1,11 @@
+import {Band} from './groupTypes';
+
 // 공통 필드를 가진 BaseEventData 인터페이스 정의
 export interface BaseEventData {
   eventName: string;
   eventStudentMaxCount: number;
   startAt: string;
   endAt: string;
-}
-
-// Band 인터페이스는 그대로 유지
-export interface Band {
-  bandId: number;
-  bandName: string;
 }
 
 // 체크인 현황 타입
