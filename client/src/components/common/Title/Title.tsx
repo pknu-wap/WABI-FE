@@ -2,15 +2,14 @@ import React from 'react';
 import * as Styled from 'components/common/Title/Title.styles';
 
 interface TextProps {
-  titleText?: string;
-  subTitleText?: string;
+  titleText: string;
 }
 
-const Title = ({titleText, subTitleText}: TextProps) => {
+const Title = ({titleText}: TextProps) => {
   return (
     <Styled.TextLayout>
       <Styled.TitleText>{titleText}</Styled.TitleText>
-      <Styled.SubTitleText>{subTitleText}</Styled.SubTitleText>
+      <Styled.SubTitleText>이벤트 상세 페이지</Styled.SubTitleText>
     </Styled.TextLayout>
   );
 };
