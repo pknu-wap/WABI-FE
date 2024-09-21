@@ -1,5 +1,4 @@
 import React from 'react';
-import CreateEventForm from 'components/EventGroupSwitcher/CreateEventForm/CreateEventForm';
 import Header from 'components/common/Header/Header';
 
 const EventGroupSwitcher = () => {
@@ -9,7 +8,6 @@ const EventGroupSwitcher = () => {
   return (
     <>
       <Header />
-      <CreateEventForm />
     </>
   );
 };
