@@ -9,7 +9,7 @@ import Button from 'components/common/Button/Button';
 import SearchBox from 'components/common/SearchBox/SearchBox';
 import Title from 'components/common/Title/Title';
 import {getEventById} from 'api/event';
-import {Band} from '../../types/eventTypes';
+import {Band} from 'types/groupTypes';
 import CheckInStatus from 'components/event_detail/CheckInStatus/CheckInStatus';
 const EventDetail = () => {
   const navigate = useNavigate();
