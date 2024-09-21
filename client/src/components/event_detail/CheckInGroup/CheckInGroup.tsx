@@ -1,18 +1,16 @@
 import React from 'react';
-import useCheckInGroup from '../../../hooks/useCheckInEvent';
 import GroupCard from 'components/event_detail/GroupCard/GroupCard';
 import * as Styled from 'components/event_detail/CheckInGroup/CheckInGroup.styles';
-interface CheckInGroupProps {
-  eventId: string;
-}
+import {Band} from 'types/eventTypes';
 
-const CheckInGroup = ({eventId}: CheckInGroupProps) => {
-  const {groups} = useCheckInGroup(eventId);
-
+const CheckInGroup = ({groups}: any) => {
   return (
     <Styled.CheckInLayout>
-      {groups.map(group => (
-        <GroupCard groupId={group.groupId} groupName={group.groupName} />
+      {groups.map((group: Band) => (
+        <GroupCard
+          groupId={group.bandId.toString()}
+          groupName={group.bandName}
+        />
       ))}
     </Styled.CheckInLayout>
   );
