@@ -12,7 +12,7 @@ const CheckInGroup: React.FC<CheckInGroupProps> = ({eventId}) => {
   return (
     <Styled.CheckInLayout>
       {groups.map(group => (
-        <GroupCard groupName={group.groupName} />
+        <GroupCard groupId={group.groupId} groupName={group.groupName} />
       ))}
     </Styled.CheckInLayout>
   );
