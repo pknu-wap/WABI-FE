@@ -21,7 +21,8 @@ const CreateGroupForm = () => {
       onSubmit={handleSave}
       onDelete={handleDelete}
     >
-      <InputField label={'그룹명'} placeholder={'그룹명'} required={true} />
+      <InputField label="그룹명" placeholder="그룹명" required={true} />
+      <InputField label="메모" placeholder="그룹 메모 추가" required={false} />
     </CommonFormLayout>
   );
 };
