@@ -8,17 +8,17 @@ import TabSwitcher from 'components/EventGroupSwitcher/ToggleTabs/TabSwitcher';
 import * as Styled from 'pages/EventGroupSwitcher/EventGroupSwitcher.styles';
 import {useRecoilValue} from 'recoil';
 import {selectedEventIdState} from 'recoil/currentEventId';
-
-const EventGroupSwitcher = () => {
-  const [activeTab, setActiveTab] = useState(0);
   
 const EventGroupSwitcher = () => {
+    const [activeTab, setActiveTab] = useState(0);
+
   const selectedEventId = useRecoilValue(selectedEventIdState);
   const selectedBandId = useRecoilValue(selectedEventIdState);
 
   useEffect(() => {}, [selectedEventId]);
 
   return (
+      <>
       <Header />
       <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 0 && <div>이벤트 관련 콘텐츠</div>}
