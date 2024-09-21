@@ -15,15 +15,18 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const eventId: string = location.state?.eventId || 'No Event ID'; // 전달된 eventId 받기
+  const adminId = 1;
 
-  const [listFilterText, setListFilterText] = useState('');
+  const [listFilterText, setListFilterText] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+
   const [groups, setGroups] = useState<Band[]>([]);
   useEffect(() => {
     if (eventId !== 'No Event ID') {
-      const adminId = 1;
       const eventIdNumber = parseInt(eventId, 10);
       getEventById(eventIdNumber, adminId).then(response => {
         setGroups(response.data.bands);
+        setTitle(response.data.eventName);
       });
     }
   }, []);
@@ -36,7 +39,7 @@ const EventDetail = () => {
     <Styled.Wrapper>
       <Header />
       <Styled.InnerLayout>
-        <Title titleText={'EVENT NAME'} subTitleText={'DEVIL'} />
+        <Title titleText={title} />
         <CheckInGroup groups={groups} />
         <SearchAndButtonFrame>
           <SearchBox filterTextChange={setListFilterText} />

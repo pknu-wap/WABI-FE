@@ -12,10 +12,17 @@ export interface Band {
   bandName: string;
 }
 
+// 체크인 현황 타입
+export interface CheckInStatus {
+  checkIn: number;
+  notCheckIn: number;
+}
+
 // Event 정보에 사용하는 인터페이스
 export interface EventInfo extends BaseEventData {
   eventId: number;
   bands: Band[];
+  checkInStatusCount: CheckInStatus;
 }
 
 // 이벤트 생성 데이터에 사용하는 인터페이스
