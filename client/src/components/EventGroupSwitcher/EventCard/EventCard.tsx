@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import * as Styled from 'components/EventGroupSwitcher/EventCard/EventCard.styles';
 import ParticipateProgress from 'components/EventGroupSwitcher/EventCard/ParticipateProgress/ParticipateProgress';
-import {EventInfo, Band} from 'types/eventTypes';
+import {EventInfo} from 'types/eventTypes';
+import {Band} from 'types/groupTypes';
 import {LoadEventList} from 'api/loadEventList';
 import { useRecoilState } from 'recoil';
 import { selectedEventIdState } from 'recoil/currentEventId';
@@ -17,7 +18,7 @@ const EventCard = () => {
   }, []);
 
   const handleCardClick = (eventId: number) => {
-    setSelectedEventId(eventId.toString()); // toString()은 제거예정
+    setSelectedEventId(eventId); // toString()은 제거예정
   };
 
   return (

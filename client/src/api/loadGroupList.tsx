@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Band} from 'types/eventTypes';
+import {Band} from 'types/groupTypes';
 
 export const LoadGroupList = () => {
   return axios
