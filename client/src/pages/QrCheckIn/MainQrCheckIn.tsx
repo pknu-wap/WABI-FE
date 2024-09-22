@@ -30,9 +30,9 @@ const MainQrCheckIn = () => {
   };
 
   return (
-    <>
+    <Styled.Wrapper>
       <Header />
-      <Styled.Wrapper>
+      <Styled.InnerLayout>
         <Styled.Event>
           <Styled.Qr>
             <Styled.QrMessage messageColor={messageColor}>
@@ -58,8 +58,8 @@ const MainQrCheckIn = () => {
             </Styled.EventTime>
           </Styled.Qr>
         </Styled.Event>
-      </Styled.Wrapper>
-    </>
+      </Styled.InnerLayout>
+    </Styled.Wrapper>
   );
 };
 
