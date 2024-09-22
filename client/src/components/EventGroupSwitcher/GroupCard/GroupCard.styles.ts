@@ -17,7 +17,7 @@ export const GroupCard = styled.div`
 export const GroupTitle = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 113px;
+  width: 180px;
   height: 17px;
   font-size: 13px;
   img {
@@ -27,5 +27,3 @@ export const GroupTitle = styled.div`
     margin-top: 20px;
   }
 `;
-
-export const GroupNumber = styled.div``;

@@ -30,3 +30,9 @@ export interface CreateEventData extends BaseEventData {
 export interface UpdateEventData extends BaseEventData {
   eventId: number;
 }
+
+// 체크인 체크아웃 인원 인터페이스
+export interface CheckInInfo extends EventInfo {
+  checkIn: number;
+  notCheckIn: number;
+}

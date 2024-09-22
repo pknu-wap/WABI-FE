@@ -26,7 +26,9 @@ const GroupCard = () => {
         <Styled.GroupCard onClick={() => handleCardClick(group.bandId)}>
           <Styled.GroupTitle>
             <h2>{group.bandName}</h2>
+            <img src="/images/EditEvent.png" alt="EditEvenIcon" />
           </Styled.GroupTitle>
+          <h3>50명</h3>
         </Styled.GroupCard>
       ))}
     </>
