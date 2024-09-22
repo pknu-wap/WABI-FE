@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import CreateEventForm from 'components/EventGroupSwitcher/CreateEventForm/CreateEventForm';
+import CreateEventForm from 'components/EventAndGroupList/CreateEventForm/CreateEventForm';
 import Header from 'components/common/Header/Header';
-import EventCardList from 'components/EventGroupSwitcher/EventCardList/EventCardList';
-import EventGroupList from 'components/EventGroupSwitcher/EventGroupList/EventGroupList';
-import CreateGroupForm from 'components/EventGroupSwitcher/CreateGroupForm/CreateGroupForm';
-import TabSwitcher from 'components/EventGroupSwitcher/TabSwitcher/TabSwitcher';
-import * as Styled from 'pages/EventGroupSwitcher/EventGroupSwitcher.styles';
+import EventCardList from 'components/EventAndGroupList/EventCardList/EventCardList';
+import EventGroupList from 'components/EventAndGroupList/EventGroupList/EventGroupList';
+import CreateGroupForm from 'components/EventAndGroupList/CreateGroupForm/CreateGroupForm';
+import TabSwitcher from 'components/EventAndGroupList/TabSwitcher/TabSwitcher';
+import * as Styled from 'pages/EventAndGroupList/EventAndGroupList.styles';
 import {selectedEventIdState} from 'recoil/currentEventId';
 import {selectedBandIdState} from 'recoil/currentBandId';
 import {useRecoilState} from 'recoil';
 
-import FormSaveButton from 'components/EventGroupSwitcher/FormSaveButton/FormSaveButton';
+import FormSaveButton from 'components/EventAndGroupList/FormSaveButton/FormSaveButton';
 
-const EventGroupSwitcher = () => {
+const EventAndGroupList = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [selectedEventId, setSelectedEventId] =
@@ -84,4 +84,4 @@ const EventGroupSwitcher = () => {
   );
 };
 
-export default EventGroupSwitcher;
+export default EventAndGroupList;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import * as Styled from 'components/common/CommonFormLayout/CommonFormLayout.styles';
-import FormSaveButton from 'components/EventGroupSwitcher/FormSaveButton/FormSaveButton';
+import FormSaveButton from 'components/EventAndGroupList/FormSaveButton/FormSaveButton';
 
 interface CreateFormLayoutProps {
   title: string;

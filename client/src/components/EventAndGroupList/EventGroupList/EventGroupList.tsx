@@ -1,6 +1,6 @@
 import React from 'react';
-import GroupCard from 'components/EventGroupSwitcher/GroupCard/GroupCard';
-import * as Styled from 'components/EventGroupSwitcher/EventGroupList/EventGroupList.styles';
+import GroupCard from 'components/EventAndGroupList/GroupCard/GroupCard';
+import * as Styled from 'components/EventAndGroupList/EventGroupList/EventGroupList.styles';
 
 const EventGroupList = () => {
   return (
