@@ -19,9 +19,7 @@ import SearchAndButtonFrame from "../../components/common/SearchAndButtonFrame/S
 // 파일 업로드 기능 컴포넌트
 
 //Todo
-//1. title, serchbox 컴포넌트 제작
-//2. title, serchbox랑 button, GroupMemberList 맞춰 정렬하기
-//3. group detail 페이지 css 마무리하기
+//가로스크롤 기능
 
 const GroupDetailPage = () => {
   const [fileUploadModalStateValue, setFileUploadModalStateValue] =
