@@ -1,19 +1,24 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  height: 180px;
-  border: 3px solid white;
-  border-radius: 15px;
-  padding: 0px 10px 10px 15px;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 180px;
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 0px 10px 10px 15px;
+    background-color: white;
 
-  &:hover {
-    border: 3px solid #4e54f5;
-  }
-  background-color: white;
+    &:hover {
+        border: 3px solid #4e54f5;
+    }
+
+    &.selected {
+        border: 3px solid #4e54f5;
+    }
 `;
+
 
 export const EventTitle = styled.div`
   height: 40px;
