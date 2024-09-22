@@ -37,6 +37,14 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
           bandIds,
         });
       });
+    } else {
+      setEventFormData({
+        eventName: '',
+        startAt: '',
+        endAt: '',
+        eventStudentMaxCount: '',
+        bandIds: '',
+      });
     }
   }, [eventId]);
 
