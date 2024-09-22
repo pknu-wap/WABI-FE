@@ -27,12 +27,15 @@ const EventCard = () => {
       {events.map((event: CheckInInfo) => (
         <Styled.Card
           key={event.eventId}
-          onClick={() => handleCardClick(event.eventId)}
           className={selectedEventId === event.eventId ? 'selected' : ''}
         >
           <Styled.EventTitle>
             <h2>{event.eventName}</h2>
-            <img src="/images/EditEvent.png" alt="EditEvenIcon" />
+            <img
+              onClick={() => handleCardClick(event.eventId)}
+              src="/images/EditEvent.png"
+              alt="EditEvenIcon"
+            />
           </Styled.EventTitle>
           <Styled.EventTime>
             <h3>
