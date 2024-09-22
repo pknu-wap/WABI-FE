@@ -23,7 +23,10 @@ const GroupCard = () => {
   return (
     <>
       {groups.map((group: Band) => (
-        <Styled.GroupCard onClick={() => handleCardClick(group.bandId)}>
+        <Styled.GroupCard
+          onClick={() => handleCardClick(group.bandId)}
+          className={selectedBandId === group.bandId ? 'selected' : ''}
+        >
           <Styled.GroupTitle>
             <h2>{group.bandName}</h2>
             <img src="/images/EditEvent.png" alt="EditEvenIcon" />
