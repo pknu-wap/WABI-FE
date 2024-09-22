@@ -8,10 +8,13 @@ export const GroupCard = styled.div`
   border: 3px solid white;
   border-radius: 15px;
   padding: 0px 10px 10px 15px;
+  background-color: white;
   &:hover {
     border: 3px solid #4e54f5;
   }
-  background-color: white;
+  &.selected {
+    border: 3px solid #4e54f5;
+  }
 `;
 
 export const GroupTitle = styled.div`
