@@ -50,7 +50,7 @@ const CommonFormLayout = ({
         {children}
         <Styled.FormFooter>
           <Styled.RequiredNote>* 필수항목</Styled.RequiredNote>
-          <FormSaveButton />
+          <FormSaveButton text={'저장하기'} type={'submit'} />
         </Styled.FormFooter>
         {isError && (
           <Styled.ErrorMessage>
