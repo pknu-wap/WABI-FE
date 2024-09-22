@@ -1,21 +1,35 @@
 import React from 'react';
 import * as Styled from 'components/EventGroupSwitcher/FormSaveButton/FormSaveButton.styles';
 
-const FormSaveButton = () => {
+interface FormSaveButtonProps {
+  text: string;
+  type?: 'button' | 'submit' | 'reset';
+  width?: string; // 버튼의 너비
+  height?: string; // 버튼의 높이
+  onClick?: () => void;
+}
+
+const FormSaveButton = ({
+  text,
+  type = 'button',
+  width = '106px',
+  height = '40px',
+  onClick,
+}: FormSaveButtonProps) => {
   return (
     <Styled.SaveButton
-      type="submit"
-      width="106px"
-      height="40px"
+      type={type}
+      width={width}
+      height={height}
       buttonColor="#FFFFFF"
       hasBorder="true"
       borderColor="#C1C7CD"
       borderRadius="10px"
-      fontColor="#4E54F5;
-"
+      fontColor="#4E54F5"
       fontSize="16px"
+      onClick={onClick}
     >
-      저장하기
+      {text}
     </Styled.SaveButton>
   );
 };

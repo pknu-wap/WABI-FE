@@ -19,8 +19,12 @@ const CreateGroupForm = ({bandId}: {bandId?: number}) => {
     if (bandId) {
       getGroupById(bandId, adminId).then(response => {
         const {bandName, bandMemo} = response.data;
-        console.log(response.data);
         setGroupFormData({bandName, bandMemo});
+      });
+    } else {
+      setGroupFormData({
+        bandName: '',
+        bandMemo: '',
       });
     }
   }, [bandId]);

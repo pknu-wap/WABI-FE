@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from 'components/EventGroupSwitcher/ToggleTabs/TabSwitcher.styles';
+import * as Styled from 'components/EventGroupSwitcher/TabSwitcher/TabSwitcher.styles';
 
 interface TabSwitcherProps {
   activeTab: number;
