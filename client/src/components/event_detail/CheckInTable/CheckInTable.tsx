@@ -49,7 +49,7 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
                 row =>
                   (row.id && row.id.includes(filterText)) || // row.id가 undefined가 아닌지 확인
                   (row.name && row.name.includes(filterText)) || // row.name이 undefined가 아닌지 확인
-                  (row.band && row.band.includes(filterText)), // row.group이 undefined가 아닌지 확인
+                  (row.bandName && row.bandName.includes(filterText)), // row.group이 undefined가 아닌지 확인
               )
               .map(row => (
                 <tr key={row.id}>
@@ -63,7 +63,7 @@ const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
                       <Styled.CheckInTime>{row.checkInTime}</Styled.CheckInTime>
                     </Styled.CheckInData>
                   </Styled.ThBorder>
-                  <Styled.ThBorder>{row.band}</Styled.ThBorder>
+                  <Styled.ThBorder>{row.bandName}</Styled.ThBorder>
                 </tr>
               ))
           ) : (

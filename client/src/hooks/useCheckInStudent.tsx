@@ -4,7 +4,7 @@ import axios from 'axios';
 interface CheckInStudent {
   id: string;
   name: string;
-  band: string;
+  bandName: string;
   eventStudentStatus: string;
   checkInTime: string;
 }
@@ -21,7 +21,7 @@ const useCheckInStudent = (eventId: string) => {
           (student: CheckInStudent) => ({
             id: student.id,
             name: student.name,
-            group: student.band,
+            bandName: student.bandName,
             eventStudentStatus: student.eventStudentStatus,
             checkInTime:
               student.checkInTime !== null
