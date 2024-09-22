@@ -30,7 +30,7 @@ const useCheckInEvent = (eventId: string) => {
       LoadCheckInStudent();
       console.log('로드 그룹');
       // console.log(groups);
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
