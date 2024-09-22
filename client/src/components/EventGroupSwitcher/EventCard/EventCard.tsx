@@ -28,6 +28,7 @@ const EventCard = () => {
         <Styled.Card
           key={event.eventId}
           onClick={() => handleCardClick(event.eventId)}
+          className={selectedEventId === event.eventId ? 'selected' : ''}
         >
           <Styled.EventTitle>
             <h2>{event.eventName}</h2>
