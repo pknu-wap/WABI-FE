@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
-import MemberUpdateButton from '../MemberUpdateButton/MemberUpdateButton';
+//import MemberUpdateButton from '../MemberUpdateButton/MemberUpdateButton';
 import {fileUpload} from '../../../api/fileUpload';
 import ModalFrame from '../../common/ModalFrame/ModalFrame';
+import * as Styled from './FileUploadModal.styles';
+import Button from "../../common/Button/Button";
+
 
 interface FileUploadModalProps {
   modalStateValue: boolean;
@@ -26,12 +29,29 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({modalStateValue}) => {
 
   return (
     <ModalFrame>
-      <h1>This is a FileUploadModal!</h1>
-      <form>
-        <input type="file" accept=".csv, .xlsx" onChange={fileChange} />
-      </form>
-
-      <MemberUpdateButton onClick={fileUploadClick} />
+      <Styled.Wrapper>
+        <Styled.InnerLayout>
+          <Styled.Name>
+            <h2>파일 불러오기</h2>
+          </Styled.Name>
+          <Styled.Container>
+            <form>
+              <input type="file" accept=".csv, .xlsx" onChange={fileChange}/>
+            </form>
+          </Styled.Container>
+          {/*<MemberUpdateButton onClick={fileUploadClick} isFileUpload={true} />*/}
+          <Button
+                onClick={fileUploadClick}
+                width="106px"
+                height="40px"
+                fontColor="#4E54F5"
+                buttonColor="white"
+                borderRadius="10px"
+                borderColor="#C1C7CD">
+              추가하기
+            </Button>
+        </Styled.InnerLayout>
+      </Styled.Wrapper>
     </ModalFrame>
   );
 };

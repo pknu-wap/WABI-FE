@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as Styled from 'components/common/GroupMemberList/GroupMemberList.styles';
 import { loadGroupMemberList } from '../../../api/loadGroupMemberList';
 import GroupMembers from './GroupMembers';
-import useHorizontalScroll from "../../../hooks/useHorizontalScroll";
+//import useHorizontalScroll from "../../../hooks/useHorizontalScroll"; //가로스크롤 커스텀 훅
 import {student} from "../../../types/studentTypes";
 
 interface groupProps {
@@ -12,7 +12,8 @@ interface groupProps {
 
 const GroupMemberList: React.FC<groupProps> = ({ groupId , filterText }) => {
   const [groupMembers, setGroupMembers] = useState<student[]>([]);
-  const { scrollRef, isDragging, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useHorizontalScroll();
+  //가로스크롤 기능 추후 추가 예정
+  //const { scrollRef, isDragging, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useHorizontalScroll();
 
   useEffect(() => {
     loadGroupMemberList(groupId, setGroupMembers);
@@ -37,23 +38,14 @@ const GroupMemberList: React.FC<groupProps> = ({ groupId , filterText }) => {
           <tr>
             <Styled.ThData>학번</Styled.ThData>
             <Styled.ThData>이름</Styled.ThData>
-            <Styled.ScrollX
-                ref={scrollRef}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUpOrLeave}
-                onMouseLeave={handleMouseUpOrLeave}
-                style={{cursor: isDragging ? 'grabbing' : 'grab'}}
-            >
-              <Styled.ThBorder>재학 유무</Styled.ThBorder>
-              <Styled.ThData>휴대폰 번호</Styled.ThData>
-              <Styled.ThData>학과.전공</Styled.ThData>
-              <Styled.ThData>동아리</Styled.ThData>
-              <Styled.ThData>직책</Styled.ThData>
-              <Styled.ThData>가입일자</Styled.ThData>
-              <Styled.ThData>소속대학</Styled.ThData>
-              <Styled.ThBorder>체크</Styled.ThBorder>
-            </Styled.ScrollX>
+            <Styled.ThBorder>재학 유무</Styled.ThBorder>
+            <Styled.ThData>휴대폰 번호</Styled.ThData>
+            <Styled.ThData>학과.전공</Styled.ThData>
+            <Styled.ThData>동아리</Styled.ThData>
+            <Styled.ThData>직책</Styled.ThData>
+            <Styled.ThData>가입일자</Styled.ThData>
+            <Styled.ThData>소속대학</Styled.ThData>
+            <Styled.ThBorder>체크</Styled.ThBorder>
           </tr>
           </thead>
           <GroupMembers members={filteredMembers} />
