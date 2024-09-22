@@ -6,7 +6,7 @@ export const GroupListGrid = styled.div`
   height: 100%;
   gap: 24px;
   margin: 20px 16px;
-  background-color: #ccc;
+  background-color: white;
   @media (max-width: 768px) {
     grid-template-columns: 2fr;
   }
