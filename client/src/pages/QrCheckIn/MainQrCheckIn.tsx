@@ -49,12 +49,10 @@ const MainQrCheckIn = () => {
                 width={'50px'}
                 height={'50px'}
               />
-              <h2>{title}</h2>
+              <Styled.EventTitle>{title}</Styled.EventTitle>
             </Styled.EventName>
             <Styled.EventTime>
-              <h3>{startAt}</h3>
-              <h3> ~ </h3>
-              <h3>{endAt}</h3>
+              <h3>{startAt + ' ~ ' + endAt}</h3>
             </Styled.EventTime>
           </Styled.Qr>
         </Styled.Event>

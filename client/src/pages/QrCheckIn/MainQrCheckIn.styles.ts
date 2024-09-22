@@ -29,7 +29,8 @@ export const Event = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 30px 100px 40px 100px;
+  width: 1000px;
+  margin: 50px 100px 40px 100px;
   padding: 30px 40px 60px 40px;
   border-radius: 10px;
 `;
@@ -52,9 +53,19 @@ export const EventName = styled(Text)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-size: 35px;
   background-color: white;
   line-height: 80px;
+  position: relative;
+  top: 10px;
+`;
+
+export const EventTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  top: 5px;
+  font-size: 35px;
 `;
 
 export const Line = styled('div')`
@@ -90,6 +101,8 @@ export const Qr = styled.div`
 `;
 
 export const QrBox = styled.div<{qrColor: string}>`
+  width: 400px;
+  height: 400px;
   margin-top: 10px;
   background-color: ${({qrColor}) => qrColor};
   border: 25px solid ${({qrColor}) => qrColor};
