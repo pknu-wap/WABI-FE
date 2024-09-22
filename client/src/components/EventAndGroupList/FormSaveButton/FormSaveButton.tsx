@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from 'components/EventGroupSwitcher/FormSaveButton/FormSaveButton.styles';
+import * as Styled from 'components/EventAndGroupList/FormSaveButton/FormSaveButton.styles';
 
 interface FormSaveButtonProps {
   text: string;

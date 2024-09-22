@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import * as Styled from 'components/EventGroupSwitcher/EventCard/EventCard.styles';
+import * as Styled from 'components/EventAndGroupList/EventCard/EventCard.styles';
 import {CheckInInfo} from 'types/eventTypes';
 import {Band} from 'types/groupTypes';
 import {LoadEventList} from 'api/loadEventList';
 import {useRecoilState} from 'recoil';
 import {selectedEventIdState} from 'recoil/currentEventId';
-import ParticipateProgress from 'components/EventGroupSwitcher/ParticipateProgress/ParticipateProgress';
+import ParticipateProgress from 'components/EventAndGroupList/ParticipateProgress/ParticipateProgress';
 
 const EventCard = () => {
   const [events, setEvents] = useState<CheckInInfo[]>([]);
