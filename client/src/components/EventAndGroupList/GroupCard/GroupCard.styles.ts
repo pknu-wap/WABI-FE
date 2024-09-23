@@ -9,6 +9,13 @@ export const GroupCard = styled.div`
   border-radius: 15px;
   padding: 0px 10px 10px 15px;
   background-color: white;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
 
   &.selected {
     border: 3px solid #4e54f5;
