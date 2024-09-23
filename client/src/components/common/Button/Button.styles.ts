@@ -14,6 +14,7 @@ export interface ButtonStyle {
     fontColor?: string;
     fontSize?: string;
     padding?:string;
+    margin?:string;
 }
 
 export const ButtonStyled = styled.button<ButtonStyle>`
@@ -31,6 +32,7 @@ export const ButtonStyled = styled.button<ButtonStyle>`
         fontColor = 'auto',
         fontSize = 'auto',
         padding = '5px',
+        margin='5px'
        }) => css`
         width: ${width};
         height: ${height};
@@ -40,6 +42,7 @@ export const ButtonStyled = styled.button<ButtonStyle>`
         color: ${fontColor};
         font-size: ${fontSize};
         padding: ${padding};
+        margin: ${margin};
     `}
 `
 

@@ -10,7 +10,6 @@ import {
   ModalLogo,
   ModalView,
 } from './ModalFrame.styles';
-import icon from '../../../icon.png';
 
 //인원 자동추가를 누르면 modalframe의 상태를 true로 만들어줘야한다.
 
@@ -29,9 +28,8 @@ const ModalFrame: React.FC<{children: React.ReactNode}> = ({children}) => {
       <ModalView>
         <ModalHeader>
           <ModalExitButton onClick={modalClose}>X</ModalExitButton>
-          <ModalLogo src={icon} alt={'logo1'} text={'WABI'} width={'40px'} height={'40px'} />
+          <ModalLogo src={'images/wabi.png'} alt={'logo1'} text={'WABI'} width={'40px'} height={'40px'} />
         </ModalHeader>
-
         <ModalContent>{children}</ModalContent>
       </ModalView>
     </ModalBackdrop>

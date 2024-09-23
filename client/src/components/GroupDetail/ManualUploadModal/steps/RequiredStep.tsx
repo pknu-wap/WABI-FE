@@ -1,28 +1,43 @@
 import React from "react";
 import {stepProps} from "../../../../types/stepTypes";
+import * as Styled from './RequiredStep.styles';
+import Button from "../../../common/Button/Button";
+import InputField from "../../../common/InputField/InputField";
 
 const RequiredStep = ({nextStep, student, handleChange}: stepProps) => {
 
     return (
-        <div>
-            <h1>필수 항목 입력</h1>
-            학번
-            <input
-                type="text"
-                name="studentId"
-                value={student?.studentId}
-                onChange={handleChange}
-            />
-
-            이름
-            <input
-                type="text"
-                name="name"
-                value={student?.name}
-                onChange={handleChange}
-            />
-            <button onClick={nextStep}> 다음</button>
-        </div>
+        <Styled.Wrapper>
+            <Styled.Container>
+                <h2>필수 항목 입력</h2>
+                <InputField
+                    label="학번"
+                    type="text"
+                    name="studentId"
+                    required = {true}
+                    placeholder="그룹원 학번 입력"
+                    value={student?.studentId}
+                    onChange={handleChange}/>
+                <InputField
+                    label="이름"
+                    type="text"
+                    name="name"
+                    required = {true}
+                    placeholder="그룹원 이름 입력"
+                    value={student?.name}
+                    onChange={handleChange}/>
+                <Button
+                    onClick={nextStep}
+                    width="106px"
+                    height="40px"
+                    fontColor="#4E54F5"
+                    buttonColor="white"
+                    borderColor="#C1C7CD"
+                    borderRadius="10px">
+                    다음으로
+                </Button>
+            </Styled.Container>
+        </Styled.Wrapper>
     )
 }
 
