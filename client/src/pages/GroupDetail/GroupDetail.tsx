@@ -13,8 +13,8 @@ import ManualUploadModal from '../../components/GroupDetail/ManualUploadModal/Ma
 import GroupMemberList from '../../components/common/GroupMemberList/GroupMemberList';
 import {useLocation} from 'react-router-dom';
 import SearchBox from 'components/common/SearchBox/SearchBox';
-import Title from "../../components/common/Title/Title";
-import SearchAndButtonFrame from "../../components/common/SearchAndButtonFrame/SearchAndButtonFrame";
+import Title from '../../components/common/Title/Title';
+import SearchAndButtonFrame from '../../components/common/SearchAndButtonFrame/SearchAndButtonFrame';
 
 // 파일 업로드 기능 컴포넌트
 
@@ -35,31 +35,36 @@ const GroupDetailPage = () => {
 
   const [listFilterText, setListFilterText] = useState('');
   const location = useLocation();
-  const groupId: string = location.state?.groupId || '1';
-
+  const groupId: string = location.state?.bandId || 'No Band ID';
 
   return (
-      <Styled.Wrapper>
-          <Header/>
-          <Styled.InnerLayout>
-              <div>
-                  <FileUploadModal modalStateValue={fileUploadModalStateValue}/>
-                  <ManualUploadModal modalStateValue={manualUploadModalStateValue}/>
-                  <Title titleText={'Group Name'} subTitleText={'그룹 메모'}/>
-                  <SearchAndButtonFrame>
-                      <SearchBox filterTextChange={setListFilterText}/>
-                      <div>
-                          {/*Todo 자동추가 / 수동추가 버튼을 Button 컴포넌트 활용해서 나누기*/}
-                          <MemberUpdateButton onClick={openFileUploadModal} isFileUpload={true}/>
-                          <MemberUpdateButton onClick={openManualUploadModal} isFileUpload={false}/>
-                      </div>
-                  </SearchAndButtonFrame>
-                  <div>
-                      <GroupMemberList groupId={groupId} filterText={listFilterText} />
-                  </div>
-              </div>
-          </Styled.InnerLayout>
-      </Styled.Wrapper>
+    <Styled.Wrapper>
+      <Header />
+      <Styled.InnerLayout>
+        <div>
+          <FileUploadModal modalStateValue={fileUploadModalStateValue} />
+          <ManualUploadModal modalStateValue={manualUploadModalStateValue} />
+          <Title titleText={'Group Name'} />
+          <SearchAndButtonFrame>
+            <SearchBox filterTextChange={setListFilterText} />
+            <div>
+              {/*Todo 자동추가 / 수동추가 버튼을 Button 컴포넌트 활용해서 나누기*/}
+              <MemberUpdateButton
+                onClick={openFileUploadModal}
+                isFileUpload={true}
+              />
+              <MemberUpdateButton
+                onClick={openManualUploadModal}
+                isFileUpload={false}
+              />
+            </div>
+          </SearchAndButtonFrame>
+          <div>
+            <GroupMemberList groupId={groupId} filterText={listFilterText} />
+          </div>
+        </div>
+      </Styled.InnerLayout>
+    </Styled.Wrapper>
   );
 };
 
