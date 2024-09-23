@@ -20,23 +20,29 @@
 ## 📂 프로젝트 구조 (Project Structure)
 ```
 📦src
- ┣ 📂api
- ┣ 📂components
- ┃ ┣ 📂common
- ┃ ┣ 📂EventAndGroupList
- ┃ ┣ 📂event_detail
- ┃ ┣ 📂GroupDetail
- ┃ ┗ 📂QrCheckIn
- ┣ 📂constants
- ┣ 📂hooks
- ┣ 📂pages
- ┃ ┣ 📂EventAndGroupList
- ┃ ┣ 📂EventDetail
- ┃ ┣ 📂GroupDetail
- ┃ ┗ 📂QrCheckIn
- ┣ 📂recoil
- ┣ 📂types
- ┣ 📂utils
+ ┣ 📂api                     # 비동기 API 요청 함수 모음
+ ┣ 📂components              # 재사용 가능한 컴포넌트 모음
+ ┃ ┣ 📂common                # 공통으로 사용하는 UI 컴포넌트
+ ┃ ┣ 📂EventAndGroupList       
+ ┃ ┣ 📂event_detail            
+ ┃ ┣ 📂GroupDetail            
+ ┃ ┗ 📂QrCheckIn               
+ ┣ 📂constants               # 프로젝트 전역에서 사용하는 상수들
+ ┣ 📂hooks                   # 커스텀 훅
+ ┣ 📂pages                   # 페이지
+ ┃ ┣ 📂EventAndGroupList       
+ ┃ ┣ 📂EventDetail             
+ ┃ ┣ 📂GroupDetail             
+ ┃ ┗ 📂QrCheckIn               
+ ┣ 📂recoil                  # Recoil 전역 상태 관리
+ ┣ 📂types                   # 타입 정의 파일들
+ ┣ 📂utils                   # 유틸리티 함수 모음
+ ┣ 📜App.css                 # 애플리케이션 전역 스타일시트
+ ┣ 📜App.tsx                 # 애플리케이션 진입점 컴포넌트
+ ┣ 📜index.css               # 애플리케이션 초기 스타일시트
+ ┣ 📜index.tsx               # 애플리케이션 진입점
+ ┗ 📜react-qr-scanner.d.ts   # react-qr-scanner 타입 정의 파일
+
 ```
 <br/>
 
@@ -71,11 +77,11 @@
     </td> 
   </tr>
   <tr>
-    <td align="center"><b>서성원</b></td>
-    <td align="center"><b>장홍준</b></td>
-    <td align="center"><b>김준서</b></td>
-    <td align="center"><b>하윤정</b></td>
-    <td align="center"><b>허나영</b></td>
+    <td align="center"><b>하키(서성원)</b></td>
+    <td align="center"><b>마이크(장홍준)</b></td>
+    <td align="center"><b>딜런(김준서)</b></td>
+    <td align="center"><b>퓨어(하윤정)</b></td>
+    <td align="center"><b>나봉(허나영)</b></td>
   </tr>
   <tr>
     <td align="center"><b>FrontEnd</b></td>
