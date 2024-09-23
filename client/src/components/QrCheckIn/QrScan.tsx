@@ -32,19 +32,18 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
       const ScannedQrArray = data.text;
       const studentIdStartPoint = 8;
       const studentIdEndPoint = 17;
-      const ExtractedStudentId = ScannedQrArray.substring(
+      Student.studentId = ScannedQrArray.substring(
         studentIdStartPoint,
         studentIdEndPoint,
       );
-      Student.studentId = ExtractedStudentId;
       Student.eventId = parseInt(eventId, 10);
 
       sendToServer(Student)
         .then(res => {
           if (res.data.message === 'OK') {
             onScanResult('정상적으로 참석되었습니다.', '#4E54F5', '#4E54F5');
+            setQrScanned(true);
           }
-          setQrScanned(true);
         })
         .catch(error => {
           // 임시로 에러코드 활용하여 동작
@@ -54,6 +53,7 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
           } else {
             onScanResult('이벤트 해당그룹이 아닙니다.', '#FF7078', '#FF7078');
           }
+          setQrScanned(true);
         });
 
       setTimeout(() => {
@@ -64,7 +64,7 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
           'lightgray',
         );
         setNextScanned(prevKey => prevKey + 1);
-      }, 1000);
+      }, 1500);
     }
   };
 
