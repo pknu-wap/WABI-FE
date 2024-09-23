@@ -1,15 +1,25 @@
 import axios from 'axios';
 
-export const fileUpload = (fileFormData : FormData) => {
-    axios.post('https://zepelown.site/api/bands/1/members/enrollments/file',fileFormData, {
+export const fileUpload = (groupId: number, fileFormData: FormData) => {
+  return axios
+    .post(
+      `https://zepelown.site/api/bands/${groupId}/members/enrollments/file`,
+      fileFormData,
+      {
         headers: {
-            'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    )
+    .then(res => {
+      console.log(res.data);
+      return res.data;
     })
-    .then((res) => {
-        console.log(res.data);
-    })
-    .catch((error) => {
-        console.log(error.data);
-    })
-}
+    .catch(error => {
+      console.error(
+        'File upload error:',
+        error.response ? error.response.data : error.message,
+      );
+      throw error;
+    });
+};
