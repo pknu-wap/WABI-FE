@@ -24,8 +24,10 @@ import SearchAndButtonFrame from '../../components/common/SearchAndButtonFrame/S
 const GroupDetailPage = () => {
   const [fileUploadModalStateValue, setFileUploadModalStateValue] =
     useRecoilState(fileUploadModalState);
+
   const [manualUploadModalStateValue, setManualUploadModalStateValue] =
     useRecoilState(manualUploadModalState);
+
   const openFileUploadModal = () => {
     setFileUploadModalStateValue(true);
   };
@@ -35,16 +37,23 @@ const GroupDetailPage = () => {
 
   const [listFilterText, setListFilterText] = useState('');
   const location = useLocation();
-  const groupId: string = location.state?.bandId || 'No Band ID';
+  const groupId: number = location.state?.bandId || 'NO GROUP ID';
+  const bandName: string = location.state?.bandName || 'Group Name';
 
   return (
     <Styled.Wrapper>
       <Header />
       <Styled.InnerLayout>
         <div>
-          <FileUploadModal modalStateValue={fileUploadModalStateValue} />
-          <ManualUploadModal modalStateValue={manualUploadModalStateValue} />
-          <Title titleText={'Group Name'} />
+          <FileUploadModal
+            modalStateValue={fileUploadModalStateValue}
+            groupId={groupId}
+          />
+          <ManualUploadModal
+            modalStateValue={manualUploadModalStateValue}
+            groupId={groupId}
+          />
+          <Title titleText={bandName} />
           <SearchAndButtonFrame>
             <SearchBox filterTextChange={setListFilterText} />
             <div>
@@ -60,7 +69,11 @@ const GroupDetailPage = () => {
             </div>
           </SearchAndButtonFrame>
           <div>
-            <GroupMemberList groupId={groupId} filterText={listFilterText} />
+            <GroupMemberList
+              key={`manualUpload:${manualUploadModalStateValue ? 'open' : 'closed'}, fileUpload:${fileUploadModalStateValue ? 'open' : 'closed'}`}
+              groupId={groupId}
+              filterText={listFilterText}
+            />
           </div>
         </div>
       </Styled.InnerLayout>

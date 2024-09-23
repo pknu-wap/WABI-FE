@@ -12,13 +12,13 @@ interface GroupCardProps {
 const GroupCard = ({group, onUpdateClick, isSelected}: GroupCardProps) => {
   const navigate = useNavigate();
 
-  const handleCardClick = (bandId: number) => {
-    navigate('/groupDetail', {state: {bandId}});
+  const handleCardClick = (bandId: number, bandName: string) => {
+    navigate('/groupDetail', {state: {bandId, bandName}});
   };
 
   return (
     <Styled.GroupCard
-      onClick={() => handleCardClick(group.bandId)}
+      onClick={() => handleCardClick(group.bandId, group.bandName)}
       className={isSelected ? 'selected' : ''}
     >
       <Styled.GroupTitle>
