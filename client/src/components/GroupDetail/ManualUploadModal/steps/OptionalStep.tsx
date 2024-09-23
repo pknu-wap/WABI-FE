@@ -13,7 +13,9 @@ const OptionalStep = ({
 }: stepProps) => {
   return (
     <Styled.Container>
-      <h2>선택 항목 입력</h2>
+      <Styled.Name>
+        <p>선택 항목 입력</p>
+      </Styled.Name>
       <Styled.Sort>
         <InputField
           label="단과대학"
@@ -81,26 +83,36 @@ const OptionalStep = ({
         value={student?.tel}
         onChange={handleChange}
       />
-      <Button
-        onClick={prevStep}
-        fontColor="#4E54F5"
-        buttonColor="white"
-        borderRadius="10px"
-        borderColor="#C1C7CD"
-      >
-        이전으로
-      </Button>
-      <Button
-        onClick={() => {
-          manualUpload(groupId, [student]);
-        }}
-        fontColor="#4E54F5"
-        buttonColor="white"
-        borderRadius="10px"
-        borderColor="#C1C7CD"
-      >
-        추가하기
-      </Button>
+      <Styled.ButtonWrapper>
+        <Styled.PreButtonWrapper>
+          <Button
+            onClick={prevStep}
+            width="106px"
+            height="40px"
+            fontColor="#4E54F5"
+            buttonColor="white"
+            borderRadius="10px"
+            borderColor="#C1C7CD"
+          >
+            이전으로
+          </Button>
+        </Styled.PreButtonWrapper>
+        <Styled.NextButtonWrapper>
+          <Button
+            onClick={() => {
+              manualUpload(groupId, [student]);
+            }}
+            width="106px"
+            height="40px"
+            fontColor="#4E54F5"
+            buttonColor="white"
+            borderRadius="10px"
+            borderColor="#C1C7CD"
+          >
+            추가하기
+          </Button>
+        </Styled.NextButtonWrapper>
+      </Styled.ButtonWrapper>
     </Styled.Container>
   );
 };

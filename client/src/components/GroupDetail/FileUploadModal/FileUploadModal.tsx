@@ -35,25 +35,28 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
       <Styled.Wrapper>
         <Styled.InnerLayout>
           <Styled.Name>
-            <h2>파일 불러오기</h2>
+            <h3>파일 불러오기</h3>
           </Styled.Name>
-          <Styled.Container>
-            <form>
+          <Styled.FileInputContainer>
+            <Styled.FileInputLabel>
+              파일 선택
               <input type="file" accept=".csv, .xlsx" onChange={fileChange} />
-            </form>
-          </Styled.Container>
+            </Styled.FileInputLabel>
+          </Styled.FileInputContainer>
           {/*<MemberUpdateButton onClick={fileUploadClick} isFileUpload={true} />*/}
-          <Button
-            onClick={fileUploadClick}
-            width="106px"
-            height="40px"
-            fontColor="#4E54F5"
-            buttonColor="white"
-            borderRadius="10px"
-            borderColor="#C1C7CD"
-          >
-            추가하기
-          </Button>
+          <Styled.ButtonWrapper>
+            <Button
+              onClick={fileUploadClick}
+              width="106px"
+              height="40px"
+              fontColor="#4E54F5"
+              buttonColor="white"
+              borderRadius="10px"
+              borderColor="#C1C7CD"
+            >
+              추가하기
+            </Button>
+          </Styled.ButtonWrapper>
         </Styled.InnerLayout>
       </Styled.Wrapper>
     </ModalFrame>
