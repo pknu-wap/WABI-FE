@@ -11,13 +11,13 @@ export const ParticipateNum = styled.div`
   align-items: center;
   width: 100%;
   h3 {
-    font-size: 15px;
+    font-size: 13px;
     line-height: 0.1;
   }
 `;
 
 export const Progress = styled.div`
-  width: 350px;
+  width: 300px;
   height: 5px;
   background-color: #ccc;
   border-radius: 5px;
