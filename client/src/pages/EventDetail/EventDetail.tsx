@@ -19,20 +19,34 @@ const EventDetail = () => {
 
   const [listFilterText, setListFilterText] = useState<string>('');
   const [title, setTitle] = useState<string>('');
-
   const [groups, setGroups] = useState<Band[]>([]);
+  const [startAt, setStartAt] = useState<string>('');
+  const [endAt, setEndAt] = useState<string>('');
+
   useEffect(() => {
     if (eventId !== 'No Event ID') {
       const eventIdNumber = parseInt(eventId, 10);
       getEventById(eventIdNumber, adminId).then(response => {
         setGroups(response.data.bands);
         setTitle(response.data.eventName);
+        const startAtOriginalData = response.data.startAt;
+        const endAtOriginalData = response.data.endAt;
+        setStartAt(
+          startAtOriginalData.slice(0, 10).replaceAll('-', '.') +
+            ' ' +
+            startAtOriginalData.slice(11, 16).replaceAll('-', '.'),
+        );
+        setEndAt(
+          endAtOriginalData.slice(0, 10).replaceAll('-', '.') +
+            ' ' +
+            endAtOriginalData.slice(11, 16).replaceAll('-', '.'),
+        );
       });
     }
   }, []);
 
   const navigateToQrScanner = () => {
-    navigate('/qrScan', {state: {eventId}});
+    navigate('/qrScan', {state: {eventId, title, startAt, endAt}});
   };
 
   return (

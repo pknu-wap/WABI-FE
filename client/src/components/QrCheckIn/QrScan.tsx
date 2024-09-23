@@ -32,30 +32,28 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
       const ScannedQrArray = data.text;
       const studentIdStartPoint = 8;
       const studentIdEndPoint = 17;
-      const ExtractedStudentId = ScannedQrArray.substring(
+      Student.studentId = ScannedQrArray.substring(
         studentIdStartPoint,
         studentIdEndPoint,
       );
-      Student.studentId = ExtractedStudentId;
       Student.eventId = parseInt(eventId, 10);
 
       sendToServer(Student)
         .then(res => {
-          if (
-            !res.data.message
-          ) {
+          if (res.data.message === 'OK') {
             onScanResult('정상적으로 참석되었습니다.', '#4E54F5', '#4E54F5');
-          } else if (
-              res.data.message === '이미 체크인 했습니다.'
-          ) {
-            onScanResult('이미 참석되었습니다.','#F5C400','#F5C400');
+            setQrScanned(true);
+          }
+        })
+        .catch(error => {
+          // 임시로 에러코드 활용하여 동작
+          // 추후 백엔드 코드로 동작 예정
+          if (error.response.status === 500) {
+            onScanResult('이미 참석되었습니다.', '#F5C400', '#F5C400');
           } else {
             onScanResult('이벤트 해당그룹이 아닙니다.', '#FF7078', '#FF7078');
           }
           setQrScanned(true);
-        })
-        .catch(error => {
-          console.log(error);
         });
 
       setTimeout(() => {
@@ -66,24 +64,24 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
           'lightgray',
         );
         setNextScanned(prevKey => prevKey + 1);
-      }, 1000);
+      }, 1500);
     }
   };
 
   return (
-      <div>
-        <Styled.QrCameraReveral>
-          <Styled.QrScannerContainer>
-            <Styled.StyledQrScanner>
-              <QrScanner
-                  key={nextScanned}
-                  onScan={handleScan}
-                  onError={handleError}
-              />
-            </Styled.StyledQrScanner>
-          </Styled.QrScannerContainer>
-        </Styled.QrCameraReveral>
-      </div>
+    <div>
+      <Styled.QrCameraReveral>
+        <Styled.QrScannerContainer>
+          <Styled.StyledQrScanner>
+            <QrScanner
+              key={nextScanned}
+              onScan={handleScan}
+              onError={handleError}
+            />
+          </Styled.StyledQrScanner>
+        </Styled.QrScannerContainer>
+      </Styled.QrCameraReveral>
+    </div>
   );
 };
 
