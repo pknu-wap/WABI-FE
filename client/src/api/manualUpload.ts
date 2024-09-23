@@ -18,7 +18,7 @@ export const manualUpload = async (groupId: number, students: students) => {
     };
     console.log('requestBody:', requestBody);
     const response = await axios.post(
-      `https://zepelown.site/api/bands/6/members/enrollments/manual`,
+      `https://zepelown.site/api/bands/${groupId}/members/enrollments/manual`,
       requestBody,
     );
 
