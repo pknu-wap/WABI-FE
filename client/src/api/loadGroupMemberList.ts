@@ -27,5 +27,9 @@ export const loadGroupMemberList = (
       }));
 
       setGroupMembers(students);
+    })
+    .catch(error => {
+      console.error('Error fetching group members:', error);
+      alert('데이터를 불러올 수 없습니다.');
     });
 };
