@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import * as Styled from 'components/common/GroupMemberList/GroupMemberList.styles';
-import { loadGroupMemberList } from '../../../api/loadGroupMemberList';
+import {loadGroupMemberList} from '../../../api/loadGroupMemberList';
 import GroupMembers from './GroupMembers';
 //import useHorizontalScroll from "../../../hooks/useHorizontalScroll"; //가로스크롤 커스텀 훅
-import {student} from "../../../types/studentTypes";
+import {student} from '../../../types/studentTypes';
 
 interface groupProps {
-  groupId: string;
+  groupId: number;
   filterText: string;
 }
 
-const GroupMemberList: React.FC<groupProps> = ({ groupId , filterText }) => {
+const GroupMemberList: React.FC<groupProps> = ({groupId, filterText}) => {
   const [groupMembers, setGroupMembers] = useState<student[]>([]);
   //가로스크롤 기능 추후 추가 예정
   //const { scrollRef, isDragging, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useHorizontalScroll();
@@ -19,7 +19,8 @@ const GroupMemberList: React.FC<groupProps> = ({ groupId , filterText }) => {
     loadGroupMemberList(groupId, setGroupMembers);
   }, []);
 
-  const filteredMembers = groupMembers.filter(member =>
+  const filteredMembers = groupMembers.filter(
+    member =>
       (member.studentId && member.studentId.includes(filterText)) ||
       (member.name && member.name.includes(filterText)) ||
       (member.academicStatus && member.academicStatus.includes(filterText)) ||
@@ -28,13 +29,13 @@ const GroupMemberList: React.FC<groupProps> = ({ groupId , filterText }) => {
       (member.club && member.club.includes(filterText)) ||
       (member.position && member.position.includes(filterText)) ||
       (member.joinDate && member.joinDate.includes(filterText)) ||
-      (member.college && member.college.includes(filterText))
+      (member.college && member.college.includes(filterText)),
   );
 
   return (
-      <div>
-        <Styled.Table>
-          <thead>
+    <div>
+      <Styled.Table>
+        <thead>
           <tr>
             <Styled.ThData>학번</Styled.ThData>
             <Styled.ThData>이름</Styled.ThData>
@@ -47,10 +48,10 @@ const GroupMemberList: React.FC<groupProps> = ({ groupId , filterText }) => {
             <Styled.ThData>소속대학</Styled.ThData>
             <Styled.ThBorder>체크</Styled.ThBorder>
           </tr>
-          </thead>
-          <GroupMembers members={filteredMembers} />
-        </Styled.Table>
-      </div>
+        </thead>
+        <GroupMembers members={filteredMembers} />
+      </Styled.Table>
+    </div>
   );
 };
 

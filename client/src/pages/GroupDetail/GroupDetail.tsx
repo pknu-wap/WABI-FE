@@ -35,7 +35,8 @@ const GroupDetailPage = () => {
 
   const [listFilterText, setListFilterText] = useState('');
   const location = useLocation();
-  const groupId: string = location.state?.bandId || 'No Band ID';
+  const groupId: number = location.state?.bandId || 'NO GROUP ID';
+  const bandName: string = location.state?.bandName || 'Group Name';
 
   return (
     <Styled.Wrapper>
@@ -43,8 +44,11 @@ const GroupDetailPage = () => {
       <Styled.InnerLayout>
         <div>
           <FileUploadModal modalStateValue={fileUploadModalStateValue} />
-          <ManualUploadModal modalStateValue={manualUploadModalStateValue} />
-          <Title titleText={'Group Name'} />
+          <ManualUploadModal
+            modalStateValue={manualUploadModalStateValue}
+            groupId={groupId}
+          />
+          <Title titleText={bandName} />
           <SearchAndButtonFrame>
             <SearchBox filterTextChange={setListFilterText} />
             <div>
