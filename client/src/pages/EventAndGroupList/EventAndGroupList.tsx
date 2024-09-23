@@ -2,27 +2,30 @@ import React, {useState} from 'react';
 import CreateEventForm from 'components/EventAndGroupList/CreateEventForm/CreateEventForm';
 import Header from 'components/common/Header/Header';
 import EventCardList from 'components/EventAndGroupList/EventCardList/EventCardList';
-import EventGroupList from 'components/EventAndGroupList/EventGroupList/EventGroupList';
+import GroupCardList from 'components/EventAndGroupList/GroupCardList/GroupCardList';
 import CreateGroupForm from 'components/EventAndGroupList/CreateGroupForm/CreateGroupForm';
 import TabSwitcher from 'components/EventAndGroupList/TabSwitcher/TabSwitcher';
 import * as Styled from 'pages/EventAndGroupList/EventAndGroupList.styles';
-import {selectedEventIdState} from 'recoil/currentEventId';
-import {selectedBandIdState} from 'recoil/currentBandId';
-import {useRecoilState} from 'recoil';
-
 import FormSaveButton from 'components/EventAndGroupList/FormSaveButton/FormSaveButton';
 
 const EventAndGroupList = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [selectedEventId, setSelectedEventId] =
-    useRecoilState(selectedEventIdState);
-  const [selectedBandId, setSelectedBandId] =
-    useRecoilState(selectedBandIdState);
+  const [selectedEventId, setSelectedEventId] = useState<number | null>(null);
+  const [selectedBandId, setSelectedBandId] = useState<number | null>(null);
 
-  const handleFormVisibility = () => {
+  const handleCreateClick = () => {
     setSelectedEventId(null);
     setSelectedBandId(null);
+    setIsFormVisible(true);
+  };
+
+  const handleUpdateClick = (id: number) => {
+    if (activeTab === 0) {
+      setSelectedEventId(id);
+    } else if (activeTab === 1) {
+      setSelectedBandId(id);
+    }
     setIsFormVisible(true);
   };
 
@@ -59,21 +62,27 @@ const EventAndGroupList = () => {
             text={activeTab === 0 ? '이벤트 개설하기' : '그룹 개설하기'}
             width="130px"
             height="30px"
-            onClick={handleFormVisibility}
+            onClick={handleCreateClick}
           />
         </Styled.CreateButtonWrapper>
 
         <Styled.EventGroupWrapper>
           {activeTab === 0 && (
             <>
-              <EventCardList />
+              <EventCardList
+                onUpdateClick={handleUpdateClick}
+                selectedEventId={selectedEventId}
+              />
               <Styled.DivideLine />
               {isFormVisible && renderEventForm()}
             </>
           )}
           {activeTab === 1 && (
             <>
-              <EventGroupList />
+              <GroupCardList
+                onUpdateClick={handleUpdateClick}
+                selectedBandId={selectedBandId}
+              />
               <Styled.DivideLine />
               {isFormVisible && renderGroupForm()}
             </>
