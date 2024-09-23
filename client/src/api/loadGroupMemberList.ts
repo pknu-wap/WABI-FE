@@ -12,7 +12,7 @@ export const loadGroupMemberList = (
   setGroupMembers: React.Dispatch<React.SetStateAction<student[]>>,
 ) => {
   axios
-    .get<ApiResponse>(`https://zepelown.site/api/bands/11/students`)
+    .get<ApiResponse>(`https://zepelown.site/api/bands/6/students`)
     .then(res => {
       const students: student[] = res.data.data.students.map(item => ({
         studentId: item.studentId,
