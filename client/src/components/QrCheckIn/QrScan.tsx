@@ -69,13 +69,6 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
           'lightgray',
         );
         setNextScanned(prevKey => prevKey + 1);
-
-        // scanned 값이 false일 때 1.5초 후 true로 변경
-        if (!scanned) {
-          setTimeout(() => {
-            setQrScanned(true); // scanned 값을 true로 변경
-          }, 1500);
-        }
       }, 1500);
     }
   };
