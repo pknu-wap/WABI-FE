@@ -46,7 +46,9 @@ const EventDetail = () => {
   }, []);
 
   const navigateToQrScanner = () => {
+
     navigate('/qrScan', {state: {eventId, title, startAt, endAt}});
+
   };
 
   return (

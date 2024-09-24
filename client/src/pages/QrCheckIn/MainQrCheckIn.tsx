@@ -3,6 +3,7 @@ import Header from '../../components/common/Header/Header';
 import React, {useState} from 'react';
 import * as Styled from './MainQrCheckIn.styles';
 import QrScan from '../../components/QrCheckIn/QrScan';
+
 import Logo from '../../components/common/Logo/Logo';
 import {useLocation} from 'react-router-dom';
 
@@ -15,9 +16,11 @@ const MainQrCheckIn = () => {
 
   const location = useLocation();
   const eventId: string = location.state?.eventId || 'No Event ID';
+
   const title: string = location.state?.title || 'No Title';
   const startAt: string = location.state?.startAt || 'No Start Time';
   const endAt: string = location.state?.endAt || 'No End Time';
+
 
   const handleScanResult = (
     newMessage: string,
@@ -30,6 +33,7 @@ const MainQrCheckIn = () => {
   };
 
   return (
+
     <Styled.Wrapper>
       <Header />
       <Styled.InnerLayout>
@@ -58,6 +62,7 @@ const MainQrCheckIn = () => {
         </Styled.Event>
       </Styled.InnerLayout>
     </Styled.Wrapper>
+
   );
 };
 

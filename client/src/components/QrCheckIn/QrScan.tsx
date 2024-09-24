@@ -35,6 +35,7 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
         studentIdStartPoint,
         studentIdEndPoint,
       );
+
       Student.eventId = parseInt(eventId, 10);
 
       if (!scanned) {
