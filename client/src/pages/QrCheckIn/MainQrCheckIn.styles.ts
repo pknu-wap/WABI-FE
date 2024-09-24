@@ -1,75 +1,121 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const Text = styled.div`
-    font-family: Noto Sans;
-    text-align: left;
+export const Text = styled.div`
+  font-family: Noto Sans;
+  text-align: left;
 `;
 
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    height: 100%;
-    padding:0;
-    margin:0;
-    background-color: #F0F4F7;
-    overflow-x: hidden;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0 auto;
+  background-color: #f0f4f7;
 `;
 
-const Event = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-    height: 417px;
-    margin-top: 40px;
-    padding: 20px 55px 60px 40px;
-    border-radius: 10px;
-    gap:5px;
-`
-const EventName = styled(Text)`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    max-width: 850px;
-    font-size: 40px;
-    line-height: 55px;
-`
-const Line = styled("div")`
-    height:1px;
-    background-color:#F0F4F7;
-    border:0;
-`
+export const InnerLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-const EventTime = styled(Text)`
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
-    line-height: 20px;
-`
+  margin: 0 auto;
+`;
 
-const GroupBox = styled(Text)`
-    font-size: 20px;
-    color: #697077;
-    line-height: 27.24px;
-`
+export const Event = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  margin: 50px 100px 40px 100px;
+  padding: 30px 40px 60px 40px;
+  border-radius: 10px;
+`;
 
-const QrBox = styled.div<{ qrColor: string }>`
-    margin-top:40px;
-    background-color: ${({ qrColor }) => qrColor};
-    border: 25px solid ${({ qrColor }) => qrColor};
-    border-bottom: 20px solid ${({ qrColor }) => qrColor};
-    border-radius: 20px;
-`
+export const EventContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 400px;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px lightgray;
+  background-color: white;
+`;
 
-const QrMessage = styled(Text)<{ messageColor: string }>`
-    color: ${({ messageColor }) => messageColor};
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 43.58px;
-    margin-top: 20px;
-    white-space: normal;
-`
+export const EventName = styled(Text)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  line-height: 80px;
+  position: relative;
+  top: 10px;
+`;
 
-export {Wrapper, Event, GroupBox, EventName, Line, EventTime, QrBox, QrMessage};
+export const EventTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  top: 5px;
+  font-size: 35px;
+`;
+
+export const Line = styled('div')`
+  height: 1px;
+  background-color: #f0f4f7;
+  border: 0;
+`;
+
+export const EventTime = styled(Text)`
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+`;
+
+export const GroupBox = styled(Text)`
+  text-align: center;
+  font-size: 20px;
+  color: #697077;
+`;
+
+export const Qr = styled.div`
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+`;
+
+export const QrBox = styled.div<{qrColor: string}>`
+  width: 400px;
+  height: 400px;
+  margin-top: 10px;
+  background-color: ${({qrColor}) => qrColor};
+  border: 25px solid ${({qrColor}) => qrColor};
+  border-bottom: 20px solid ${({qrColor}) => qrColor};
+  border-radius: 20px;
+`;
+
+export const QrMessage = styled(Text)<{messageColor: string}>`
+  color: ${({messageColor}) => messageColor};
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 43.58px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
+`;

@@ -9,6 +9,7 @@ const Steps = ({
   prevStep,
   student,
   handleChange,
+  groupId,
 }: stepProps) => {
   if (step === 1) {
     return (
@@ -16,6 +17,7 @@ const Steps = ({
         nextStep={nextStep}
         student={student}
         handleChange={handleChange}
+        groupId={groupId}
       />
     );
   }
@@ -24,6 +26,7 @@ const Steps = ({
       prevStep={prevStep}
       student={student}
       handleChange={handleChange}
+      groupId={groupId}
     />
   );
 };

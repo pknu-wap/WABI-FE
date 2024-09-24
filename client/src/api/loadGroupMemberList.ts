@@ -1,11 +1,35 @@
 import axios from 'axios';
+import {student} from '../types/studentTypes';
+
+interface ApiResponse {
+  data: {
+    students: student[];
+  };
+}
 
 export const loadGroupMemberList = (
-  setGroupMembers: React.Dispatch<React.SetStateAction<never[]>>,
+  groupId: number,
+  setGroupMembers: React.Dispatch<React.SetStateAction<student[]>>,
 ) => {
   axios
-    .get(
-      `https://13f9350d-c685-4634-9131-e118c99027d6.mock.pstmn.io/api/bands/1/students`,
-    )
-    .then(res => setGroupMembers(res.data.data.students));
+    .get<ApiResponse>(`https://zepelown.site/api/bands/${groupId}/students`)
+    .then(res => {
+      const students: student[] = res.data.data.students.map(item => ({
+        studentId: item.studentId,
+        name: item.name,
+        academicStatus: item.academicStatus,
+        tel: item.tel,
+        major: item.major,
+        club: item.club,
+        position: item.position,
+        joinDate: item.joinDate,
+        college: item.college,
+      }));
+
+      setGroupMembers(students);
+    })
+    .catch(error => {
+      console.error('Error fetching group members:', error);
+      alert('데이터를 불러올 수 없습니다.');
+    });
 };

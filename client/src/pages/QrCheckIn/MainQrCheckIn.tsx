@@ -3,7 +3,7 @@ import Header from '../../components/common/Header/Header';
 import React, {useState} from 'react';
 import * as Styled from './MainQrCheckIn.styles';
 import QrScan from '../../components/QrCheckIn/QrScan';
-import icon from '../../icon.png';
+
 import Logo from '../../components/common/Logo/Logo';
 import {useLocation} from 'react-router-dom';
 
@@ -17,6 +17,11 @@ const MainQrCheckIn = () => {
   const location = useLocation();
   const eventId: string = location.state?.eventId || 'No Event ID';
 
+  const title: string = location.state?.title || 'No Title';
+  const startAt: string = location.state?.startAt || 'No Start Time';
+  const endAt: string = location.state?.endAt || 'No End Time';
+
+
   const handleScanResult = (
     newMessage: string,
     newMessageColor: string,
@@ -28,36 +33,36 @@ const MainQrCheckIn = () => {
   };
 
   return (
-    <>
+
+    <Styled.Wrapper>
       <Header />
-      <Styled.Wrapper>
+      <Styled.InnerLayout>
         <Styled.Event>
-          <Styled.EventName>
-            <Logo src={icon} alt={'logo1'} text={''} />
-            <h2>WAP 2024 2학기 개강총회</h2>
-          </Styled.EventName>
-          <Styled.Line></Styled.Line>
-          <Styled.EventTime>
-            <h3>2024.09.13 18:30</h3>
-            <h3> ~ </h3>
-            <h3>2024.09.13 20:00</h3>
-          </Styled.EventTime>
-          <Styled.Line></Styled.Line>
-          <Styled.GroupBox>
-            <p>참가 가능한 그룹</p>
-            <p>WAP 2024</p>
-          </Styled.GroupBox>
+          <Styled.Qr>
+            <Styled.QrMessage messageColor={messageColor}>
+              <div>{message}</div>
+            </Styled.QrMessage>
+            <Styled.QrBox qrColor={qrColor}>
+              <QrScan onScanResult={handleScanResult} eventId={eventId} />
+            </Styled.QrBox>
+            <Styled.EventName>
+              <Logo
+                src={'images/eventIcon.png'}
+                alt={'logo3'}
+                text={''}
+                width={'50px'}
+                height={'50px'}
+              />
+              <Styled.EventTitle>{title}</Styled.EventTitle>
+            </Styled.EventName>
+            <Styled.EventTime>
+              <h3>{startAt + ' ~ ' + endAt}</h3>
+            </Styled.EventTime>
+          </Styled.Qr>
         </Styled.Event>
-        <div className="Qr">
-          <Styled.QrBox qrColor={qrColor}>
-            <QrScan onScanResult={handleScanResult} eventId={eventId} />
-          </Styled.QrBox>
-          <Styled.QrMessage messageColor={messageColor}>
-            <div>{message}</div>
-          </Styled.QrMessage>
-        </div>
-      </Styled.Wrapper>
-    </>
+      </Styled.InnerLayout>
+    </Styled.Wrapper>
+
   );
 };
 

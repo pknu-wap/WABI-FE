@@ -4,7 +4,7 @@ import axios from 'axios';
 interface CheckInStudent {
   id: string;
   name: string;
-  group: string;
+  bandName: string;
   eventStudentStatus: string;
   checkInTime: string;
 }
@@ -17,16 +17,22 @@ const useCheckInStudent = (eventId: string) => {
       .get(`https://zepelown.site/api/events/check-in/${eventId}?filter=ALL`)
       .then(res => {
         const CleanedData = res.data.data;
+        const CheckInStudentList = CleanedData.map(
+          (student: CheckInStudent) => ({
+            id: student.id,
+            name: student.name,
+            bandName: student.bandName,
+            eventStudentStatus: student.eventStudentStatus,
+            checkInTime:
+              student.checkInTime !== null
+                ? student.checkInTime.slice(0, 10).replaceAll('-', '.') +
+                  ' ' +
+                  student.checkInTime.slice(11, 16).replaceAll('-', '.')
+                : '',
+          }),
+        );
 
-        const CheckInStudent = CleanedData.map((student: any) => ({
-          id: student.id,
-          name: student.name,
-          group: student.band,
-          eventStudentStatus: student.eventStudentStatus,
-          checkInTime: student.checkInTime,
-        }));
-
-        setStudents(CheckInStudent);
+        setStudents(CheckInStudentList);
       })
       .catch(error => {
         console.log('체크인 명단 불러오기를 실패했습니다', error);

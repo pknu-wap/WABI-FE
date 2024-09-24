@@ -5,10 +5,12 @@ import ModalFrame from '../../common/ModalFrame/ModalFrame';
 
 interface FileUploadModalProps {
   modalStateValue: boolean;
+  groupId: number;
 }
 
 const ManualUploadModal: React.FC<FileUploadModalProps> = ({
   modalStateValue,
+  groupId,
 }) => {
   const [step, setStep] = useState(1);
   const nextStep = () => setStep(step + 1);
@@ -22,7 +24,7 @@ const ManualUploadModal: React.FC<FileUploadModalProps> = ({
     college: '',
     major: '',
     tel: '',
-    status: '',
+    academicStatus: '',
   });
 
   const handleChange = (
@@ -44,6 +46,7 @@ const ManualUploadModal: React.FC<FileUploadModalProps> = ({
         prevStep={prevStep}
         student={student}
         handleChange={handleChange}
+        groupId={groupId}
       />
     </ModalFrame>
   );

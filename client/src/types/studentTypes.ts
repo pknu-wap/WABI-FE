@@ -7,7 +7,7 @@ export interface student {
     college: string,
     major: string,
     tel: string,
-    status: string,
+    academicStatus: string,
 }
 
 export type students = student[];
