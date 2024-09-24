@@ -25,6 +25,7 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
     const fileToUpload = file || new Blob();
     const fileFormData = new FormData();
     fileFormData.append('file', fileToUpload);
+    console.log(fileFormData);
     fileUpload(groupId, fileFormData);
   };
 
