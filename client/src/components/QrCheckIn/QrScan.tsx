@@ -42,18 +42,19 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
         .then(res => {
           if (res.data.message === 'OK') {
             onScanResult('정상적으로 참석되었습니다.', '#4E54F5', '#4E54F5');
-            setQrScanned(true);
           }
+          if (res.data.message === '이미 체크인 했습니다.') {
+            onScanResult('이미 참석되었습니다.', '#F5C400', '#F5C400');
+          }
+          setQrScanned(true);
         })
         .catch(error => {
           // 임시로 에러코드 활용하여 동작
           // 추후 백엔드 코드로 동작 예정
-          if (error.response.status === 500) {
-            onScanResult('이미 참석되었습니다.', '#F5C400', '#F5C400');
-          } else {
+          if (error) {
             onScanResult('이벤트 해당그룹이 아닙니다.', '#FF7078', '#FF7078');
+            setQrScanned(true);
           }
-          setQrScanned(true);
         });
 
       setTimeout(() => {
