@@ -32,7 +32,6 @@ const GroupCard = ({group, onUpdateClick, isSelected}: GroupCardProps) => {
           <Styled.UpdateIcon src="/images/EditEvent.png" alt="EditEvenIcon" />
         </Styled.UpdateButton>
       </Styled.GroupTitle>
-      <h3>50명</h3>
     </Styled.GroupCard>
   );
 };

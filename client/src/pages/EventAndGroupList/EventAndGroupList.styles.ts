@@ -19,7 +19,7 @@ export const DivideLine = styled.hr`
 
 export const CreateButtonWrapper = styled.div`
   position: absolute;
-  top: 150px;
+  top: 135px;
   right: 0;
 `;
 
