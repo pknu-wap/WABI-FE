@@ -1,9 +1,13 @@
 import axios from 'axios';
 import {CheckInInfo} from 'types/eventTypes';
 
-export const LoadEventList = () => {
+export const LoadEventList = (token: string) => {
   return axios
-    .get(`https://zepelown.site/api/events/list?adminId=1`)
+    .get(`https://zepelown.site/api/events/list?adminId=1`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then(res => {
       const events = res.data.data;
 
@@ -18,7 +22,6 @@ export const LoadEventList = () => {
         notCheckIn: event.checkInStatusCount.notCheckIn,
       }));
     })
-
     .catch(error => {
       console.log('이벤트 리스트 불러오기에 실패했습니다', error);
       return [];
