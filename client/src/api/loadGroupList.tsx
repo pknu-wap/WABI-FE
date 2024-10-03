@@ -1,9 +1,13 @@
 import axios from 'axios';
 import {Band} from 'types/groupTypes';
 
-export const LoadGroupList = () => {
+export const LoadGroupList = (token: string) => {
   return axios
-    .get(`https://zepelown.site/api/bands/list?adminId=1`)
+    .get(`https://zepelown.site/api/bands/list?adminId=1`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then(res => {
       const groups = res.data.data;
       const filteredEvent = groups.map((group: Band) => ({
