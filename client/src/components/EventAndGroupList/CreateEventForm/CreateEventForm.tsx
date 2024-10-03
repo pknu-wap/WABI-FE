@@ -3,6 +3,7 @@ import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayou
 import InputField from 'components/common/InputField/InputField';
 import {Band} from 'types/groupTypes';
 import {getEventById, createEvent, updateEvent, deleteEvent} from 'api/event';
+import {useAuthToken} from 'hooks/useAuthToken';
 
 const CreateEventForm = ({eventId}: {eventId?: number}) => {
   //Todo
@@ -20,10 +21,12 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
     bandIds: '',
   });
 
+  const token = useAuthToken('seongwon3', 'shin0916@@');
+
   // 수정 모드일 경우 기존 데이터 불러오기
   useEffect(() => {
     if (eventId) {
-      getEventById(eventId, adminId).then(response => {
+      getEventById(eventId, adminId, token).then(response => {
         const {eventName, startAt, endAt, eventStudentMaxCount, bands} =
           response.data;
 
