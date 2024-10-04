@@ -20,23 +20,18 @@ const EventCardList = ({
 
   useEffect(() => {
     const fetchEvents = async () => {
-      if (!token) return;
-
-      try {
-        const filteredEvent = await LoadEventList(token);
-        setEvents(filteredEvent);
-      } catch {
-        console.error('Token invalid, logging in again...');
-        const newToken = await logIn('seongwon3', 'shin091612@@');
-        localStorage.setItem('token', newToken);
-        const filteredEvent = await LoadEventList(newToken);
-        setEvents(filteredEvent);
+      if (token) {
+        try {
+          const filteredEvents = await LoadEventList(token);
+          setEvents(filteredEvents);
+        } catch (error) {
+          console.error('Failed to load events:', error);
+        }
       }
     };
 
     fetchEvents();
   }, [token]);
-
   return (
     <Styled.EventListGrid>
       {events.map(event => (
