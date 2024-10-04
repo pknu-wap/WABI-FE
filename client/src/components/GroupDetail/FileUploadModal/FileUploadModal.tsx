@@ -4,6 +4,7 @@ import {fileUpload} from '../../../api/fileUpload';
 import ModalFrame from '../../common/ModalFrame/ModalFrame';
 import * as Styled from './FileUploadModal.styles';
 import Button from '../../common/Button/Button';
+import {useAuthToken} from 'hooks/useAuthToken';
 
 interface FileUploadModalProps {
   modalStateValue: boolean;
@@ -15,6 +16,7 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
   groupId,
 }) => {
   const [file, setFile] = useState<File | null>(null);
+  const token = useAuthToken('seongwon3', 'shin091612@@');
 
   const fileChange = (fileElement: React.ChangeEvent<HTMLInputElement>) => {
     const files = fileElement.target.files;
@@ -22,11 +24,22 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
   };
 
   const fileUploadClick = () => {
+    if (!token) {
+      console.error('토큰이 없습니다. 파일 업로드를 진행할 수 없습니다.');
+      return;
+    }
     const fileToUpload = file || new Blob();
     const fileFormData = new FormData();
     fileFormData.append('file', fileToUpload);
     console.log(fileFormData);
-    fileUpload(groupId, fileFormData);
+
+    fileUpload(groupId, fileFormData, token)
+      .then(res => {
+        console.log('파일 업로드 성공:', res);
+      })
+      .catch(err => {
+        console.error('파일 업로드 실패:', err);
+      });
   };
 
   if (modalStateValue === false) return null;
