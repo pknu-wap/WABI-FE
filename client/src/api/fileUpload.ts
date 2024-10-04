@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-export const fileUpload = (groupId: number, fileFormData: FormData) => {
+export const fileUpload = (
+  groupId: number,
+  fileFormData: FormData,
+  token: string | null,
+) => {
   return axios
     .post(
       `https://zepelown.site/api/bands/${groupId}/members/enrollments/file`,
@@ -8,6 +12,7 @@ export const fileUpload = (groupId: number, fileFormData: FormData) => {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
         },
       },
     )

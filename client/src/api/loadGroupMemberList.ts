@@ -10,9 +10,14 @@ interface ApiResponse {
 export const loadGroupMemberList = (
   groupId: number,
   setGroupMembers: React.Dispatch<React.SetStateAction<student[]>>,
+  token: string | null,
 ) => {
   axios
-    .get<ApiResponse>(`https://zepelown.site/api/bands/${groupId}/students`)
+    .get<ApiResponse>(`https://zepelown.site/api/bands/${groupId}/students`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 추가
+      },
+    })
     .then(res => {
       const students: student[] = res.data.data.students.map(item => ({
         studentId: item.studentId,
