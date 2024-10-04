@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import * as Styled from 'components/common/GroupMemberList/GroupMemberList.styles';
 import {loadGroupMemberList} from '../../../api/loadGroupMemberList';
 import GroupMembers from './GroupMembers';
-//import useHorizontalScroll from "../../../hooks/useHorizontalScroll"; //가로스크롤 커스텀 훅
 import {student} from '../../../types/studentTypes';
+import {useAuthToken} from 'hooks/useAuthToken'; // useAuthToken 훅을 가져옴
 
 interface groupProps {
   groupId: number;
@@ -12,12 +12,13 @@ interface groupProps {
 
 const GroupMemberList: React.FC<groupProps> = ({groupId, filterText}) => {
   const [groupMembers, setGroupMembers] = useState<student[]>([]);
-  //가로스크롤 기능 추후 추가 예정
-  //const { scrollRef, isDragging, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useHorizontalScroll();
+  const token = useAuthToken('seongwon3', 'shin091612@@');
 
   useEffect(() => {
-    loadGroupMemberList(groupId, setGroupMembers);
-  }, []);
+    if (token) {
+      loadGroupMemberList(groupId, setGroupMembers, token);
+    }
+  }, [token, groupId]);
 
   const filteredMembers = groupMembers.filter(
     member =>
