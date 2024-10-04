@@ -30,10 +30,6 @@ export const getEventById = async (
 ): Promise<ApiResponse<EventInfo>> => {
   try {
     if (!token) {
-      token = localStorage.getItem('token');
-    }
-
-    if (!token) {
       console.log('토큰이 없습니다. 로그인 시도 중...');
       token = await logIn('seongwon3', 'shin091612@@');
       localStorage.setItem('token', token);
