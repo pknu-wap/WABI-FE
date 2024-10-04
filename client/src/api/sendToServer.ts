@@ -7,9 +7,14 @@ interface ServerResponse {
 
 export const sendToServer = (
   data: studentQr,
+  token: string | null,
 ): Promise<AxiosResponse<ServerResponse>> => {
   return axios
-    .post('https://zepelown.site/api/events/check-in', data)
+    .post('https://zepelown.site/api/events/check-in', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     .then(res => {
       console.log(res);
       return res;
