@@ -4,7 +4,7 @@ export const signUp = (
   name: string,
   password: string,
   email: string,
-): Promise<AxiosResponse> => {
+): Promise<AxiosResponse | null> => {
   return axios
     .post('https://zepelown.site/auth/admins/register', {
       name: name,
@@ -15,7 +15,7 @@ export const signUp = (
       return res;
     })
     .catch(error => {
-      console.error('Failed to register admin:', error);
-      throw error;
+      console.log('Failed to register admin:', error);
+      return null;
     });
 };
