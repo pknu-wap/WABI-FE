@@ -1,11 +1,7 @@
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 import {students} from '../types/studentTypes'; // students 타입 import
 
-export const manualUpload = async (
-  groupId: number,
-  students: students,
-  token: string | null,
-) => {
+export const manualUpload = async (groupId: number, students: students) => {
   try {
     const requestBody = {
       bandStudentDtos: students.map(student => ({
@@ -22,14 +18,10 @@ export const manualUpload = async (
     };
     console.log('requestBody:', requestBody);
 
-    const response = await axios.post(
-      `https://zepelown.site/api/bands/${groupId}/members/enrollments/manual`,
+    const response = await apiClient.post(
+      `/bands/${groupId}/members/enrollments/manual`,
       requestBody,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
+      {},
     );
 
     console.log('Response:', response.data);

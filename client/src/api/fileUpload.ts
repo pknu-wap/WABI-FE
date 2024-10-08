@@ -1,21 +1,8 @@
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 
-export const fileUpload = (
-  groupId: number,
-  fileFormData: FormData,
-  token: string | null,
-) => {
-  return axios
-    .post(
-      `https://zepelown.site/api/bands/${groupId}/members/enrollments/file`,
-      fileFormData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
+export const fileUpload = (groupId: number, fileFormData: FormData) => {
+  return apiClient
+    .post(`/bands/${groupId}/members/enrollments/file`, fileFormData, {})
     .then(res => {
       console.log(res.data);
       return res.data;

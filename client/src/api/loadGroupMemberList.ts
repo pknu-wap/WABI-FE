@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 import {student} from '../types/studentTypes';
 
 interface ApiResponse {
@@ -10,14 +10,9 @@ interface ApiResponse {
 export const loadGroupMemberList = (
   groupId: number,
   setGroupMembers: React.Dispatch<React.SetStateAction<student[]>>,
-  token: string | null,
 ) => {
-  axios
-    .get<ApiResponse>(`https://zepelown.site/api/bands/${groupId}/students`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 추가
-      },
-    })
+  apiClient
+    .get<ApiResponse>(`/bands/${groupId}/students`, {})
     .then(res => {
       const students: student[] = res.data.data.students.map(item => ({
         studentId: item.studentId,
