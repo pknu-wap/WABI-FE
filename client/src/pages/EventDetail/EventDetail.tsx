@@ -11,6 +11,7 @@ import Title from 'components/common/Title/Title';
 import {getEventById} from 'api/event';
 import {Band} from 'types/groupTypes';
 import CheckInStatus from 'components/event_detail/CheckInStatus/CheckInStatus';
+
 const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,9 +47,7 @@ const EventDetail = () => {
   }, []);
 
   const navigateToQrScanner = () => {
-
     navigate('/qrScan', {state: {eventId, title, startAt, endAt}});
-
   };
 
   return (

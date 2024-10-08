@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Styled from './CheckInTable.styles';
-import useCheckInStudent from '../../../hooks/useCheckInStudent';
+import useCheckInStudent from 'hooks/useCheckInStudent';
 
 interface CheckInTableProps {
   eventId: string;

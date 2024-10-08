@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 import {student} from '../types/studentTypes';
 
 interface ApiResponse {
@@ -11,8 +11,8 @@ export const loadGroupMemberList = (
   groupId: number,
   setGroupMembers: React.Dispatch<React.SetStateAction<student[]>>,
 ) => {
-  axios
-    .get<ApiResponse>(`https://zepelown.site/api/bands/${groupId}/students`)
+  apiClient
+    .get<ApiResponse>(`/bands/${groupId}/students`, {})
     .then(res => {
       const students: student[] = res.data.data.students.map(item => ({
         studentId: item.studentId,

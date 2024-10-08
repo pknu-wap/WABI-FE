@@ -4,7 +4,6 @@ import {fileUpload} from '../../../api/fileUpload';
 import ModalFrame from '../../common/ModalFrame/ModalFrame';
 import * as Styled from './FileUploadModal.styles';
 import Button from '../../common/Button/Button';
-
 interface FileUploadModalProps {
   modalStateValue: boolean;
   groupId: number;
@@ -26,7 +25,14 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
     const fileFormData = new FormData();
     fileFormData.append('file', fileToUpload);
     console.log(fileFormData);
-    fileUpload(groupId, fileFormData);
+
+    fileUpload(groupId, fileFormData)
+      .then(res => {
+        console.log('파일 업로드 성공:', res);
+      })
+      .catch(err => {
+        console.error('파일 업로드 실패:', err);
+      });
   };
 
   if (modalStateValue === false) return null;

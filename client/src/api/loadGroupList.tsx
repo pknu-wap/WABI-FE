@@ -1,20 +1,20 @@
-import axios from 'axios';
 import {Band} from 'types/groupTypes';
+import apiClient from 'api/apiClient';
 
-export const LoadGroupList = () => {
-  return axios
-    .get(`https://zepelown.site/api/bands/list?adminId=1`)
-    .then(res => {
-      const groups = res.data.data;
-      const filteredEvent = groups.map((group: Band) => ({
-        bandId: group.bandId,
-        bandName: group.bandName,
-      }));
+export const LoadGroupList = async (): Promise<Band[]> => {
+  try {
+    const response = await apiClient.get('/bands/list?adminId=1');
 
-      return filteredEvent;
-    })
-    .catch(error => {
-      console.log('이벤트 리스트 불러오기에 실패했습니다', error);
-      return [];
-    });
+    const groups = response.data.data;
+
+    const filteredEvent = groups.map((group: Band) => ({
+      bandId: group.bandId,
+      bandName: group.bandName,
+    }));
+
+    return filteredEvent;
+  } catch (error) {
+    console.error('그룹 리스트 불러오기에 실패했습니다:', error);
+    return [];
+  }
 };

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 
 interface CheckInStudent {
   id: string;
@@ -13,8 +13,8 @@ const useCheckInStudent = (eventId: string) => {
   const [students, setStudents] = useState<CheckInStudent[]>([]);
 
   const LoadCheckInStudent = () => {
-    axios
-      .get(`https://zepelown.site/api/events/check-in/${eventId}?filter=ALL`)
+    apiClient
+      .get(`/events/check-in/${eventId}?filter=ALL`)
       .then(res => {
         const CleanedData = res.data.data;
         const CheckInStudentList = CleanedData.map(
@@ -43,7 +43,7 @@ const useCheckInStudent = (eventId: string) => {
     const interval = setInterval(() => {
       LoadCheckInStudent();
       console.log('로드');
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -13,7 +13,7 @@ const GroupCardList = ({
   onUpdateClick,
   selectedBandId,
 }: EventGroupListProps) => {
-  const [groups, setGroupList] = useState<Band[]>([]); // 그룹 리스트 상태
+  const [groups, setGroupList] = useState<Band[]>([]);
 
   useEffect(() => {
     LoadGroupList().then(filteredGroups => {

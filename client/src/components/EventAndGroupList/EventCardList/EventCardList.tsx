@@ -20,7 +20,6 @@ const EventCardList = ({
       setEvents(filteredEvent);
     });
   }, []);
-
   return (
     <Styled.EventListGrid>
       {events.map(event => (

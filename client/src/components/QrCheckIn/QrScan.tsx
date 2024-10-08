@@ -26,6 +26,7 @@ interface QrScanProps {
 const QrScan = ({onScanResult, eventId}: QrScanProps) => {
   const [scanned, setQrScanned] = useState(false);
   const [nextScanned, setNextScanned] = useState(0);
+
   const handleScan = (data: scanData) => {
     if (data && !scanned) {
       const ScannedQrArray = data.text;
