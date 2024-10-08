@@ -4,7 +4,6 @@ import {sendToServer} from '../../api/sendToServer';
 import {studentQr} from '../../types/QrType/StudentQr';
 import {scanData} from '../../types/QrType/ScanData';
 import * as Styled from './qrCode.styles';
-import {useAuthToken} from 'hooks/useAuthToken';
 
 const Student: studentQr = {
   studentId: '',
@@ -27,7 +26,6 @@ interface QrScanProps {
 const QrScan = ({onScanResult, eventId}: QrScanProps) => {
   const [scanned, setQrScanned] = useState(false);
   const [nextScanned, setNextScanned] = useState(0);
-  const token = useAuthToken('seongwon3', 'shin091612@@');
 
   const handleScan = (data: scanData) => {
     if (data && !scanned) {
@@ -41,7 +39,7 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
 
       Student.eventId = parseInt(eventId, 10);
 
-      sendToServer(Student, token)
+      sendToServer(Student)
         .then(res => {
           if (
             res.data.message === 'OK' ||

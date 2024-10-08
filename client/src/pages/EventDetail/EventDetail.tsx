@@ -11,7 +11,7 @@ import Title from 'components/common/Title/Title';
 import {getEventById} from 'api/event';
 import {Band} from 'types/groupTypes';
 import CheckInStatus from 'components/event_detail/CheckInStatus/CheckInStatus';
-import {useAuthToken} from 'hooks/useAuthToken';
+
 const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,12 +23,11 @@ const EventDetail = () => {
   const [groups, setGroups] = useState<Band[]>([]);
   const [startAt, setStartAt] = useState<string>('');
   const [endAt, setEndAt] = useState<string>('');
-  const token = useAuthToken('seongwon3', 'shin091612@@');
 
   useEffect(() => {
     if (eventId !== 'No Event ID') {
       const eventIdNumber = parseInt(eventId, 10);
-      getEventById(eventIdNumber, adminId, token).then(response => {
+      getEventById(eventIdNumber, adminId).then(response => {
         setGroups(response.data.bands);
         setTitle(response.data.eventName);
         const startAtOriginalData = response.data.startAt;

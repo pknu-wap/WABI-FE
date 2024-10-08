@@ -3,7 +3,6 @@ import * as Styled from 'components/common/GroupMemberList/GroupMemberList.style
 import {loadGroupMemberList} from '../../../api/loadGroupMemberList';
 import GroupMembers from './GroupMembers';
 import {student} from '../../../types/studentTypes';
-import {useAuthToken} from 'hooks/useAuthToken'; // useAuthToken 훅을 가져옴
 
 interface groupProps {
   groupId: number;
@@ -12,13 +11,10 @@ interface groupProps {
 
 const GroupMemberList: React.FC<groupProps> = ({groupId, filterText}) => {
   const [groupMembers, setGroupMembers] = useState<student[]>([]);
-  const token = useAuthToken('seongwon3', 'shin091612@@');
 
   useEffect(() => {
-    if (token) {
-      loadGroupMemberList(groupId, setGroupMembers, token);
-    }
-  }, [token, groupId]);
+    loadGroupMemberList(groupId, setGroupMembers);
+  }, []);
 
   const filteredMembers = groupMembers.filter(
     member =>

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getEventById} from '../../../api/event';
 import * as Styled from 'components/event_detail/CheckInStatus/CheckInStatus.styles';
-import {useAuthToken} from 'hooks/useAuthToken';
 
 interface CheckInStatusProps {
   eventId: string;
@@ -11,11 +10,10 @@ interface CheckInStatusProps {
 const CheckInStatus = ({eventId, adminId}: CheckInStatusProps) => {
   const [checkInCount, setCheckInCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const token = useAuthToken('seongwon3', 'shin091612@@');
   const loadCheckInStatus = () => {
     const eventIdToNumber = parseInt(eventId, 10);
 
-    getEventById(eventIdToNumber, adminId, token).then(response => {
+    getEventById(eventIdToNumber, adminId).then(response => {
       const checkInStatus = response.data.checkInStatusCount.checkIn;
       const notCheckInStatus = response.data.checkInStatusCount.notCheckIn;
       const totalStatus = checkInStatus + notCheckInStatus;
@@ -27,7 +25,7 @@ const CheckInStatus = ({eventId, adminId}: CheckInStatusProps) => {
     const interval = setInterval(() => {
       loadCheckInStatus();
       console.log('로드 체크인');
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -4,7 +4,6 @@ import {manualUpload} from '../../../../api/manualUpload';
 import InputField from '../../../common/InputField/InputField';
 import Button from '../../../common/Button/Button';
 import * as Styled from './OptionalStep.styles';
-import {useAuthToken} from 'hooks/useAuthToken';
 
 const OptionalStep = ({
   prevStep,
@@ -12,7 +11,6 @@ const OptionalStep = ({
   handleChange,
   groupId,
 }: stepProps) => {
-  const token = useAuthToken('seongwon3', 'shin091612@@');
   return (
     <Styled.Container>
       <Styled.Name>
@@ -102,7 +100,7 @@ const OptionalStep = ({
         <Styled.NextButtonWrapper>
           <Button
             onClick={() => {
-              manualUpload(groupId, [student], token);
+              manualUpload(groupId, [student]);
             }}
             width="106px"
             height="40px"

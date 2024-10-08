@@ -3,8 +3,6 @@ import EventCard from 'components/EventAndGroupList/EventCard/EventCard';
 import * as Styled from 'components/EventAndGroupList/EventCardList/EventCardList.styles';
 import {CheckInInfo} from 'types/eventTypes';
 import {LoadEventList} from 'api/loadEventList';
-import {logIn} from 'api/logIn';
-import {useAuthToken} from 'hooks/useAuthToken';
 
 interface EventCardListProps {
   onUpdateClick: (eventId: number) => void;
@@ -16,22 +14,12 @@ const EventCardList = ({
   selectedEventId,
 }: EventCardListProps) => {
   const [events, setEvents] = useState<CheckInInfo[]>([]);
-  const token = useAuthToken('seongwon3', 'shin091612@@');
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      if (token) {
-        try {
-          const filteredEvents = await LoadEventList(token);
-          setEvents(filteredEvents);
-        } catch (error) {
-          console.error('Failed to load events:', error);
-        }
-      }
-    };
-
-    fetchEvents();
-  }, [token]);
+    LoadEventList().then(filteredEvent => {
+      setEvents(filteredEvent);
+    });
+  }, []);
   return (
     <Styled.EventListGrid>
       {events.map(event => (
