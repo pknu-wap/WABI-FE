@@ -7,6 +7,9 @@ interface CreateFormLayoutProps {
   children: React.ReactNode;
   onSubmit: () => void;
   onDelete?: () => void;
+  buttonText?: string;
+  errorMessage?: string;
+  requiredNoteText?: string;
 }
 
 const CommonFormLayout = ({
@@ -14,6 +17,9 @@ const CommonFormLayout = ({
   children,
   onSubmit,
   onDelete,
+  buttonText = '저장하기',
+  errorMessage = '필수항목을 모두 입력하지 않았습니다.',
+  requiredNoteText = '* 필수항목',
 }: CreateFormLayoutProps) => {
   const [isError, setIsError] = useState(false);
 
@@ -49,14 +55,10 @@ const CommonFormLayout = ({
       <Styled.Form onSubmit={handleSubmit} noValidate>
         {children}
         <Styled.FormFooter>
-          <Styled.RequiredNote>* 필수항목</Styled.RequiredNote>
-          <FormSaveButton text={'저장하기'} type={'submit'} />
+          <Styled.RequiredNote>{requiredNoteText}</Styled.RequiredNote>
+          <FormSaveButton text={buttonText} type="submit" />
         </Styled.FormFooter>
-        {isError && (
-          <Styled.ErrorMessage>
-            필수항목을 모두 입력하지 않았습니다.
-          </Styled.ErrorMessage>
-        )}
+        {isError && <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>}
       </Styled.Form>
     </Styled.FormContainer>
   );
