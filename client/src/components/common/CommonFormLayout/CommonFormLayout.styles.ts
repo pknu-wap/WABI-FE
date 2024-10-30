@@ -5,8 +5,10 @@ export const FormContainer = styled.div`
   position: relative;
   width: 20%;
   height: 100%;
-  margin: 20px 10px;
-  padding: 50px;
+  min-width: 300px;
+  max-width: 400px;
+  margin: 20px 10px 0 10px;
+  padding: 50px 50px 30px 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 `;
