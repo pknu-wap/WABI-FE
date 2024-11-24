@@ -1,16 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayout';
 import InputField from 'components/common/InputField/InputField';
 import {Band} from 'types/groupTypes';
-import {getEventById, createEvent, updateEvent, deleteEvent} from 'api/event';
+import {useCreateEvent} from 'queries/eventQueries/useCreateEvent';
+import {useDeleteEvent} from 'queries/eventQueries/useDeleteEvent';
+import {useGetEvent} from 'queries/eventQueries/useGetEvent';
+import {useUpdateEvent} from 'queries/eventQueries/useUpdateEvent';
 
 const CreateEventForm = ({eventId}: {eventId?: number}) => {
-  //Todo
-  //1. adminId const 처리
-  //2. 그룹 선택 추후 api 연결 이후 selectBox로 구현
-  //3. 그룹 선택 배열로 파싱하는 로직 제거
+  const adminId = 1; // 추후 로그인 정보 기반으로 설정
 
-  const adminId = 1; //추후 로그인 정보에 맞는 adminId로 적용해야함
+  const {data: eventData} = useGetEvent(eventId || 0, adminId);
+  const createEventMutation = useCreateEvent();
+  const updateEventMutation = useUpdateEvent();
+  const deleteEventMutation = useDeleteEvent();
 
   const [eventFormData, setEventFormData] = useState({
     eventName: '',
@@ -20,33 +23,23 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
     bandIds: '',
   });
 
-  // 수정 모드일 경우 기존 데이터 불러오기
+  // 데이터 로드 후 상태 설정
   useEffect(() => {
-    if (eventId) {
-      getEventById(eventId, adminId).then(response => {
-        const {eventName, startAt, endAt, eventStudentMaxCount, bands} =
-          response.data;
+    if (eventId && eventData) {
+      const {eventName, startAt, endAt, eventStudentMaxCount, bands} =
+        eventData.data;
 
-        const bandIds = bands.map((band: Band) => band.bandId).join(', '); // 배열을 문자열로 변환
+      const bandIds = bands.map((band: Band) => band.bandId).join(', ');
 
-        setEventFormData({
-          eventName,
-          startAt,
-          endAt,
-          eventStudentMaxCount: String(eventStudentMaxCount),
-          bandIds,
-        });
-      });
-    } else {
       setEventFormData({
-        eventName: '',
-        startAt: '',
-        endAt: '',
-        eventStudentMaxCount: '',
-        bandIds: '',
+        eventName,
+        startAt,
+        endAt,
+        eventStudentMaxCount: String(eventStudentMaxCount),
+        bandIds,
       });
     }
-  }, [eventId]);
+  }, [eventId, eventData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -59,6 +52,7 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
   const handleSave = () => {
     const {eventName, startAt, endAt, eventStudentMaxCount, bandIds} =
       eventFormData;
+
     const requestPayload = {
       eventName,
       startAt,
@@ -66,42 +60,67 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
       eventStudentMaxCount: parseInt(eventStudentMaxCount, 10),
     };
 
+    const bandIdArray = bandIds
+      .split(',')
+      .map(id => id.trim())
+      .filter(id => id !== '')
+      .map(id => parseInt(id, 10));
+
     if (eventId) {
-      // 이벤트 수정 로직 (PUT 요청)
-      updateEvent(
+      // 수정
+      updateEventMutation.mutate(
         {
-          ...requestPayload,
-          eventId: eventId,
+          data: {...requestPayload, eventId},
+          adminId,
         },
-        adminId,
+        {
+          onSuccess: () => {
+            alert('이벤트가 성공적으로 수정되었습니다.');
+          },
+          onError: error => {
+            alert('이벤트 수정 중 오류가 발생했습니다.');
+            console.error(error);
+          },
+        },
       );
-      alert('이벤트 정보가 성공적으로 수정되었습니다.');
     } else {
-      // 그룹 생성 로직 (POST 요청)
-      const bandIdArray = bandIds
-        .split(',')
-        .map(id => id.trim())
-        .filter(id => id !== '')
-        .map(id => parseInt(id, 10));
-      createEvent(
+      // 생성
+      createEventMutation.mutate(
         {
-          ...requestPayload,
-          bandIds: bandIdArray,
+          data: {...requestPayload, bandIds: bandIdArray},
+          adminId,
         },
-        adminId,
+        {
+          onSuccess: () => {
+            alert('이벤트가 성공적으로 생성되었습니다.');
+          },
+          onError: error => {
+            alert('이벤트 생성 중 오류가 발생했습니다.');
+            console.error(error);
+          },
+        },
       );
-      alert('이벤트가 성공적으로 생성되었습니다.');
     }
   };
 
   const handleDelete = () => {
-    if (eventId) {
-      deleteEvent(eventId, adminId);
-      alert('이벤트가 성공적으로 삭제되었습니다.');
-    } else {
-      alert('삭제할 이벤트가 없습니다');
+    if (!eventId) {
+      alert('삭제할 이벤트가 없습니다.');
+      return;
     }
-    //추후 리다이렉트 또는 상태 초기화로 처리해야할 듯
+
+    deleteEventMutation.mutate(
+      {eventId, adminId},
+      {
+        onSuccess: () => {
+          alert('이벤트가 성공적으로 삭제되었습니다.');
+        },
+        onError: error => {
+          alert('이벤트 삭제 중 오류가 발생했습니다.');
+          console.error(error);
+        },
+      },
+    );
   };
 
   return (
