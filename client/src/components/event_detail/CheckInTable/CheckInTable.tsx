@@ -3,7 +3,7 @@ import * as Styled from './CheckInTable.styles';
 import useCheckInStudent from 'hooks/useCheckInStudent';
 
 interface CheckInTableProps {
-  eventId: string;
+  eventId: number;
   filterText: string;
 }
 

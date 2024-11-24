@@ -3,7 +3,7 @@ import {getEventById} from '../../../api/event';
 import * as Styled from 'components/event_detail/CheckInStatus/CheckInStatus.styles';
 
 interface CheckInStatusProps {
-  eventId: string;
+  eventId: number;
   adminId: number;
 }
 
@@ -11,9 +11,7 @@ const CheckInStatus = ({eventId, adminId}: CheckInStatusProps) => {
   const [checkInCount, setCheckInCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const loadCheckInStatus = () => {
-    const eventIdToNumber = parseInt(eventId, 10);
-
-    getEventById(eventIdToNumber, adminId).then(response => {
+    getEventById({eventId, adminId}).then(response => {
       const checkInStatus = response.data.checkInStatusCount.checkIn;
       const notCheckInStatus = response.data.checkInStatusCount.notCheckIn;
       const totalStatus = checkInStatus + notCheckInStatus;

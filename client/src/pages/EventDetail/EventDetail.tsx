@@ -15,7 +15,7 @@ import CheckInStatus from 'components/event_detail/CheckInStatus/CheckInStatus';
 const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const eventId: string = location.state?.eventId || 'No Event ID'; // 전달된 eventId 받기
+  const eventId: number = location.state?.eventId || undefined; // 전달된 eventId 받기
   const adminId = 1;
 
   const [listFilterText, setListFilterText] = useState<string>('');
@@ -25,9 +25,8 @@ const EventDetail = () => {
   const [endAt, setEndAt] = useState<string>('');
 
   useEffect(() => {
-    if (eventId !== 'No Event ID') {
-      const eventIdNumber = parseInt(eventId, 10);
-      getEventById(eventIdNumber, adminId).then(response => {
+    if (eventId) {
+      getEventById({eventId, adminId}).then(response => {
         setGroups(response.data.bands);
         setTitle(response.data.eventName);
         const startAtOriginalData = response.data.startAt;
