@@ -1,79 +1,79 @@
 import React from 'react';
 import * as Styled from './CheckInTable.styles';
-import useCheckInStudent from 'hooks/useCheckInStudent';
+import {useGetCheckInList} from 'queries/eventQueries/useGetCheckInList';
+import {formatCheckInTime} from 'utils/convertToKoreanTime';
 
 interface CheckInTableProps {
-  eventId: string;
+  eventId: number;
   filterText: string;
 }
 
 const CheckInTable: React.FC<CheckInTableProps> = ({eventId, filterText}) => {
-  const {students} = useCheckInStudent(eventId);
-
-  const eventStudentStatusImage = (rowEventStudentStatus: string) => {
-    if (rowEventStudentStatus === 'CHECK_IN') {
-      return (
-        <img
-          src={'images/checkInDot.png'}
-          alt="Check In"
-          width={'16px'}
-          height={'16px'}
-        />
-      );
-    }
+  const {students, isLoading, isError} = useGetCheckInList(eventId);
+  console.log(students);
+  const renderStatusImage = (status: string) => {
+    const isCheckIn = status === 'CHECK_IN';
     return (
       <img
-        src={'images/notCheckInDot.png'}
-        alt="Not Check In"
-        width={'16px'}
-        height={'16px'}
+        src={`images/${isCheckIn ? 'checkInDot' : 'notCheckInDot'}.png`}
+        alt={isCheckIn ? 'Check In' : 'Not Check In'}
+        width="16px"
+        height="16px"
       />
     );
   };
 
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (isError) {
+    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
+  }
+
   return (
-    <>
-      <Styled.Table>
-        <thead>
+    <Styled.Table>
+      <thead>
+        <tr>
+          <Styled.ThData>학번</Styled.ThData>
+          <Styled.ThData>이름</Styled.ThData>
+          <Styled.ThBorder>체크인 상태</Styled.ThBorder>
+          <Styled.ThBorder>그룹</Styled.ThBorder>
+        </tr>
+      </thead>
+      <tbody>
+        {students.length > 0 ? (
+          students
+            .filter(
+              student =>
+                (student.id && student.id.includes(filterText)) ||
+                (student.name && student.name.includes(filterText)) ||
+                (student.bandName && student.bandName.includes(filterText)),
+            )
+            .map(student => (
+              <tr key={student.id}>
+                <Styled.ThData>{student.id}</Styled.ThData>
+                <Styled.ThData>{student.name}</Styled.ThData>
+                <Styled.ThBorder>
+                  <Styled.CheckInData>
+                    <Styled.CheckInImage>
+                      {renderStatusImage(student.eventStudentStatus)}
+                    </Styled.CheckInImage>
+                    <Styled.CheckInTime>
+                      {formatCheckInTime(student.checkInTime)}
+                    </Styled.CheckInTime>
+                  </Styled.CheckInData>
+                </Styled.ThBorder>
+                <Styled.ThBorder>{student.bandName}</Styled.ThBorder>
+              </tr>
+            ))
+        ) : (
           <tr>
-            <Styled.ThData>학번</Styled.ThData>
-            <Styled.ThData>이름</Styled.ThData>
-            <Styled.ThBorder>체크인 상태</Styled.ThBorder>
-            <Styled.ThBorder>그룹</Styled.ThBorder>
+            <td colSpan={4}>데이터가 없습니다.</td>
           </tr>
-        </thead>
-        <tbody>
-          {students.length > 0 ? (
-            students
-              .filter(
-                row =>
-                  (row.id && row.id.includes(filterText)) || // row.id가 undefined가 아닌지 확인
-                  (row.name && row.name.includes(filterText)) || // row.name이 undefined가 아닌지 확인
-                  (row.bandName && row.bandName.includes(filterText)), // row.group이 undefined가 아닌지 확인
-              )
-              .map(row => (
-                <tr key={row.id}>
-                  <Styled.ThData>{row.id}</Styled.ThData>
-                  <Styled.ThData>{row.name}</Styled.ThData>
-                  <Styled.ThBorder>
-                    <Styled.CheckInData>
-                      <Styled.CheckInImage>
-                        {eventStudentStatusImage(row.eventStudentStatus)}
-                      </Styled.CheckInImage>
-                      <Styled.CheckInTime>{row.checkInTime}</Styled.CheckInTime>
-                    </Styled.CheckInData>
-                  </Styled.ThBorder>
-                  <Styled.ThBorder>{row.bandName}</Styled.ThBorder>
-                </tr>
-              ))
-          ) : (
-            <tr>
-              <td colSpan={5}>데이터가 없습니다.</td>
-            </tr>
-          )}
-        </tbody>
-      </Styled.Table>
-    </>
+        )}
+      </tbody>
+    </Styled.Table>
   );
 };
 
