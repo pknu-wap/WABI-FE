@@ -3,6 +3,7 @@ import QrScanner from 'react-qr-scanner';
 import {sendToServer} from '../../api/sendToServer';
 import {studentQr} from '../../types/QrType/StudentQr';
 import {scanData} from '../../types/QrType/ScanData';
+import resetQrScanner from '../../utils/resetQrScanner';
 import * as Styled from './qrCode.styles';
 
 const Student: studentQr = {
@@ -48,36 +49,17 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
             onScanResult('정상적으로 참석되었습니다.', '#4E54F5', '#4E54F5');
             setQrScanned(true);
           }
-          // else if (res.data.message === '이미 체크인 했습니다.') {
-          //   onScanResult('이미 참석되었습니다.', '#F5C400', '#F5C400');
-          //   setQrScanned(true);
-          // }
         })
         .catch(error => {
-          // 임시로 에러코드 활용하여 동작
-          // 추후 백엔드 코드로 동작 예정
-          if (error) {
-            onScanResult('이벤트 해당그룹이 아닙니다.', '#FF7078', '#FF7078');
+          const errorMessage = error.response.data.message;
+          if (errorMessage === '이미 체크인 했습니다.') {
+            onScanResult('이미 체크인 했습니다', '#FF7078', '#FF7078');
             setQrScanned(true);
           }
+          resetQrScanner(setQrScanned, onScanResult, setNextScanned);
         });
 
-      setTimeout(() => {
-        setQrScanned(false); // 기존 동작
-        onScanResult(
-          'QR CODE를 화면의 사각형 안에 맞춰주세요.',
-          'black',
-          'lightgray',
-        );
-        setNextScanned(prevKey => prevKey + 1);
-
-        // scanned 값이 false일 때 1.5초 후 true로 변경
-        if (!scanned) {
-          setTimeout(() => {
-            setQrScanned(true); // scanned 값을 true로 변경
-          }, 1500);
-        }
-      }, 1500);
+      resetQrScanner(setQrScanned, onScanResult, setNextScanned);
     }
   };
 
