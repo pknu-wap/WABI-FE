@@ -12,11 +12,11 @@ export const sendToServer = (
   return apiClient
     .post('https://zepelown.site/api/events/check-in', data, {})
     .then(res => {
-      console.log(res);
+      console.log(res.data.message);
       return res;
     })
     .catch(error => {
-      console.log(error);
+      console.log(error.response.data.message);
       throw error;
     });
 };
