@@ -37,11 +37,11 @@ export const ModalExitButton = styled.button`
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.1s ease;
 
-    &:hover {
-        color: red;
-    }
+  &:hover {
+    color: red;
+  }
 `;
 
 export const ModalHeader = styled.div`
