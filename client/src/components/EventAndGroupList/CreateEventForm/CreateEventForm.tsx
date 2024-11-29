@@ -6,6 +6,8 @@ import {useCreateEvent} from 'queries/eventQueries/useCreateEvent';
 import {useDeleteEvent} from 'queries/eventQueries/useDeleteEvent';
 import {useGetEvent} from 'queries/eventQueries/useGetEvent';
 import {useUpdateEvent} from 'queries/eventQueries/useUpdateEvent';
+import {useSetRecoilState} from 'recoil';
+import {isFormVisibleState} from 'recoil/formState';
 
 const CreateEventForm = ({eventId}: {eventId?: number}) => {
   const adminId = 1; // 추후 로그인 정보 기반으로 설정
@@ -22,6 +24,7 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
     eventStudentMaxCount: '',
     bandIds: '',
   });
+  const setIsFormVisible = useSetRecoilState(isFormVisibleState);
 
   // 데이터 로드 후 상태 설정
   useEffect(() => {
@@ -101,6 +104,7 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
         },
       );
     }
+    setIsFormVisible(false);
   };
 
   const handleDelete = () => {
