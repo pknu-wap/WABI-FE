@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import GroupCard from 'components/EventAndGroupList/GroupCard/GroupCard';
 import * as Styled from 'components/EventAndGroupList/GroupCardList/GroupCardList.styles';
-import {LoadGroupList} from 'api/loadGroupList';
-import {Band} from 'types/groupTypes';
+import {useGetGroupList} from '../../../queries/groupQueries/useGetGroupList';
 
 interface EventGroupListProps {
   onUpdateClick: (groupId: number) => void;
@@ -13,13 +12,15 @@ const GroupCardList = ({
   onUpdateClick,
   selectedBandId,
 }: EventGroupListProps) => {
-  const [groups, setGroupList] = useState<Band[]>([]);
+  const {data: groups = [], isLoading, isError} = useGetGroupList();
 
-  useEffect(() => {
-    LoadGroupList().then(filteredGroups => {
-      setGroupList(filteredGroups);
-    });
-  }, []);
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (isError) {
+    return <div>그룹 데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  }
 
   return (
     <Styled.GroupListGrid>
