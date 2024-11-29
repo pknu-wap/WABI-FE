@@ -10,6 +10,7 @@ export const useDeleteEvent = () => {
     onSuccess: () => {
       // 성공 시 캐시 무효화
       queryClient.invalidateQueries({queryKey: [QUERY_KEYS.EVENT_DETAIL]});
+      queryClient.invalidateQueries({queryKey: [QUERY_KEYS.EVENT_LIST]});
     },
     onError: error => {
       console.error('이벤트 삭제 중 오류:', error);
