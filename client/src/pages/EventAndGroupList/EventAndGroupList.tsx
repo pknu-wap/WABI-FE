@@ -7,26 +7,49 @@ import CreateGroupForm from 'components/EventAndGroupList/CreateGroupForm/Create
 import TabSwitcher from 'components/EventAndGroupList/TabSwitcher/TabSwitcher';
 import * as Styled from 'pages/EventAndGroupList/EventAndGroupList.styles';
 import FormSaveButton from 'components/EventAndGroupList/FormSaveButton/FormSaveButton';
+import {useRecoilState} from 'recoil';
+import {isFormVisibleState} from 'recoil/formState';
 
 const EventAndGroupList = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useRecoilState(isFormVisibleState);
   const [selectedEventId, setSelectedEventId] = useState<number | null>(null);
   const [selectedBandId, setSelectedBandId] = useState<number | null>(null);
 
   const handleCreateClick = () => {
-    setSelectedEventId(null);
-    setSelectedBandId(null);
-    setIsFormVisible(true);
+    if (isFormVisible && !selectedEventId && !selectedBandId) {
+      // 폼이 열려 있고, 생성 모드라면 폼을 닫기
+      setIsFormVisible(false);
+    } else {
+      // 새로운 폼 열기
+      setSelectedEventId(null);
+      setSelectedBandId(null);
+      setIsFormVisible(true);
+    }
   };
 
   const handleUpdateClick = (id: number) => {
     if (activeTab === 0) {
-      setSelectedEventId(id);
+      if (isFormVisible && selectedEventId === id) {
+        // 동일한 이벤트 수정 모드라면 폼 닫기
+        setIsFormVisible(false);
+        setSelectedEventId(null);
+      } else {
+        // 다른 이벤트 수정 모드 열기
+        setSelectedEventId(id);
+        setIsFormVisible(true);
+      }
     } else if (activeTab === 1) {
-      setSelectedBandId(id);
+      if (isFormVisible && selectedBandId === id) {
+        // 동일한 그룹 수정 모드라면 폼 닫기
+        setIsFormVisible(false);
+        setSelectedBandId(null);
+      } else {
+        // 다른 그룹 수정 모드 열기
+        setSelectedBandId(id);
+        setIsFormVisible(true);
+      }
     }
-    setIsFormVisible(true);
   };
 
   const renderEventForm = () => {
