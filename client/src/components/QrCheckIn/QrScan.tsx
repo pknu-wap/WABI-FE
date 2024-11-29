@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import QrScanner from 'react-qr-scanner';
 import {sendToServer} from '../../api/sendToServer';
