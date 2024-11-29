@@ -1,15 +1,35 @@
 import {CreateGroupData, UpdateGroupData} from 'types/groupTypes';
 import apiClient from 'api/apiClient';
 
-export const createGroup = (data: CreateGroupData, adminId: number) => {
+interface CreateGroupParams {
+  data: CreateGroupData;
+  adminId: number;
+}
+
+interface UpdateGroupParams {
+  data: UpdateGroupData;
+  adminId: number;
+}
+
+interface GetGroupParams {
+  bandId: number;
+  adminId: number;
+}
+
+interface DeleteGroupParams {
+  bandId: number;
+  adminId: number;
+}
+
+export const createGroup = ({data, adminId}: CreateGroupParams) => {
   return apiClient.post('/bands/create', data, {
-    params: {adminId: adminId},
+    params: {adminId},
   });
 };
 
-export const updateGroup = (data: UpdateGroupData, adminId: number) => {
-  return apiClient.put(`/api/bands`, data, {
-    params: {adminId: adminId},
+export const updateGroup = ({data, adminId}: UpdateGroupParams) => {
+  return apiClient.put('/api/bands', data, {
+    params: {adminId},
   });
 };
 
@@ -19,21 +39,21 @@ interface ApiResponse<T> {
   data: T;
 }
 
-export const getGroupById = async (
-  bandId: number,
-  adminId: number,
-): Promise<ApiResponse<UpdateGroupData>> => {
+export const getGroupById = async ({
+  bandId,
+  adminId,
+}: GetGroupParams): Promise<ApiResponse<UpdateGroupData>> => {
   const response = await apiClient.get<ApiResponse<UpdateGroupData>>(
     `/bands/${bandId}/detail`,
     {
-      params: {adminId: adminId},
+      params: {adminId},
     },
   );
   return response.data;
 };
 
-export const deleteGroup = (bandId: number, adminId: number) => {
+export const deleteGroup = ({bandId, adminId}: DeleteGroupParams) => {
   return apiClient.delete(`/bands/${bandId}`, {
-    params: {bandId: bandId, adminId: adminId},
+    params: {adminId},
   });
 };

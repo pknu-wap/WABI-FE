@@ -45,14 +45,10 @@ const GroupDetailPage = () => {
       <Header />
       <Styled.InnerLayout>
         <div>
-          <FileUploadModal
-            modalStateValue={fileUploadModalStateValue}
-            groupId={groupId}
-          />
-          <ManualUploadModal
-            modalStateValue={manualUploadModalStateValue}
-            groupId={groupId}
-          />
+          {fileUploadModalStateValue && <FileUploadModal groupId={groupId} />}
+          {manualUploadModalStateValue && (
+            <ManualUploadModal groupId={groupId} />
+          )}
           <Title titleText={bandName} />
           <SearchAndButtonFrame>
             <SearchBox filterTextChange={setListFilterText} />

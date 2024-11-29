@@ -1,33 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayout';
 import InputField from 'components/common/InputField/InputField';
-import {createGroup, updateGroup, getGroupById, deleteGroup} from 'api/group';
+import {useGetGroup} from 'queries/groupQueries/useGetGroup';
+import {useCreateGroup} from 'queries/groupQueries/useCreateGroup';
+import {useUpdateGroup} from 'queries/groupQueries/useUpdateGroup';
+import {useDeleteGroup} from 'queries/groupQueries/useDeleteGroup';
+import {useSetRecoilState} from 'recoil';
+import {isFormVisibleState} from 'recoil/formState';
 
 const CreateGroupForm = ({bandId}: {bandId?: number}) => {
-  //Todo
-  //1. adminId const 처리
-  //2. 추후 폼 초기화 처리 필요
-  // -> 삭제 이후, 생성 이후, 수정 이후 로직 추가 필요
-  const adminId = 1;
+  const setIsFormVisible = useSetRecoilState(isFormVisibleState);
+  const adminId = 1; // 추후 로그인 정보 기반으로 설정
+
+  const {data: groupData} = useGetGroup(bandId || 0, adminId);
+  const createGroupMutation = useCreateGroup();
+  const updateGroupMutation = useUpdateGroup();
+  const deleteGroupMutation = useDeleteGroup();
 
   const [groupFormData, setGroupFormData] = useState({
     bandName: '',
     bandMemo: '',
   });
 
+  // 데이터 로드 후 상태 설정
   useEffect(() => {
-    if (bandId) {
-      getGroupById(bandId, adminId).then(response => {
-        const {bandName, bandMemo} = response.data;
-        setGroupFormData({bandName, bandMemo});
-      });
+    if (bandId && groupData) {
+      const {bandName, bandMemo} = groupData.data;
+      setGroupFormData({bandName, bandMemo});
     } else {
-      setGroupFormData({
-        bandName: '',
-        bandMemo: '',
-      });
+      setGroupFormData({bandName: '', bandMemo: ''});
     }
-  }, [bandId]);
+  }, [bandId, groupData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -39,23 +42,61 @@ const CreateGroupForm = ({bandId}: {bandId?: number}) => {
 
   const handleSave = () => {
     if (bandId) {
-      // 그룹 수정 로직 (PUT 요청)
-      updateGroup({...groupFormData, bandId: bandId}, adminId);
-      alert('그룹 정보가 성공적으로 수정되었습니다.');
+      // 수정
+      updateGroupMutation.mutate(
+        {
+          data: {...groupFormData, bandId},
+          adminId,
+        },
+        {
+          onSuccess: () => {
+            alert('그룹이 성공적으로 수정되었습니다.');
+          },
+          onError: error => {
+            alert('그룹 수정 중 오류가 발생했습니다.');
+            console.error(error);
+          },
+        },
+      );
     } else {
-      // 그룹 생정 로직 (POST 요청)
-      createGroup(groupFormData, adminId);
-      alert('그룹이 성공적으로 생성되었습니다.');
+      // 생성
+      createGroupMutation.mutate(
+        {
+          data: groupFormData,
+          adminId,
+        },
+        {
+          onSuccess: () => {
+            alert('그룹이 성공적으로 생성되었습니다.');
+          },
+          onError: error => {
+            alert('그룹 생성 중 오류가 발생했습니다.');
+            console.error(error);
+          },
+        },
+      );
     }
+    setIsFormVisible(false);
   };
 
   const handleDelete = () => {
-    if (bandId) {
-      deleteGroup(bandId, adminId);
-      alert('그룹 성공적으로 삭제되었습니다.');
-    } else {
-      alert('삭제할 그룹이 없습니다');
+    if (!bandId) {
+      alert('삭제할 그룹이 없습니다.');
+      return;
     }
+
+    deleteGroupMutation.mutate(
+      {bandId, adminId},
+      {
+        onSuccess: () => {
+          alert('그룹이 성공적으로 삭제되었습니다.');
+        },
+        onError: error => {
+          alert('그룹 삭제 중 오류가 발생했습니다.');
+          console.error(error);
+        },
+      },
+    );
   };
 
   return (
@@ -67,7 +108,7 @@ const CreateGroupForm = ({bandId}: {bandId?: number}) => {
       <InputField
         name="bandName"
         label="그룹명"
-        placeholder="그룹명"
+        placeholder="그룹명 입력"
         required={true}
         value={groupFormData.bandName}
         onChange={handleChange}
