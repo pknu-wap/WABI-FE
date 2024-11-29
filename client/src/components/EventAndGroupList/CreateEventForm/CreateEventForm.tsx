@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Select, {MultiValue} from 'react-select';
 import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayout';
 import InputField from 'components/common/InputField/InputField';
 import {Band} from 'types/groupTypes';
@@ -8,6 +9,15 @@ import {useGetEvent} from 'queries/eventQueries/useGetEvent';
 import {useUpdateEvent} from 'queries/eventQueries/useUpdateEvent';
 import {useSetRecoilState} from 'recoil';
 import {isFormVisibleState} from 'recoil/formState';
+import {useGetGroupList} from 'queries/groupQueries/useGetGroupList'; // 그룹 리스트를 가져오는 커스텀 훅
+import styled from 'styled-components';
+
+type SelectOption = {value: number; label: string};
+const Label = styled.label`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
 
 const CreateEventForm = ({eventId}: {eventId?: number}) => {
   const adminId = 1; // 추후 로그인 정보 기반으로 설정
@@ -16,23 +26,28 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
   const createEventMutation = useCreateEvent();
   const updateEventMutation = useUpdateEvent();
   const deleteEventMutation = useDeleteEvent();
+  const {data: groupListData, isLoading: isGroupListLoading} =
+    useGetGroupList();
 
   const [eventFormData, setEventFormData] = useState({
     eventName: '',
     startAt: '',
     endAt: '',
     eventStudentMaxCount: '',
-    bandIds: '',
+    bandIds: [] as SelectOption[],
   });
   const setIsFormVisible = useSetRecoilState(isFormVisibleState);
 
   // 데이터 로드 후 상태 설정
   useEffect(() => {
-    if (eventId && eventData) {
+    if (eventId && eventData?.data) {
       const {eventName, startAt, endAt, eventStudentMaxCount, bands} =
         eventData.data;
 
-      const bandIds = bands.map((band: Band) => band.bandId).join(', ');
+      const bandIds = bands.map((band: Band) => ({
+        value: band.bandId,
+        label: band.bandName,
+      }));
 
       setEventFormData({
         eventName,
@@ -52,6 +67,13 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
     }));
   };
 
+  const handleBandChange = (selectedOptions: MultiValue<SelectOption>) => {
+    setEventFormData(prevData => ({
+      ...prevData,
+      bandIds: Array.from(selectedOptions),
+    }));
+  };
+
   const handleSave = () => {
     const {eventName, startAt, endAt, eventStudentMaxCount, bandIds} =
       eventFormData;
@@ -61,46 +83,23 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
       startAt,
       endAt,
       eventStudentMaxCount: parseInt(eventStudentMaxCount, 10),
+      bandIds: bandIds.map((band: SelectOption) => band.value),
     };
 
-    const bandIdArray = bandIds
-      .split(',')
-      .map(id => id.trim())
-      .filter(id => id !== '')
-      .map(id => parseInt(id, 10));
-
     if (eventId) {
-      // 수정
       updateEventMutation.mutate(
+        {data: {...requestPayload, eventId}, adminId},
         {
-          data: {...requestPayload, eventId},
-          adminId,
-        },
-        {
-          onSuccess: () => {
-            alert('이벤트가 성공적으로 수정되었습니다.');
-          },
-          onError: error => {
-            alert('이벤트 수정 중 오류가 발생했습니다.');
-            console.error(error);
-          },
+          onSuccess: () => alert('이벤트가 성공적으로 수정되었습니다.'),
+          onError: error => console.error('이벤트 수정 중 오류:', error),
         },
       );
     } else {
-      // 생성
       createEventMutation.mutate(
+        {data: requestPayload, adminId},
         {
-          data: {...requestPayload, bandIds: bandIdArray},
-          adminId,
-        },
-        {
-          onSuccess: () => {
-            alert('이벤트가 성공적으로 생성되었습니다.');
-          },
-          onError: error => {
-            alert('이벤트 생성 중 오류가 발생했습니다.');
-            console.error(error);
-          },
+          onSuccess: () => alert('이벤트가 성공적으로 생성되었습니다.'),
+          onError: error => console.error('이벤트 생성 중 오류:', error),
         },
       );
     }
@@ -116,16 +115,17 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
     deleteEventMutation.mutate(
       {eventId, adminId},
       {
-        onSuccess: () => {
-          alert('이벤트가 성공적으로 삭제되었습니다.');
-        },
-        onError: error => {
-          alert('이벤트 삭제 중 오류가 발생했습니다.');
-          console.error(error);
-        },
+        onSuccess: () => alert('이벤트가 성공적으로 삭제되었습니다.'),
+        onError: error => console.error('이벤트 삭제 중 오류:', error),
       },
     );
   };
+
+  const groupOptions =
+    groupListData?.map((group: Band) => ({
+      value: group.bandId,
+      label: group.bandName,
+    })) || [];
 
   return (
     <CommonFormLayout
@@ -166,15 +166,18 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
         value={eventFormData.eventStudentMaxCount}
         onChange={handleChange}
       />
-      <InputField
-        name="bandIds"
-        label="참여 그룹 선택"
-        placeholder=",을 활용해서 입력 (1, 3, 5)"
-        required={false}
-        value={eventFormData.bandIds}
-        onChange={handleChange}
-        readOnly={!!eventId} // 수정 모드일 때 readOnly 적용
-      />
+      <div className="form-group">
+        <Label htmlFor="bandIds">참여 그룹 선택</Label>
+        <Select
+          id="bandIds"
+          isMulti
+          options={groupOptions}
+          isLoading={isGroupListLoading}
+          value={eventFormData.bandIds}
+          onChange={handleBandChange}
+          placeholder="그룹을 선택하세요"
+        />
+      </div>
     </CommonFormLayout>
   );
 };
