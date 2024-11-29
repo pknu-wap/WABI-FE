@@ -2,7 +2,7 @@ import React from 'react';
 import * as Styled from 'components/common/Title/Title.styles';
 
 interface TextProps {
-  titleText: string;
+  titleText?: string;
 }
 
 const Title = ({titleText}: TextProps) => {

@@ -1,50 +1,62 @@
-import React, {useState} from 'react';
-//import MemberUpdateButton from '../MemberUpdateButton/MemberUpdateButton';
-import {fileUpload} from '../../../api/fileUpload';
-import ModalFrame from '../../common/ModalFrame/ModalFrame';
-import * as Styled from './FileUploadModal.styles';
-import Button from '../../common/Button/Button';
+import React, {useState, useEffect} from 'react';
+import {useRecoilState} from 'recoil';
+import {fileUploadModalState} from 'recoil/modalState';
+import {fileUpload} from 'api/fileUpload';
+import ModalFrame from 'components/common/ModalFrame/ModalFrame';
+import FileDragDrop from 'components/common/FileDragDrop/FileDragDrop';
+import * as Styled from 'components/GroupDetail/FileUploadModal/FileUploadModal.styles';
+import Button from 'components/common/Button/Button';
 
-interface FileUploadModalProps {
-  modalStateValue: boolean;
-  groupId: number;
-}
-
-const FileUploadModal: React.FC<FileUploadModalProps> = ({
-  modalStateValue,
-  groupId,
-}) => {
+const FileUploadModal = ({groupId}: {groupId: number}) => {
   const [file, setFile] = useState<File | null>(null);
+  const [isModalOpen, setFileUploadModalState] =
+    useRecoilState(fileUploadModalState);
 
-  const fileChange = (fileElement: React.ChangeEvent<HTMLInputElement>) => {
-    const files = fileElement.target.files;
-    if (files) setFile(files[0]);
-  };
+  useEffect(() => {
+    if (!isModalOpen) {
+      setFile(null);
+    }
+  }, [isModalOpen]);
 
   const fileUploadClick = () => {
-    const fileToUpload = file || new Blob();
+    if (!file) {
+      alert('파일을 선택해주세요.');
+      return;
+    }
+
+    // Todo 파일 크기 검증
+
     const fileFormData = new FormData();
-    fileFormData.append('file', fileToUpload);
-    console.log(fileFormData);
-    fileUpload(groupId, fileFormData);
+    fileFormData.append('file', file);
+
+    fileUpload(groupId, fileFormData)
+      .then(res => {
+        console.log('파일 업로드 성공:', res);
+        alert('파일 업로드 성공');
+        setFile(null); // 파일 상태 초기화
+        setFileUploadModalState(false); // 모달 닫기
+      })
+      .catch(err => {
+        console.error('파일 업로드 실패:', err);
+        alert('파일 업로드 실패');
+      });
   };
 
-  if (modalStateValue === false) return null;
+  if (!isModalOpen) return null;
 
   return (
-    <ModalFrame>
+    <ModalFrame width={'500px'} height={'300px'}>
       <Styled.Wrapper>
         <Styled.InnerLayout>
           <Styled.Name>
-            <h3>파일 불러오기</h3>
+            <h3>파일 업로드</h3>
           </Styled.Name>
-          <Styled.FileInputContainer>
-            <Styled.FileInputLabel>
-              파일 선택
-              <input type="file" accept=".csv, .xlsx" onChange={fileChange} />
-            </Styled.FileInputLabel>
-          </Styled.FileInputContainer>
-          {/*<MemberUpdateButton onClick={fileUploadClick} isFileUpload={true} />*/}
+
+          <FileDragDrop
+            onFileSelect={setFile}
+            acceptedFileTypes=".csv, .xlsx, .xls, text/csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          />
+
           <Styled.ButtonWrapper>
             <Button
               onClick={fileUploadClick}

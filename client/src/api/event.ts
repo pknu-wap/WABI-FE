@@ -1,16 +1,28 @@
-import axios from 'axios';
 import {CreateEventData, UpdateEventData, EventInfo} from 'types/eventTypes';
+import apiClient from './apiClient';
 
 // 이벤트 생성
-export const createEvent = (data: CreateEventData, adminId: number) => {
-  return axios.post('https://zepelown.site/api/events', data, {
+export const createEvent = ({
+  data,
+  adminId,
+}: {
+  data: CreateEventData;
+  adminId: number;
+}) => {
+  return apiClient.post('/events', data, {
     params: {adminId: adminId},
   });
 };
 
 // 이벤트 수정
-export const updateEvent = (data: UpdateEventData, adminId: number) => {
-  return axios.put(`https://zepelown.site/api/events`, data, {
+export const updateEvent = ({
+  data,
+  adminId,
+}: {
+  data: UpdateEventData;
+  adminId: number;
+}) => {
+  return apiClient.put('/events', data, {
     params: {adminId: adminId},
   });
 };
@@ -22,22 +34,38 @@ interface ApiResponse<T> {
   data: T;
 }
 
-export const getEventById = async (
-  eventId: number,
-  adminId: number,
-): Promise<ApiResponse<EventInfo>> => {
-  const response = await axios.get<ApiResponse<EventInfo>>(
-    `https://zepelown.site/api/events/${eventId}`,
-    {
-      params: {adminId: adminId},
-    },
-  );
-  return response.data;
+export const getEventById = async ({
+  eventId,
+  adminId,
+}: {
+  eventId: number;
+  adminId: number;
+}): Promise<ApiResponse<EventInfo>> => {
+  try {
+    const response = await apiClient.get<ApiResponse<EventInfo>>(
+      `/events/${eventId}`,
+      {
+        params: {
+          adminId: adminId,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error('이벤트 데이터를 불러오는 중 오류가 발생했습니다:', error);
+    throw error;
+  }
 };
 
 // 이벤트 삭제
-export const deleteEvent = (eventId: number, adminId: number) => {
-  return axios.delete(`https://zepelown.site/api/events/${eventId}`, {
-    params: {eventId: eventId, adminId: adminId},
+export const deleteEvent = ({
+  eventId,
+  adminId,
+}: {
+  eventId: number;
+  adminId: number;
+}) => {
+  return apiClient.delete(`/events/${eventId}`, {
+    params: {adminId: adminId},
   });
 };

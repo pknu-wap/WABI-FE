@@ -1,4 +1,4 @@
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 import {students} from '../types/studentTypes'; // students 타입 import
 
 export const manualUpload = async (groupId: number, students: students) => {
@@ -17,14 +17,16 @@ export const manualUpload = async (groupId: number, students: students) => {
       })),
     };
     console.log('requestBody:', requestBody);
-    const response = await axios.post(
-      `https://zepelown.site/api/bands/${groupId}/members/enrollments/manual`,
+
+    const response = await apiClient.post(
+      `/bands/${groupId}/members/enrollments/manual`,
       requestBody,
+      {},
     );
 
     console.log('Response:', response.data);
     return response.data;
   } catch (error: unknown) {
-    console.log(error);
+    console.log('Manual upload error:', error);
   }
 };

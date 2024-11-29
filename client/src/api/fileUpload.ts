@@ -1,16 +1,8 @@
-import axios from 'axios';
+import apiClient from 'api/apiClient';
 
 export const fileUpload = (groupId: number, fileFormData: FormData) => {
-  return axios
-    .post(
-      `https://zepelown.site/api/bands/${groupId}/members/enrollments/file`,
-      fileFormData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
-    )
+  return apiClient
+    .post(`/bands/${groupId}/members/enrollments/file`, fileFormData, {})
     .then(res => {
       console.log(res.data);
       return res.data;

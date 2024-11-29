@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import EventCard from 'components/EventAndGroupList/EventCard/EventCard';
 import * as Styled from 'components/EventAndGroupList/EventCardList/EventCardList.styles';
-import {CheckInInfo} from 'types/eventTypes';
-import {LoadEventList} from 'api/loadEventList';
+import {useGetEventList} from 'queries/eventQueries/useGetEventList';
 
 interface EventCardListProps {
   onUpdateClick: (eventId: number) => void;
@@ -13,13 +12,15 @@ const EventCardList = ({
   onUpdateClick,
   selectedEventId,
 }: EventCardListProps) => {
-  const [events, setEvents] = useState<CheckInInfo[]>([]);
+  const {data: events = [], isLoading, isError} = useGetEventList();
 
-  useEffect(() => {
-    LoadEventList().then(filteredEvent => {
-      setEvents(filteredEvent);
-    });
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>; // 데이터 로딩 중
+  }
+
+  if (isError) {
+    return <div>이벤트 데이터를 가져오는 데 실패했습니다.</div>; // 데이터 로드 실패
+  }
 
   return (
     <Styled.EventListGrid>

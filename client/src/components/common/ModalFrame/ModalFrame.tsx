@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRecoilState} from 'recoil';
 import {fileUploadModalState, manualUploadModalState} from 'recoil/modalState';
-
+import {FiX} from 'react-icons/fi';
 import {
   ModalBackdrop,
   ModalContent,
@@ -15,7 +15,10 @@ import {
 
 const ModalFrame: React.FC<{
   children: React.ReactNode;
-}> = ({children}) => {
+  width?: string; // 모달의 너비
+  height?: string; // 모달의 높이
+}> = ({children, width = '500px', height = '400px'}) => {
+  // 기본값 설정
   const [, setFileUploadModalState] = useRecoilState(fileUploadModalState);
   const [, setManualUploadModalState] = useRecoilState(manualUploadModalState);
 
@@ -24,12 +27,19 @@ const ModalFrame: React.FC<{
     setFileUploadModalState(false);
     setManualUploadModalState(false);
   };
-
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // ModalContent 클릭 시 이벤트 전파 방지
+    if (e.target === e.currentTarget) {
+      modalClose();
+    }
+  };
   return (
-    <ModalBackdrop>
-      <ModalView>
+    <ModalBackdrop onClick={handleBackdropClick}>
+      <ModalView style={{width, height}}>
         <ModalHeader>
-          <ModalExitButton onClick={modalClose}>X</ModalExitButton>
+          <ModalExitButton onClick={modalClose}>
+            <FiX size={24} />
+          </ModalExitButton>
           <ModalLogo
             src={'images/wabi.png'}
             alt={'logo1'}
