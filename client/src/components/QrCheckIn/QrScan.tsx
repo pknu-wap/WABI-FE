@@ -46,9 +46,14 @@ const QrScan = ({onScanResult, eventId}: QrScanProps) => {
             res.data.message === 'OK'
           ) {
             onScanResult('정상적으로 참석되었습니다.', '#4E54F5', '#4E54F5');
-            setQrScanned(true);
+
+            setTimeout(() => {
+              setQrScanned(true);
+            }, 1500);
           }
+          resetQrScanner(setQrScanned, onScanResult, setNextScanned);
         })
+
         .catch(error => {
           const errorMessage = error.response.data.message;
           if (errorMessage === '이미 체크인 했습니다.') {
