@@ -2,6 +2,7 @@ import React from 'react';
 import * as Styled from 'components/common/Header/Header.styles';
 import Logo from 'components/common/Logo/Logo';
 import Button from 'components/common/Button/Button';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -32,7 +33,9 @@ const Header = () => {
         fontSize="16px"
         padding="10px 16px 10px 16px"
       >
-        Login
+        <Link to="/signin" style={{textDecoration: 'none', color: 'inherit'}}>
+          Login
+        </Link>
       </Button>
     </Styled.HeaderStyles>
   );
