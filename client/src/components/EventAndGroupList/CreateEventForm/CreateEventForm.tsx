@@ -20,9 +20,7 @@ const Label = styled.label`
 `;
 
 const CreateEventForm = ({eventId}: {eventId?: number}) => {
-  const adminId = 1; // 추후 로그인 정보 기반으로 설정
-
-  const {data: eventData} = useGetEvent(eventId || 0, adminId);
+  const {data: eventData} = useGetEvent(eventId || 0);
   const createEventMutation = useCreateEvent();
   const updateEventMutation = useUpdateEvent();
   const deleteEventMutation = useDeleteEvent();
@@ -88,7 +86,7 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
 
     if (eventId) {
       updateEventMutation.mutate(
-        {data: {...requestPayload, eventId}, adminId},
+        {data: {...requestPayload, eventId}},
         {
           onSuccess: () => alert('이벤트가 성공적으로 수정되었습니다.'),
           onError: error => console.error('이벤트 수정 중 오류:', error),
@@ -96,7 +94,7 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
       );
     } else {
       createEventMutation.mutate(
-        {data: requestPayload, adminId},
+        {data: requestPayload},
         {
           onSuccess: () => alert('이벤트가 성공적으로 생성되었습니다.'),
           onError: error => console.error('이벤트 생성 중 오류:', error),
@@ -113,7 +111,7 @@ const CreateEventForm = ({eventId}: {eventId?: number}) => {
     }
 
     deleteEventMutation.mutate(
-      {eventId, adminId},
+      {eventId},
       {
         onSuccess: () => alert('이벤트가 성공적으로 삭제되었습니다.'),
         onError: error => console.error('이벤트 삭제 중 오류:', error),

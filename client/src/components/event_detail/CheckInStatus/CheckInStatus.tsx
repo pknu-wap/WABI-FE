@@ -4,14 +4,13 @@ import * as Styled from 'components/event_detail/CheckInStatus/CheckInStatus.sty
 
 interface CheckInStatusProps {
   eventId: number;
-  adminId: number;
 }
 
-const CheckInStatus = ({eventId, adminId}: CheckInStatusProps) => {
+const CheckInStatus = ({eventId}: CheckInStatusProps) => {
   const [checkInCount, setCheckInCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const loadCheckInStatus = () => {
-    getEventById({eventId, adminId}).then(response => {
+    getEventById({eventId}).then(response => {
       const checkInStatus = response.data.checkInStatusCount.checkIn;
       const notCheckInStatus = response.data.checkInStatusCount.notCheckIn;
       const totalStatus = checkInStatus + notCheckInStatus;

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
+import {logIn} from '../../../api/logIn';
 import InputField from 'components/common/InputField/InputField';
 import CommonFormLayout from 'components/common/CommonFormLayout/CommonFormLayout';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import * as Styled from 'components/Authentication/SignInForm/SignInForm.styles';
 
 const SignInForm = () => {
@@ -9,9 +10,21 @@ const SignInForm = () => {
     username: '',
     password: '',
   });
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    //로그인 버튼 눌렀을때의 로직
+  const handleSubmit = async () => {
+    try {
+      const response = await logIn(
+        loginFormData.username,
+        loginFormData.password,
+      );
+      alert('로그인에 성공하였습니다!');
+      navigate('/');
+      return response;
+    } catch (error: any) {
+      console.error('로그인 실패:', error);
+      alert('로그인에 실패하였습니다. 다시 시도해주세요.');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

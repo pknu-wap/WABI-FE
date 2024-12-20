@@ -3,7 +3,7 @@ import apiClient from 'api/apiClient';
 
 export const LoadGroupList = async (): Promise<Band[]> => {
   try {
-    const response = await apiClient.get('/bands/list?adminId=1');
+    const response = await apiClient.get('/bands/list');
 
     const groups = response.data.data;
 

@@ -2,29 +2,13 @@ import {CreateEventData, UpdateEventData, EventInfo} from 'types/eventTypes';
 import apiClient from './apiClient';
 
 // 이벤트 생성
-export const createEvent = ({
-  data,
-  adminId,
-}: {
-  data: CreateEventData;
-  adminId: number;
-}) => {
-  return apiClient.post('/events', data, {
-    params: {adminId: adminId},
-  });
+export const createEvent = ({data}: {data: CreateEventData}) => {
+  return apiClient.post('/events', data, {});
 };
 
 // 이벤트 수정
-export const updateEvent = ({
-  data,
-  adminId,
-}: {
-  data: UpdateEventData;
-  adminId: number;
-}) => {
-  return apiClient.put('/events', data, {
-    params: {adminId: adminId},
-  });
+export const updateEvent = ({data}: {data: UpdateEventData}) => {
+  return apiClient.put('/events', data, {});
 };
 
 // 이벤트 단일 조회
@@ -36,19 +20,13 @@ interface ApiResponse<T> {
 
 export const getEventById = async ({
   eventId,
-  adminId,
 }: {
   eventId: number;
-  adminId: number;
 }): Promise<ApiResponse<EventInfo>> => {
   try {
     const response = await apiClient.get<ApiResponse<EventInfo>>(
       `/events/${eventId}`,
-      {
-        params: {
-          adminId: adminId,
-        },
-      },
+      {},
     );
     return response.data;
   } catch (error) {
@@ -58,14 +36,6 @@ export const getEventById = async ({
 };
 
 // 이벤트 삭제
-export const deleteEvent = ({
-  eventId,
-  adminId,
-}: {
-  eventId: number;
-  adminId: number;
-}) => {
-  return apiClient.delete(`/events/${eventId}`, {
-    params: {adminId: adminId},
-  });
+export const deleteEvent = ({eventId}: {eventId: number}) => {
+  return apiClient.delete(`/events/${eventId}`, {});
 };
