@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 // Axios 클라이언트 생성
 const apiClient = axios.create({
-  baseURL: 'https://zepelown.site/api', // 기본 API URL 설정
+  baseURL: 'http://34.64.179.51:8080/api', // 기본 API URL 설정
 });
 
 // 요청 인터셉터
