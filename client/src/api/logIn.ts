@@ -33,7 +33,7 @@ export const setTokens = (
 
   // 리프레시 토큰을 쿠키에 저장
   Cookies.set('refreshToken', newRefreshToken, {
-    secure: false, // 프로덕션 환경에서는 true로 설정 권장
+    secure: true, // 프로덕션 환경에서는 true로 설정 권장
     path: '/', // 모든 경로에서 쿠키 접근 가능
   });
 };
@@ -54,7 +54,7 @@ export const logIn = async (
   try {
     // 로그인 API 호출
     const response = await axios.post<RegisterResponse>(
-      'https://zepelown.site/auth/admins/login',
+      'http://34.64.179.51:8080/auth/admins/login',
       {
         name: name,
         password: password,
