@@ -33,7 +33,7 @@ export const setTokens = (
 
   // 리프레시 토큰을 쿠키에 저장
   Cookies.set('refreshToken', newRefreshToken, {
-    secure: false, // 프로덕션 환경에서는 true로 설정 권장
+    secure: true, // 프로덕션 환경에서는 true로 설정 권장
     path: '/', // 모든 경로에서 쿠키 접근 가능
   });
 };
