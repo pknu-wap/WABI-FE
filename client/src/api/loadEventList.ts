@@ -3,9 +3,7 @@ import apiClient from './apiClient';
 
 export const LoadEventList = async (): Promise<CheckInInfo[]> => {
   try {
-    const response = await apiClient.get('/events/list', {
-      params: {adminId: 1},
-    });
+    const response = await apiClient.get('/events/list', {});
 
     const events = response.data.data;
 
