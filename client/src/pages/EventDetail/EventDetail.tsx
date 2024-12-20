@@ -16,7 +16,6 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const eventId: number = location.state?.eventId || undefined; // 전달된 eventId 받기
-  const adminId = 1;
 
   const [listFilterText, setListFilterText] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -26,7 +25,7 @@ const EventDetail = () => {
 
   useEffect(() => {
     if (eventId) {
-      getEventById({eventId, adminId}).then(response => {
+      getEventById({eventId}).then(response => {
         setGroups(response.data.bands);
         setTitle(response.data.eventName);
         const startAtOriginalData = response.data.startAt;
@@ -58,7 +57,7 @@ const EventDetail = () => {
         <SearchAndButtonFrame>
           <SearchBox filterTextChange={setListFilterText} />
           <Styled.StatusAndButtonFrame>
-            <CheckInStatus eventId={eventId} adminId={adminId} />
+            <CheckInStatus eventId={eventId} />
             <Button
               type="button"
               width={'155px'}

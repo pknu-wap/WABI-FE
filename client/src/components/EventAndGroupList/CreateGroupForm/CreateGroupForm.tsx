@@ -10,9 +10,8 @@ import {isFormVisibleState} from 'recoil/formState';
 
 const CreateGroupForm = ({bandId}: {bandId?: number}) => {
   const setIsFormVisible = useSetRecoilState(isFormVisibleState);
-  const adminId = 1; // 추후 로그인 정보 기반으로 설정
 
-  const {data: groupData} = useGetGroup(bandId || 0, adminId);
+  const {data: groupData} = useGetGroup(bandId || 0);
   const createGroupMutation = useCreateGroup();
   const updateGroupMutation = useUpdateGroup();
   const deleteGroupMutation = useDeleteGroup();
@@ -46,7 +45,6 @@ const CreateGroupForm = ({bandId}: {bandId?: number}) => {
       updateGroupMutation.mutate(
         {
           data: {...groupFormData, bandId},
-          adminId,
         },
         {
           onSuccess: () => {
@@ -63,7 +61,6 @@ const CreateGroupForm = ({bandId}: {bandId?: number}) => {
       createGroupMutation.mutate(
         {
           data: groupFormData,
-          adminId,
         },
         {
           onSuccess: () => {
@@ -86,7 +83,7 @@ const CreateGroupForm = ({bandId}: {bandId?: number}) => {
     }
 
     deleteGroupMutation.mutate(
-      {bandId, adminId},
+      {bandId},
       {
         onSuccess: () => {
           alert('그룹이 성공적으로 삭제되었습니다.');
