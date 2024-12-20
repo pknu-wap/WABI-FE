@@ -18,7 +18,6 @@ function App() {
         <Route path="/qrScan" element={<MainQrCheckIn />} />
         <Route path="/groupDetail" element={<GrouupDetail />} />
         <Route path="/mainEventList " element={<MainEventList />} />
-        <Route path="/mainEventList " element={<MainEventList />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
