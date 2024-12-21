@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const apiBaseUrl = `${process.env.REACT_APP_URL_KEY}/api`;
+const apiBaseUrl = `${process.env.REACT_APP_API_BASE_URL}/api`;
 
 // Axios 클라이언트 생성
 const apiClient = axios.create({
