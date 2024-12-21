@@ -1,1 +1,4 @@
 /*  /index.html 200
+/api/*  http://34.64.179.51:8080/:splat  200
+/auth/admins/register http://34.64.179.51:8080/auth/admins/register 200
+/auth/admins/login http://34.64.179.51:8080/auth/admins/login 200
