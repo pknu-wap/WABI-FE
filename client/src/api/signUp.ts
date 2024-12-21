@@ -6,7 +6,7 @@ export const signUp = (
   email: string,
 ): Promise<AxiosResponse | null> => {
   return axios
-    .post('http://34.64.179.51:8080/auth/admins/register', {
+    .post('https://zepelown.site/auth/admins/register', {
       name: name,
       password: password,
       email: email,
