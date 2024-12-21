@@ -54,7 +54,7 @@ export const logIn = async (
   try {
     // 로그인 API 호출
     const response = await axios.post<RegisterResponse>(
-      'http://34.64.179.51:8080/auth/admins/login',
+      'https://zepelown.site/auth/admins/login',
       {
         name: name,
         password: password,
