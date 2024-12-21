@@ -14,6 +14,9 @@ interface RegisterResponse {
   data: LoginData;
 }
 
+// 환경변수에서 API URL 가져오기
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 // 토큰 가져오기 함수 추가
 export const getAccessToken = (): string | null => {
   return localStorage.getItem('accessToken');
@@ -54,7 +57,7 @@ export const logIn = async (
   try {
     // 로그인 API 호출
     const response = await axios.post<RegisterResponse>(
-      'http://34.64.179.51:8080/auth/admins/login',
+      `${API_BASE_URL}/auth/admins/login`, // 환경변수를 사용한 API URL
       {
         name: name,
         password: password,
